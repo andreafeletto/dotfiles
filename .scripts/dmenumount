@@ -1,4 +1,5 @@
 #!/bin/sh
+# Script by Luke Smith https://github.com/LukeSmithxyz/voidrice
 # Gives a dmenu prompt to mount unmounted drives.
 # If they're in /etc/fstab, they'll be mounted automatically.
 # Otherwise, you'll be prompted to give a mountpoint from already existsing directories.

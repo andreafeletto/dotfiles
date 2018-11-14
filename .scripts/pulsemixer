@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+
+# Script by GeorgeFilipkin https://github.com/GeorgeFilipkin/pulsemixer
+
 '''Usage of pulsemixer:
   -h, --help            show this help message and exit
   -v, --version         print version
