@@ -1,0 +1,12 @@
+#!/bin/bash
+
+DIR=$HOME/.config/walls
+
+URLS=("images-assets.nasa.gov/image/PIA18033/PIA18033~orig.jpg" "images-assets.nasa.gov/image/from-a-million-miles-away-nasa-camera-shows-moon-crossing-face-of-earth_20129140980_o/from-a-million-miles-away-nasa-camera-shows-moon-crossing-face-of-earth_20129140980_o~orig.png" "images-assets.nasa.gov/image/hubble-captures-vivid-auroras-in-jupiters-atmosphere_28000029525_o/hubble-captures-vivid-auroras-in-jupiters-atmosphere_28000029525_o~orig.jpg" "images-assets.nasa.gov/image/PIA19821/PIA19821~orig.jpg" "images-assets.nasa.gov/image/0202795/0202795~orig.jpg" "images-assets.nasa.gov/image/PIA01492/PIA01492~orig.jpg" "images-assets.nasa.gov/image/PIA21390/PIA21390~orig.jpg" "images-assets.nasa.gov/image/a-sky-view-of-earth-from-suomi-npp_16611703184_o/a-sky-view-of-earth-from-suomi-npp_16611703184_o~orig.jpg" "images-assets.nasa.gov/image/PIA09113/PIA09113~orig.jpg" "images-assets.nasa.gov/image/PIA04591/PIA04591~orig.jpg")
+
+rm -rf $DIR
+mkdir $DIR
+
+for url in "${URLS[@]}"; do
+    wget $url -P $DIR
+done
