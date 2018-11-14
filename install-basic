@@ -1,0 +1,12 @@
+#!/bin/bash
+
+DIR="$HOME/dotfiles"
+
+DOTS_TO_LN=(".bash_aliases" ".bash_profile" ".bashrc" ".profile" ".vimrc" ".selected_editor" ".scripts")
+
+for dot in "${DOTS_TO_LN[@]}"; do
+    rm -rf "$HOME/$dot"
+    ln -sfT "$DIR/$dot" "$HOME/$dot"
+done
+
+source "$HOME/.bashrc"

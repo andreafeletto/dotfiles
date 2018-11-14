@@ -1,0 +1,14 @@
+#!/bin/bash
+
+VALUE=`cat /sys/class/power_supply/BAT1/capacity` || exit
+STATUS=`cat /sys/class/power_supply/BAT1/status`
+
+if [ "$VALUE" -ge 30 ]; then
+	color="#FFFFFF"
+else
+	color="#FF0000"
+fi
+
+[ "$STATUS" = "Charging" ] && color="#00FF00"
+
+echo "<span color='$color'>`sed -e "s/,//g;s/Discharging/🔋/;s/Charging/🔌/;s/Unknown/❓/;s/Full/⚡/;s/ 0*/ /g;s/ :/ /g" <<<"$STATUS"` `sed -e 's/$/%/' <<<"$VALUE"`</span>"

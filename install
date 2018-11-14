@@ -1,0 +1,4 @@
+#!/bin/bash
+
+bash $HOME/dotfiles/install-basic
+bash $HOME/dotfiles/install-i3

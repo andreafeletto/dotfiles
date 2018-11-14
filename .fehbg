@@ -1,0 +1,2 @@
+#!/bin/sh
+'feh' '--randomize' '--bg-max' '/home/andrea/.config/walls/earth-moon1.png' '/home/andrea/.config/walls/earth1.jpg' '/home/andrea/.config/walls/giove-aurora1.jpg' '/home/andrea/.config/walls/pluto1.jpg' '/home/andrea/.config/walls/porg.jpg' 

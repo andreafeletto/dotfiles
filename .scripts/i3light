@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo "🌞 $(echo -e "scale=2;sqrt($(light))*10" | bc)"

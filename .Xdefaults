@@ -1,0 +1,26 @@
+
+#include ".Xresources.d/urxvt/random-tree"
+
+URxvt.intensityStyles:	false
+URxvt.allow_bold:       true
+URxvt.depth:		32
+URxvt.font: 		xft:monaco:size=14
+URxvt.letterSpace:      -1
+URxvt.scrollBar:	false
+URxvt.cursorColor:	white
+
+!! Extensions
+URxvt.perl-ext-common:	        default,matcher,resize-font,url-select,keyboard-select
+URxvt.colorUL:		        #4682B4
+!! url-select
+URxvt.keysym.M-u:	        perl:url-select:select_next
+URxvt.url-select.launcher:      linkhandler
+URxvt.url-select.underline:     true
+!! keyboard-select:
+URxvt.keysym.M-Escape:          perl:keyboard-select:activate
+!! resize-font
+URxvt.resize-font.smaller:	C-j
+URxvt.resize-font.bigger:	C-k
+!! Matcher
+URxvt.url-launcher:	        urlhandler
+URxvt.matcher.button:	        1
