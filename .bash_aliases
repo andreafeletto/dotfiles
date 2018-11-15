@@ -13,6 +13,10 @@ else
     alias hl="hledger"
 fi
 
+if [ -x $HOME/arduino/arduino ]; then
+    alias arduino="bash $HOME/arduino/arduino"
+fi
+
 function cerca() {
     look $1 $DICT/parole
 }

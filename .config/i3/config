@@ -2,7 +2,7 @@
 # For i3-gaps
 for_window [class="^.*"] border pixel 2 
 gaps inner 15
-gaps outer 15
+gaps outer 10
 
 set $term --no-startup-id $TERMINAL
 set $mod Mod4 
@@ -34,7 +34,7 @@ set_from_resource $darkwhite	color7  #a8a19f
 set_from_resource $white	color15 #f1efee
 set $transparent		#00000000
 
-#                       BORDER		BACKGROUND	TEXT		INDICATOR   CHILD_BORDER
+#                       BORDER		BACKGROUND	TEXT		INDICATOR               CHILD_BORDER
 client.focused		$red		$red		$magenta	$darkmagenta		$darkblue
 client.unfocused	$transparent	$blue		$white		$darkblue		$darkblack
 client.focused_inactive	$transparent	$blue		$white		$darkblue		$darkblack
@@ -147,19 +147,10 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # Resize mode
-mode "resize" {
-        bindsym $left       resize shrink width 10 px or 10 ppt
-        bindsym $down       resize grow height 10 px or 10 ppt
-        bindsym $up         resize shrink height 10 px or 10 ppt
-        bindsym $right      resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
-
-bindsym $mod+Shift+x mode "resize"
+bindsym $mod+Shift+v    resize shrink   width   10 px or 2 ppt
+bindsym $mod+Shift+b    resize grow     height  10 px or 2 ppt
+bindsym $mod+Shift+n    resize shrink   height  10 px or 2 ppt
+bindsym $mod+Shift+m    resize grow     width   10 px or 2 ppt
 
 # Second Function Keys
 bindcode 233 exec light -A 3 && pkill -RTMIN+20 i3blocks
