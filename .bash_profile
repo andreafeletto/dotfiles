@@ -1,1 +1,1 @@
-.profile
+bash .profile
