@@ -23,3 +23,9 @@ HISTSIZE= HISTFILESIZE=
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/andrea/google-cloud-sdk/path.bash.inc' ]; then . '/home/andrea/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/andrea/google-cloud-sdk/completion.bash.inc' ]; then . '/home/andrea/google-cloud-sdk/completion.bash.inc'; fi
