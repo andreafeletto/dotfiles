@@ -1,3 +1,0 @@
-#!/bin/bash
-
-gcloud compute scp u0_a320@ledger:~/.hledger.journal $HOME/.hledger.journal >/dev/null
