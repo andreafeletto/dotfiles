@@ -1,7 +1,7 @@
 #!/bin/bash
 
 case $BLOCK_BUTTON in
-    1) notify-send 'Downloading...' -t 1000 && gcloud compute scp u0_a320@ledger:~/.hledger.journal $HOME/.hledger.journal >/dev/null && notify-send 'Finished.' -t 1000
+    1) notify-send 'Downloading...' -t 1000 && hld && notify-send 'Finished.' -t 1000
 esac
 
 hledger bal --flat | grep -f $HOME/.hledger_accounts | awk '{ print $2, $1}' | awk -F ':' '{ print $NF }' | awk '{ print $1 ": " $2 }' | paste -sd ' '
