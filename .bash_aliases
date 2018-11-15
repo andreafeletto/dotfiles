@@ -18,5 +18,5 @@ function cerca() {
 }
 
 # Colors
-alias ls="ls -hN --color=auto --group-directories-first"
-alias ll="ls -al"
+alias ls="ls --color=auto --group-directories-first"
+alias ll="ls -ahl"
