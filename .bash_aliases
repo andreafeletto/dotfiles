@@ -5,7 +5,7 @@ alias r="ranger"
 alias g="git"
 alias mkd="mkdir -pv"
 alias ref="source ~/.bashrc"
-alias hld="gcloud compute scp andrea@ledger:~/.hledger.journal $HOME/.ledger.journal"
+alias hld="gcloud compute scp andrea@ledger:~/.hledger.journal $HOME/.hledger.journal"
 
 if command -v termux-open >/dev/null; then
     alias o="termux-open"
