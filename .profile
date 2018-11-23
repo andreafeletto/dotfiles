@@ -6,12 +6,13 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+export PATH="$PATH:$HOME/.scripts"
+export EDITOR="vim"
+export BROWSER="qutebrowser"
+export TERMINAL="urxvt"
+
 # Start graphical server if i3 not already running
 if [ "$(tty)" = "/dev/tty1" ] ; then
     pgrep -x i3 || exec startx
 fi
 
-export PATH="$PATH:$HOME/.scripts"
-export EDITOR="vim"
-export BROWSER="qutebrowser"
-export TERMINAL="rxvt-unicode"

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DIR="$HOME/dotfiles"
-DOTS_TO_LN=(".fehbg" ".hledger_accounts" ".urxvt" ".config/i3/config" ".config/ranger/rc.conf" ".config/i3blocks/config" ".Xresources.d" ".Xdefaults")
+DOTS_TO_LN=(".xinitrc" ".hledger_accounts" ".urxvt" ".config/i3/config" ".config/ranger/rc.conf" ".config/i3blocks/config" ".Xresources.d" ".Xdefaults")
 
 for dot in "${DOTS_TO_LN[@]}"; do
     rm -rf "$HOME/$dot"

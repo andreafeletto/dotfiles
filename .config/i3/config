@@ -12,6 +12,8 @@ set $reboot sudo -A reboot
 # External Scripts
 exec --no-startup-id ~/.fehbg # feh --bg-fill <img>
 exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
+exec --no-startup-id "setxkbmap -layout it"
 
 font pango:monospace 12
 
@@ -153,8 +155,8 @@ bindsym $mod+Shift+n    resize shrink   height  10 px or 2 ppt
 bindsym $mod+Shift+m    resize grow     width   10 px or 2 ppt
 
 # Second Function Keys
-bindcode 233 exec light -A 3 && pkill -RTMIN+20 i3blocks
-bindcode 232 exec light -U 3 && pkill -RTMIN+20 i3blocks
+bindcode 233 exec xbacklight -inc 10 && pkill -RTMIN+20 i3blocks
+bindcode 232 exec xbacklight -dec 10 && pkill -RTMIN+20 i3blocks
 bindcode 121 exec lmc mute
 bindcode 122 exec lmc down 5
 bindcode 123 exec lmc up 5
