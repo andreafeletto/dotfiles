@@ -6,6 +6,8 @@ alias g="git"
 alias mkd="mkdir -pv"
 alias ref="source ~/.bashrc"
 alias hld="gcloud compute scp andrea@ledger:~/.hledger.journal $HOME/.hledger.journal"
+alias hlc="gcloud compute ssh andrea@ledger"
+alias sudomanoncorro="sudo"
 
 if command -v termux-open >/dev/null; then
     alias o="termux-open"
