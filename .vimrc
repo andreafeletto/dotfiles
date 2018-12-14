@@ -29,4 +29,10 @@ set wildmode=longest,list,full
 " Goyo
 map <leader>f :Goyo <cr>
 
+map <Left> <nop>
+map <Down> <nop>
+map <Up> <nop>
+map <Right> <nop>
+
+
 autocmd Filetype rmd map <F5> :!echo<space>"require(rmarkdown);<space>render('<c-r>%')"<space>\|<space>R<space>--vanilla<enter> 
