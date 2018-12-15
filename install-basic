@@ -2,7 +2,7 @@
 
 DIR="$HOME/dotfiles"
 
-DOTS_TO_LN=(".vim/autoload/plug.vim" ".bash_aliases" ".bashrc" ".profile" ".vimrc" ".selected_editor" ".scripts")
+DOTS_TO_LN=(".emoji" ".vim/autoload/plug.vim" ".bash_aliases" ".bashrc" ".profile" ".vimrc" ".selected_editor" ".scripts")
 
 for dot in "${DOTS_TO_LN[@]}"; do
     rm -rf "$HOME/$dot"
