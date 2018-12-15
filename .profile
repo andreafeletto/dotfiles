@@ -9,7 +9,8 @@ fi
 export PATH="/usr/local/anaconda/bin:$PATH:$HOME/.scripts:$HOME/.local/bin"
 export EDITOR="vim"
 export BROWSER="qutebrowser"
-export TERMINAL="urxvt"
+export TERMINAL="st"
+export READER="zathura"
 
 # Start graphical server if i3 not already running
 if [ "$(tty)" = "/dev/tty1" ] ; then
