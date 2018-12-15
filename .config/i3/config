@@ -14,6 +14,7 @@ exec --no-startup-id ~/.fehbg # feh --bg-fill <img>
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id "setxkbmap -layout it"
+exec --no-startup-id compton -b
 
 font pango:monospace 12
 

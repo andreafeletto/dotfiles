@@ -1,7 +1,7 @@
 
 #include ".Xresources.d/urxvt/random-tree"
 
-*alpha:                 100
+*.alpha:                180
 
 URxvt.intensityStyles:	false
 URxvt.allow_bold:       true
