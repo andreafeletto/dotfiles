@@ -1,10 +1,10 @@
 # My Dotfiles
 
 ## How to
-'''bash
+```bash
 cd dotfiles
 stow bash i3 qutebrowser ranger vim
-'''
+```
 
 ## Partially stolen from...
 
