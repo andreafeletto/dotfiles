@@ -1,1 +1,1 @@
-feh --bg-max --randomize $HOME/.config/walls/*
+feh --bg-max --randomize /home/andrea/.config/walls/*
