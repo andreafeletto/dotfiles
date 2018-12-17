@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+
+case "$1" in
+    *pdf) zathura "$1";;
+    *)    xdg-open "$1";;
+esac
