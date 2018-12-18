@@ -5,6 +5,7 @@ markup=pango
 signal=7
 
 [ledger]
+label=💸
 command=i3ledger
 interval=once
 
