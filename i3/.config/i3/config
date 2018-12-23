@@ -75,7 +75,7 @@ bindsym $mod+BackSpace		kill
 bindsym $mod+q exec dmenu_run
 bindsym $mod+w exec $BROWSER
 bindsym $mod+e exec $term
-bindsym $mod+r exec $term -e ranger
+bindsym $mod+r exec $term -e nnn
 bindsym $mod+c exec $term -e clacurse
 bindsym $mod+b exec blueman-manager
 bindsym $mod+shift+e exit

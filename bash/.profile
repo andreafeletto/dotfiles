@@ -6,7 +6,7 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-export PATH="/usr/local/anaconda/bin:$PATH:$HOME/.scripts:$HOME/.local/bin"
+export PATH="/usr/local/anaconda/bin:$PATH:$HOME/.scripts:$HOME/.local/bin:/usr/local/go/bin"
 export EDITOR="vim"
 export BROWSER="qutebrowser"
 export TERMINAL="st"
