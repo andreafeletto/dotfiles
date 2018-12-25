@@ -1,5 +1,5 @@
 
-#include ".Xresources.d/urxvt/random-tree"
+#include ".Xresources.d/themes/random-tree"
 
 *.alpha:                180
 
