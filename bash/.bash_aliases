@@ -7,7 +7,7 @@ alias mkd="mkdir -pv"
 alias ref="source ~/.bashrc"
 alias hld="gcloud compute scp andrea@ledger:~/.hledger.journal $HOME/.hledger.journal"
 alias hlc="gcloud compute ssh andrea@ledger"
-alias hlz="bzip2 -k $HOME/.hledger.journal"
+alias hlz="bzip2 -kf $HOME/.hledger.journal"
 alias sudomanoncorro="sudo"
 
 if command -v termux-open >/dev/null; then
