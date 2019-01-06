@@ -8,7 +8,7 @@ fi
 
 export PATH="/usr/local/anaconda/bin:$PATH:$HOME/.scripts:$HOME/.local/bin:/usr/local/go/bin"
 export EDITOR="vim"
-export BROWSER="qutebrowser"
+export BROWSER="firefox"
 export TERMINAL="st"
 export READER="zathura"
 

@@ -10,11 +10,7 @@ set $shutdown sudo -A shutdown now
 set $reboot sudo -A reboot
 
 # External Scripts
-exec --no-startup-id xrdb ~/.Xdefaults
-exec --no-startup-id ~/.fehbg # feh --bg-fill <img>
-exec --no-startup-id nm-applet
-exec --no-startup-id blueman-applet
-exec --no-startup-id "setxkbmap -layout it"
+exec --no-startup-id wal
 exec --no-startup-id compton -b
 
 font pango:monospace 12
