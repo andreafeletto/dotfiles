@@ -4,5 +4,5 @@ setxkbmap -layout it
 xrdb ~/.Xdefaults
 blueman-applet &
 nm-applet &
-dwmstatus 2>&1 >/dev/null &
-exec i3
+status &
+exec dwm
