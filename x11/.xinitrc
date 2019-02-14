@@ -5,4 +5,5 @@ xrdb ~/.Xdefaults
 blueman-applet &
 nm-applet &
 status &
+/usr/lib/notification-daemon-1.0/notification-daemon &
 exec dwm
