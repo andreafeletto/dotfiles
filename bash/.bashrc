@@ -10,8 +10,6 @@ HISTCONTROL=ignoreboth
 # auto-cd and append to history
 shopt -s autocd histappend
 
-set -o vi
-
 # Bash prompt.
 if command -v termux-open >/dev/null; then
     export PS1="\w \$ "

@@ -7,7 +7,7 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 export PATH="/usr/local/anaconda/bin:$PATH:$HOME/.scripts:$HOME/.local/bin:/usr/local/go/bin:$(ruby -e 'print Gem.user_dir')/bin"
-export EDITOR="vim"
+export EDITOR="nvim"
 export BROWSER="firefox"
 export TERMINAL="st"
 export READER="zathura"

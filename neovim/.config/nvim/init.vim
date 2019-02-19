@@ -32,3 +32,6 @@ map <Left> <nop>
 map <Down> <nop>
 map <Up> <nop>
 map <Right> <nop>
+
+" Compile lolcode
+map <leader>x :w! \| !lci <c-r>%<CR>
