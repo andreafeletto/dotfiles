@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=2018b
+Type=Application
+Terminal=false
+MimeType=text/x-matlab
+Exec=env _JAVA_AWT_WM_NONREPARENTING=1 matlab -desktop -nosplash
+Name=MATLAB
+Icon=matlab
+Categories=Development;Math;Science
+Comment=Scientific computing environment
+StartupNotify=true

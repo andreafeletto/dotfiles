@@ -1,0 +1,3 @@
+#!/usr/bin/sh
+
+dex .local/share/applications/matlab.desktop
