@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=Vim
+Exec=/usr/bin/vim %u
+Terminal=true
