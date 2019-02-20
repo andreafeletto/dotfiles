@@ -3,7 +3,7 @@
 while true; do
     VALUE=`cat /sys/class/power_supply/BAT1/capacity`
     STATUS=`cat /sys/class/power_supply/BAT1/status`
-    DATE=`date '+%Y %b %d (%a)  %I:%M%p'`
-    xsetroot -name "$(i3ledger) | $(i3volume) | $(i3light) | $VALUE% | $DATE"
+    DATE=`date '+%a %d %b %Y  %I:%M%p'`
+    xsetroot -name "$(i3ledger) | $(i3volume) | $(i3light) | $(i3battery) | $DATE"
     sleep 2
 done
