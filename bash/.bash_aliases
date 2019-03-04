@@ -22,6 +22,8 @@ if [ -x $HOME/arduino/arduino ]; then
     alias arduino="bash $HOME/arduino/arduino"
 fi
 
-# Colors
-alias ls="ls --color=auto --group-directories-first"
-alias ll="ls -ahl"
+if command -v lsd &> /dev/null; then
+    alias ll="lsd -al"
+else
+    alias ll="ls -ahl --group-directories-first"
+fi
