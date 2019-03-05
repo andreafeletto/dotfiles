@@ -8,6 +8,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'vimwiki/vimwiki'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-surround'
 call plug#end()
 
 " Basics
