@@ -23,7 +23,7 @@ if [ -x $HOME/arduino/arduino ]; then
 fi
 
 if command -v lsd &> /dev/null; then
-    alias ll="lsd -al"
+    alias ll='lsd -al --group-dirs first'
 else
-    alias ll="ls -ahl --group-directories-first"
+    alias ll='ls -ahl --group-directories-first'
 fi
