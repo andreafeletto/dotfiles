@@ -1,6 +1,9 @@
 
 alias ref="source ~/.bashrc"
 
+# calcurse
+alias calcurse="calcurse -D $HOME/.config/calcurse"
+
 # hledger
 alias hld="gcloud compute scp --compress andrea@ledger:~/.hledger.journal $HOME/.hledger.journal"
 alias hlc="gcloud compute ssh andrea@ledger"
@@ -23,7 +26,7 @@ if [ -x $HOME/arduino/arduino ]; then
 fi
 
 if command -v lsd &> /dev/null; then
-    alias ll='lsd -al --group-dirs first'
+    alias ll='lsd --group-dirs first -al'
 else
     alias ll='ls -ahl --group-directories-first'
 fi
