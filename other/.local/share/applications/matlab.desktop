@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=2019a
+Type=Application
+Terminal=false
+MimeType=text/x-matlab
+Exec=env _JAVA_AWT_WM_NONREPARENTING=1 /home/andrea/matlab/R2019a/bin/matlab -desktop
+Name=MATLAB
+Icon=matlab
+Categories=Development;Math;Science
+Comment=Scientific computing environment
+StartupNotify=true
