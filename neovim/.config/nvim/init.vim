@@ -9,6 +9,7 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'vimwiki/vimwiki'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
+Plug 'thaerkh/vim-workspace'
 call plug#end()
 
 " Basics
