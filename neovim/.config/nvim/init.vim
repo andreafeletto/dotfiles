@@ -50,6 +50,10 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+" Tab navigation
+map <leader>h :tabp<CR>
+map <leader>l :tabn<CR>
+
 " Compiler and preview
 map <leader>c :w! \| !compiler <c-r>%<CR>
 map <leader>p :!opout <c-r>%<CR><CR>
