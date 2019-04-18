@@ -11,6 +11,7 @@ export EDITOR="nvim"
 export BROWSER="firefox"
 export TERMINAL="st"
 export READER="zathura"
+export NPM_CONFIG_USERCONFIG="$HOME/.config/npm/npmrc"
 
 # Start graphical server if i3 not already running
 if [ "$(tty)" = "/dev/tty1" ] ; then
