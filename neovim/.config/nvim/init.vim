@@ -11,6 +11,7 @@ Plug 'tpope/vim-surround'
 Plug 'thaerkh/vim-workspace'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
+Plug 'chrisbra/csv.vim'
 call plug#end()
 
 " Basics
@@ -29,8 +30,12 @@ set mouse=a
 " No copy when changing
 nnoremap c "_c
 " Enable loading plugin files for filetype detection
-filetype plugin on
+filetype plugin indent on
 syntax on
+
+" Reload config
+autocmd! bufwritepost init.vim source %
+command! ReloadConfig :so /home/andrea/.config/nvim/init.vim
 
 " Disable automatic comments on newlines
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -38,8 +43,13 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Autocompletition
 set wildmode=longest,list,full
 
+" Spellcheck
+map <leader>oi :setlocal spell spelllang=it<CR>
+map <leader>oe :setlocal spell spelllang=en<CR>
+map <leader>oo :setlocal spell!<CR>
+
 " Goyo
-map <leader>f :Goyo <cr> \| set linebreak<CR>
+map <leader>f :Goyo \| set linebreak<CR>
 
 " NerdTree
 map <leader>t :NERDTreeToggle<CR>
@@ -62,3 +72,51 @@ map <Left> <nop>
 map <Down> <nop>
 map <Up> <nop>
 map <Right> <nop>
+
+" <++>
+map <leader><leader> /<++><Enter>c4l
+imap <leader><leader> <Esc>/<++><Enter>c4l
+
+"""
+""" Latex
+"""
+
+" Changes plaintex to tex for empty files
+let g:tex_flavor='latex'
+
+" Inserts template in new files
+autocmd BufNewFile *.tex execute 'r ~/latex/template.tex' | 0 | delete
+
+" Equations
+autocmd Filetype tex imap ,ee \begin{equation}<enter>\end{equation}<enter><enter><++><esc>2kO
+autocmd Filetype tex imap ,ea \begin{align*}<enter>\end{align*}<enter><enter><++><esc>2kO
+
+" Derivatives
+autocmd Filetype tex imap ,dd \frac{d}{d}<++><esc>4hi
+autocmd Filetype tex imap ,dp \frac{\partial}{\partial }<++><esc>4hi
+
+" Integrals
+autocmd Filetype tex imap ,ii \int
+autocmd Filetype tex imap ,id \int_{}^{<++>}<++>d<++><esc>16hi
+autocmd Filetype tex imap ,ip \int\limits_{}<++>d<++><esc>9hi
+autocmd Filetype tex imap ,icp \oint\limits_{}<++>d<++><esc>9hi
+autocmd Filetype tex imap ,is \iint\limits_{}<++>d<++><esc>9hi
+autocmd Filetype tex imap ,ics \oiint\limits_{}<++>d<++><esc>9hi
+autocmd Filetype tex imap ,iv \iiint\limits_{}<++>d<++><esc>9hi
+
+" Vector calculus
+autocmd Filetype tex imap ,vv \vec{}<++><esc>4hi
+autocmd Filetype tex imap ,vc \nabla\times
+autocmd Filetype tex imap ,vd \nabla\cdot
+autocmd Filetype tex imap ,vg \nabla
+
+" Funtions
+autocmd Filetype tex imap ,ff \colon<++>\to<++><esc>16hi
+autocmd Filetype tex imap ,fF \colon&<++>\to<++>\\<enter>&<++>\mapsto<++><esc>k15hi
+
+" Sets
+autocmd Filetype tex imap ,sr \mathbb{R}
+autocmd Filetype tex imap ,sc \mathbb{C}
+autocmd Filetype tex imap ,sn \mathbb{N}
+autocmd Filetype tex imap ,sz \mathbb{Z}
+
