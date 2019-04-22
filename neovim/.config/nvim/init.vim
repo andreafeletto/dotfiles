@@ -32,10 +32,15 @@ nnoremap c "_c
 " Enable loading plugin files for filetype detection
 filetype plugin indent on
 syntax on
+" Fuzzy find
+set path+=**
 
 " Reload config
 autocmd! bufwritepost init.vim source %
 command! ReloadConfig :so /home/andrea/.config/nvim/init.vim
+
+" ctags (^] jump to tag, ^t prev tag)
+command! MakeTags !ctags -R .
 
 " Disable automatic comments on newlines
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
