@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# A general audio interface for LARBS.
-
-newvol="pkill -RTMIN+10 i3blocks"
-
 [ -z "$2" ] && num="2" || num="$2"
 
 case "$1" in

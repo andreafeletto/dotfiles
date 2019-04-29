@@ -3,6 +3,12 @@ unlet! skip_defaults_vim
 
 let mapleader=" "
 
+if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
+	echo "Downloading junegunn/vim-plug to manage plugins..."
+	silent !mkdir -p ~/.config/nvim/autoload/
+	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
+endif
+
 call plug#begin('~/.config/nvim/plugged')
 Plug 'junegunn/goyo.vim'
 Plug 'vimwiki/vimwiki'
@@ -12,6 +18,7 @@ Plug 'thaerkh/vim-workspace'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'chrisbra/csv.vim'
+Plug 'neovimhaskell/haskell-vim'
 call plug#end()
 
 " Basics
@@ -79,8 +86,7 @@ map <Up> <nop>
 map <Right> <nop>
 
 " <++>
-map <leader><leader> /<++><Enter>c4l
-imap <leader><leader> <Esc>/<++><Enter>c4l
+nmap <leader><leader> /<++><Enter>c4l
 
 """
 """ Latex
