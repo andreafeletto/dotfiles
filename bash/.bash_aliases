@@ -4,6 +4,11 @@ alias ref="source ~/.bashrc"
 # calcurse
 alias calcurse="calcurse -D $HOME/.config/calcurse"
 
+# git
+alias gs="git status"
+alias gd="git diff"
+alias gc="git commit -m"
+
 # hledger
 alias hld="gcloud compute scp --compress andrea@ledger:~/.hledger.journal $HOME/.hledger.journal"
 alias hlc="gcloud compute ssh andrea@ledger"
