@@ -41,6 +41,8 @@ filetype plugin indent on
 syntax on
 " Fuzzy find
 set path+=**
+" .viminfo path
+set viminfo+=n~/history/viminfo
 
 " Reload config
 autocmd! bufwritepost init.vim source %
