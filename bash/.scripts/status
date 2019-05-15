@@ -5,5 +5,5 @@ while true; do
     STATUS=`cat /sys/class/power_supply/BAT1/status`
     DATE=`date '+%a %d %b %Y  %I:%M%p'`
     xsetroot -name "$(i3light) | $(i3volume) | $(i3battery) | $DATE"
-    sleep 2
+    sleep 1
 done
