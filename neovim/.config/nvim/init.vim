@@ -93,6 +93,9 @@ nmap <leader><leader> /<++><Enter>c4l
 " Haskell
 autocmd FileType haskell setlocal shiftwidth=2 softtabstop=2
 
+" sxhkd
+autocmd BufWritePost *sxhkdrc !killall sxhkd; setsid sxhkd &
+
 """
 """ Latex
 """

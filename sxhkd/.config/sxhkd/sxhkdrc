@@ -1,0 +1,24 @@
+
+super + q
+    dmenu_run
+super + w
+    $BROWSER
+super + e
+    $TERMINAL
+super + b
+    blueman-manager
+super + o
+    xdg-open "$(dbrowse)"
+
+super + z
+    xbacklight -dec 5
+
+{XF86MonBrightnessDown,XF86MonBrightnessUp}
+    xbacklight {-dec,-inc} 5
+{XF86AudioLowerVolume,XF86AudioRaiseVolume}
+    pulsemixer --change-volume {-,+}5
+XF86AudioMute
+    pulsemixer --toggle-mute
+
+super + shift + BackSpace
+    prompt "Shutdown?" "shutdown now"
