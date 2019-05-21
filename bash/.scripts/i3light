@@ -1,3 +1,0 @@
-#!/bin/sh
-
-echo "💡 $(printf %b "scale=2; sqrt($(xbacklight))*10/1\n" | bc)"

@@ -2,6 +2,6 @@
 
 while true; do
     DATE=$(date '+%a %d %b %Y  %I:%M%p')
-    xsetroot -name "$(i3light) | $(i3volume) | $(i3battery) | $DATE"
+    xsetroot -name "$(xbacklight | head -c 4) | $(statvol) | $(statbat) | $DATE"
     sleep 1
 done
