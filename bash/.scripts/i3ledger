@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 ACCOUNTS_PATH='/home/andrea/.config/ledger/.hledger_accounts'
 

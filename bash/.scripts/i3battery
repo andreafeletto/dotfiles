@@ -1,9 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
-VALUE=`cat /sys/class/power_supply/BAT1/capacity` || exit
-STATUS=`cat /sys/class/power_supply/BAT1/status`
-
-# echo "`sed -e "s/,//g;s/Discharging/🔋/;s/Charging/🔌/;s/Unknown/❓/;s/Full/⚡/;s/ 0*/ /g;s/ :/ /g" <<<"$STATUS"` `sed -e 's/$/%/' <<<"$VALUE"`"
+VALUE=$(cat /sys/class/power_supply/BAT1/capacity) || exit
+STATUS=$(cat /sys/class/power_supply/BAT1/status)
 
 case $STATUS in
     "Discharging")

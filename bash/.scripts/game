@@ -1,12 +1,12 @@
-#!/usr/bin/bash
+#!/bin/sh
 
 if [ $# -ge 1 ]; then
-    game="$(which $1)"
-    dwm="$(which dwm)"
+    game="$(command -v "$1")"
+    dwm="$(command -v dwm)"
     tmpgame="/tmp/tmpgame.sh"
     DISPLAY=:1.0
-    echo -e "${dwm} &\n${game}" > ${tmpgame}
-    xinit ${tmpgame} -- :1 vt${XDG_VTNR} || exit 1
+    printf %b "${dwm} &\n${game}" > ${tmpgame}
+    xinit ${tmpgame} -- :1 vt"${XDG_VTNR}" || exit 1
 else
     echo "not a valid argument"
 fi

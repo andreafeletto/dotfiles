@@ -1,18 +1,19 @@
-#!/bin/bash
+#!/bin/sh
 
 export PATH=/usr/bin
 
-USER_NAME=$(who | awk -v vt=tty$(fgconsole) '$0 ~ vt {print $1}')
+USER_NAME=$(who | awk -v vt=tty"$(fgconsole)" '$0 ~ vt {print $1}')
 USER_ID=$(id -u "$USER_NAME")
 CARD_PATH="/sys/class/drm/card0/"
 AUDIO_OUTPUT="analog-surround-40"
-PULSE_SERVER="unix:/run/user/"$USER_ID"/pulse/native"
+PULSE_SERVER="unix:/run/user/$USER_ID/pulse/native"
+echo "$PULSE_SERVER"
 
 for OUTPUT in $(cd "$CARD_PATH" && echo card*); do
-  OUT_STATUS=$(<"$CARD_PATH"/"$OUTPUT"/status)
-  if [[ $OUT_STATUS == connected ]]
+  OUT_STATUS=$(cat "$CARD_PATH"/"$OUTPUT"/status)
+  if [ "$OUT_STATUS" = connected ]
   then
-    echo $OUTPUT connected
+    echo "$OUTPUT" connected
     case "$OUTPUT" in
       "card0-HDMI-A-1")
         AUDIO_OUTPUT="hdmi-stereo" # Digital Stereo (HDMI 1)
