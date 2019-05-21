@@ -1,6 +1,6 @@
 
 super + q
-    dmenu_run
+    setsid dmenu_run -m 0 -h 21
 super + w
     $BROWSER
 super + e
@@ -9,9 +9,6 @@ super + b
     blueman-manager
 super + o
     xdg-open "$(dbrowse)"
-
-super + z
-    xbacklight -dec 5
 
 {XF86MonBrightnessDown,XF86MonBrightnessUp}
     xbacklight {-dec,-inc} 5
