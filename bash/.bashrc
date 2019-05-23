@@ -1,5 +1,9 @@
-# auto-cd and append to history
+#!/bin/bash
+
 shopt -s autocd histappend
+
+HISTSIZE=
+HISTFILESIZE=
 
 function _update_ps1() {
     PS1=$(powerline-shell $?)
@@ -11,8 +15,4 @@ elif [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
 
-# Infinite history
-HISTSIZE= HISTFILESIZE=
-
-# Alias definitions.
-[ -f ~/.bash_aliases ] && source ~/.bash_aliases
+[ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"

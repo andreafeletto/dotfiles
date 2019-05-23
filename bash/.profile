@@ -1,25 +1,23 @@
 # if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
-    fi
-fi
+[ -n "$BASH_VERSION" ] && [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
 
-export PATH="/usr/local/anaconda/bin:$PATH:$HOME/.scripts:$HOME/.local/bin:/usr/local/go/bin:$(ruby -e 'print Gem.user_dir')/bin:$HOME/go/bin"
 export EDITOR="nvim"
 export BROWSER="firefox"
 export TERMINAL="st"
 export READER="zathura"
 export NPM_CONFIG_USERCONFIG="$HOME/.config/npm/npmrc"
 
+PATH="/usr/local/anaconda/bin:$PATH"
+PATH="$PATH:$HOME/.scripts"
+PATH="$PATH:$HOME/.local/bin"
+PATH="$PATH:/usr/local/go/bin"
+PATH="$PATH:$HOME/go/bin"
+PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
+export PATH
+
 # History files
 export HISTFILE="$HOME/history/bash_history"
 export PYTHONSTARTUP="$HOME/.config/python/startup.py"
 export LESSHISTFILE="$HOME/history/lesshst"
 
-# Start graphical server if i3 not already running
-if [ "$(tty)" = "/dev/tty1" ] ; then
-    pgrep -x i3 || exec startx
-fi
-
+[ "$(tty)" = "/dev/tty1" ] && pgrep -x dwm || exec startx > /tmp/startx.log 2>&1
