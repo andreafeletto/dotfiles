@@ -9,6 +9,10 @@ super + b
     blueman-manager
 super + o
     xdg-open "$(dbrowse)"
+super + p
+    passmenu
+super + shift + p
+    otpmenu
 
 {XF86MonBrightnessDown,XF86MonBrightnessUp}
     xbacklight {-dec,-inc} 5
