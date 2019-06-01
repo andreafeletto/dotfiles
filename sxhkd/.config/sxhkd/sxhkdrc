@@ -1,6 +1,6 @@
 
 super + q
-    setsid dmenu_run -m 0 -h 21
+    dmenu_run
 super + w
     $BROWSER
 super + e

@@ -1,0 +1,65 @@
+
+## Original /usr/share/doc/ncmpcpp/bindings
+
+## Disable arrow keys
+
+def_key "left"
+    dummy
+
+def_key "right"
+    dummy
+
+def_key "up"
+    dummy
+
+def_key "down"
+    dummy
+
+## Vim hjkl
+
+def_key "h"
+  previous_column
+
+def_key "j"
+    scroll_down
+
+def_key "shift-j"
+    select_item
+    scroll_down
+
+def_key "k"
+    scroll_up
+
+def_key "shift-k"
+    select_item
+    scroll_up
+
+def_key "l"
+  next_column
+
+## Change views order
+
+def_key "1"
+  show_playlist
+
+def_key "2"
+  show_media_library
+
+def_key "3"
+  show_visualizer
+
+def_key "4"
+  show_tag_editor
+
+def_key "5"
+  show_playlist_editor
+
+def_key "6"
+  show_browser
+
+def_key "7"
+  show_search_engine
+
+def_key "8"
+  show_outputs
+
