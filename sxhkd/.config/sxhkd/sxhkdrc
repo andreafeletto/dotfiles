@@ -21,5 +21,8 @@ super + shift + p
 XF86AudioMute
     pulsemixer --toggle-mute
 
+{XF86AudioPrev,XF86AudioNext,XF86AudioPlay}
+    mpc {prev,next,toggle}
+
 super + shift + BackSpace
     prompt "Shutdown?" "shutdown now"
