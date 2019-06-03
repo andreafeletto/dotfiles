@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Mpv
+Exec=/usr/bin/mpv --vo=gpu %u
