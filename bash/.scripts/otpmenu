@@ -5,7 +5,6 @@ prefix="$HOME/.password-store"
 files=$(find "$prefix" ! \( -path .git -prune \) -name \*.gpg -exec basename -s ".gpg" '{}' ';')
 
 selected=$(echo "$files" | dmenu)
-echo $selected
 
 [ -n "$selected" ] || exit
 
