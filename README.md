@@ -11,7 +11,7 @@ git clone https://github.com/andreafeletto/dotfiles.git
 Move into the repository and stow the needed directories:
 ```bash
 cd dotfiles
-stow bash git mpd mpv ncmpcpp neovim npm other python sxiv x11
+stow bash git mpd mpv ncmpcpp neovim npm xdg python sxiv x11
 ```
 
 ## Install packages
