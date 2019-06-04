@@ -14,6 +14,9 @@ super + p
 super + shift + p
     otpmenu
 
+ctrl + super + space
+    slock
+
 {XF86MonBrightnessDown,XF86MonBrightnessUp}
     xbacklight {-dec,-inc} 5
 {XF86AudioLowerVolume,XF86AudioRaiseVolume}
