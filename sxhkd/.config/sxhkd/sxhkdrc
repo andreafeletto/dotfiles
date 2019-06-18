@@ -18,11 +18,11 @@ ctrl + super + space
     slock
 
 {XF86MonBrightnessDown,XF86MonBrightnessUp}
-    xbacklight {-dec,-inc} 5
+    xbacklight {-dec,-inc} 5; statref
 {XF86AudioLowerVolume,XF86AudioRaiseVolume}
-    pulsemixer --change-volume {-,+}5
+    pulsemixer --change-volume {-,+}5; statref
 XF86AudioMute
-    pulsemixer --toggle-mute
+    pulsemixer --toggle-mute; statref
 
 {XF86AudioPrev,XF86AudioNext,XF86AudioPlay}
     mpc {prev,next,toggle}
