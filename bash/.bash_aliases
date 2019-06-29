@@ -10,9 +10,9 @@ alias gd="git diff"
 alias gc="git commit -m"
 
 # hledger
-alias hld="gcloud compute scp --compress andrea@ledger:~/.hledger.journal $HOME/.hledger.journal"
-alias hlc="gcloud compute ssh andrea@ledger"
-alias hlz="bzip2 -kf $HOME/.hledger.journal"
+alias hld="scp andrea@34.74.55.94:~/.hledger.journal $HOME/.hledger.journal"
+alias hlc="ssh andrea@34.74.55.94"
+alias hlbak="bzip2 -kf $HOME/.hledger.journal"
 
 # neovim
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
@@ -33,5 +33,5 @@ fi
 if command -v lsd &> /dev/null; then
     alias ll='lsd --group-dirs first -al'
 else
-    alias ll='ls -ahl --group-directories-first'
+    alias ll='ls -ahl --group-directories-first --color=auto'
 fi
