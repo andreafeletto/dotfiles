@@ -21,4 +21,4 @@ export HISTFILE="$HOME/history/bash_history"
 export PYTHONSTARTUP="$HOME/.config/python/startup.py"
 export LESSHISTFILE="$HOME/history/lesshst"
 
-[ "$(tty)" = "/dev/tty1" ] && pgrep -x dwm || exec startx > /tmp/startx.log 2>&1
+( [ "$(tty)" = "/dev/tty1" ] && ! pgrep -x dwm ) && exec startx > /tmp/startx.log 2>&1
