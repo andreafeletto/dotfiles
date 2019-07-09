@@ -10,8 +10,8 @@ alias gd="git diff"
 alias gc="git commit -m"
 
 # hledger
-alias hld="scp andrea@34.74.55.94:~/.hledger.journal $HOME/.hledger.journal"
-alias hlc="ssh andrea@34.74.55.94"
+alias hld="scp andrea@andreafeletto.com:~/.hledger.journal $HOME/.hledger.journal"
+alias hlc="ssh andrea@andreafeletto.com"
 alias hlbak="bzip2 -kf $HOME/.hledger.journal"
 
 # neovim
