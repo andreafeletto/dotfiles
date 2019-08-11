@@ -1,4 +1,4 @@
 #!/bin/sh
 
-[ "$(pidof slstatus)" ] && pkill slstatus
-nohup slstatus > /dev/null 2>&1 &
+pkill status
+status &

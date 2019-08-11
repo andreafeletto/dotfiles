@@ -3,5 +3,5 @@
 while true; do
     DATE=$(date '+%a %d %b %Y  %I:%M%p')
     xsetroot -name "💡 $(xbacklight | head -c 4) | $(statvol) | $(statbat) | $DATE"
-    sleep 1
+    sleep 10
 done
