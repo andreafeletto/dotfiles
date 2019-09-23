@@ -6,8 +6,8 @@ export BROWSER="firefox"
 export TERMINAL="st"
 export READER="zathura"
 export NPM_CONFIG_USERCONFIG="$HOME/.config/npm/npmrc"
+export GNUPGHOME="$HOME/.config/gnupg"
 
-PATH="/usr/local/anaconda/bin:$PATH"
 PATH="$PATH:$HOME/.scripts"
 PATH="$PATH:$HOME/.local/bin"
 PATH="$PATH:/usr/local/go/bin"
@@ -21,4 +21,4 @@ export HISTFILE="$HOME/history/bash_history"
 export PYTHONSTARTUP="$HOME/.config/python/startup.py"
 export LESSHISTFILE="$HOME/history/lesshst"
 
-( [ "$(tty)" = "/dev/tty1" ] && ! pgrep -x dwm ) && exec startx > /tmp/startx.log 2>&1
+[ "$(tty)" = "/dev/tty1" ] && exec startx > /tmp/startx.log 2>&1

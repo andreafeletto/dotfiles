@@ -1,0 +1,7 @@
+#/bin/sh
+
+source="$HOME/.hledger.journal"
+sink="$HOME/ledger.bak.d/$(date '+%Y-%m-%d').bz2"
+
+mkdir -p $HOME/ledger.bak.d
+bzip2 --compress --keep --small --stdout "$source" > "$sink"
