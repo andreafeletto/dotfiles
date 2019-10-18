@@ -2,11 +2,16 @@
 [ -n "$BASH_VERSION" ] && [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
 
 export EDITOR="nvim"
-export BROWSER="firefox"
+export BROWSER="chromium"
 export TERMINAL="st"
 export READER="zathura"
 export NPM_CONFIG_USERCONFIG="$HOME/.config/npm/npmrc"
 export GNUPGHOME="$HOME/.config/gnupg"
+export QT_SELECT="4"
+
+# Rust
+export CARGO_HOME="$HOME/.local/cargo"
+export RUSTUP_HOME="$HOME/.local/rustup"
 
 PATH="$PATH:$HOME/.scripts"
 PATH="$PATH:$HOME/.local/bin"
@@ -14,6 +19,7 @@ PATH="$PATH:/usr/local/go/bin"
 PATH="$PATH:$HOME/go/bin"
 PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
 PATH="$PATH:/usr/local/plan9/bin"
+PATH="$PATH:$HOME/.cargo/bin"
 export PATH
 
 # History files
@@ -22,3 +28,5 @@ export PYTHONSTARTUP="$HOME/.config/python/startup.py"
 export LESSHISTFILE="$HOME/history/lesshst"
 
 [ "$(tty)" = "/dev/tty1" ] && exec startx > /tmp/startx.log 2>&1
+
+export PATH="$HOME/.cargo/bin:$PATH"
