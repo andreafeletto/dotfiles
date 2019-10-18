@@ -19,6 +19,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'chrisbra/csv.vim'
 Plug 'neovimhaskell/haskell-vim'
+Plug 'tmhedberg/SimpylFold'
 call plug#end()
 
 " Basics
