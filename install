@@ -1,0 +1,23 @@
+#!/bin/sh
+
+mkdir -p "$HOME/.config/autorandr"
+mkdir -p "$HOME/.config/git"
+mkdir -p "$HOME/.config/mpd"
+mkdir -p "$HOME/.config/mpv"
+mkdir -p "$HOME/.config/nvim"
+mkdir -p "$HOME/.config/npm"
+mkdir -p "$HOME/.config/python"
+mkdir -p "$HOME/.config/sxhkd"
+mkdir -p "$HOME/.config/sxiv"
+mkdir -p "$HOME/.config/fontconfig"
+mkdir -p "$HOME/.local/share/applications"
+
+stow autorandr bash git mpd mpv ncmpcpp neovim vim newsboat npm python sxhkd sxiv x11 xdg latex
+
+# grep -v "#" pkgs-arch | sudo pacman -Syu --noconfirm -
+
+xargs -a pkgs-gem gem install
+
+pip install --user -r pkgs-pip
+
+xargs -a pkgs-npm npm i -g
