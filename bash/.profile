@@ -19,7 +19,7 @@ PATH="$PATH:/usr/local/go/bin"
 PATH="$PATH:$HOME/go/bin"
 PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
 PATH="$PATH:/usr/local/plan9/bin"
-PATH="$PATH:$HOME/.cargo/bin"
+PATH="$PATH:$HOME/.local/cargo/bin"
 export PATH
 
 # History files

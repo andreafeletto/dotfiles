@@ -20,6 +20,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'chrisbra/csv.vim'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'tmhedberg/SimpylFold'
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 " Basics
