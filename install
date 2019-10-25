@@ -1,23 +1,48 @@
-#!/bin/sh
+#!/bin/bash
 
-mkdir -p "$HOME/.config/autorandr"
-mkdir -p "$HOME/.config/git"
-mkdir -p "$HOME/.config/mpd"
-mkdir -p "$HOME/.config/mpv"
-mkdir -p "$HOME/.config/nvim"
-mkdir -p "$HOME/.config/npm"
-mkdir -p "$HOME/.config/python"
-mkdir -p "$HOME/.config/sxhkd"
-mkdir -p "$HOME/.config/sxiv"
-mkdir -p "$HOME/.config/fontconfig"
+read -p "Do you wish to install pacman packages? [y/n] " -n 1 -r
+echo
+[ "$REPLY" = "y" ] && grep -v "#" pkgs-arch | sudo pacman -Syu --noconfirm -
+
+dot_config_folders="    \
+    autorandr           \
+    git                 \
+    mpd                 \
+    mpv                 \
+    nvim                \
+    npm                 \
+    python              \
+    sxhkd               \
+    sxiv                \
+    fontconfig          \
+"
+for f in $dot_config_folders; do
+    mkdir -p "$HOME/.config/$f"
+done
+
 mkdir -p "$HOME/.local/share/applications"
 
 stow autorandr bash git mpd mpv ncmpcpp neovim vim newsboat npm python sxhkd sxiv x11 xdg latex
 
-# grep -v "#" pkgs-arch | sudo pacman -Syu --noconfirm -
+read -p "Do you wish to install ruby packages? [y/n] " -n 1 -r
+echo
+[ "$REPLY" = "y" ] && xargs -a pkgs-gem gem install
 
-xargs -a pkgs-gem gem install
+read -p "Do you wish to install python packages? [y/n] " -n 1 -r
+echo
+[ "$REPLY" = "y" ] && pip install --user -r pkgs-pip
 
-pip install --user -r pkgs-pip
+read -p "Do you wish to install npm packages? [y/n] " -n 1 -r
+echo
+[ "$REPLY" = "y" ] && xargs -a pkgs-npm npm i -g
 
-xargs -a pkgs-npm npm i -g
+read -p "Do you wish to install github packages? [y/n] " -n 1 -r
+echo
+if [ "$REPLY" = "y" ]; then
+    mkdir "$HOME/repos"
+    for name in st dmenu dwm slock
+    do
+        git clone "https://github.com/andreafeletto/$name.git" "$HOME/repos/$name"
+        (cd "$HOME/repos/$name" && sudo make install clean)
+    done
+fi
