@@ -4,24 +4,33 @@
 Every folder contains the dotfiles needed for the relative application.
 First make sure that [GNU Stow](https://www.gnu.org/software/stow) is installed.
 Clone this repository into the home directory:
-```
+```sh
 cd ~
 git clone https://github.com/andreafeletto/dotfiles.git
 ```
-Move into the repository and stow the needed directories:
-```bash
+Move into the repository and run the install script:
+```sh
 cd dotfiles
-stow bash git mpd mpv ncmpcpp neovim npm xdg python sxiv x11
+./install
+```
+To install a subset of the configuration files just use Stow.
+Just know that if a subdirectory of the chosen directory is not already
+present it will be symlinked. This means that new files in the
+subdirectory will also be added to the repository, which may not be
+what you want.
+```sh
+mkdir -p ~/.config/nvim
+stow neovim
 ```
 
 ## Install packages
 Arch linux packages:
 ```
-sudo pacman -S - < pkgs
+sudo pacman -S - < pkgs-arch
 ```
-Debian/Ubuntu packages:
+Debian/Ubuntu packages (Not tested, packages may not exist):
 ```
-xargs -a pkgs sudo apt install
+xargs -a pkgs-arch sudo apt install
 ```
 Gems:
 ```
@@ -48,4 +57,4 @@ Change the $dir and $urls (space separated string) variables then run:
 
 ## Partially stolen from...
 
-[Luke Smith](https://github.com/LukeSmithxyz/voidrice) (for the main setup), [AntSunrise](https://github.com/AntSunrise/URxvt-themes) (for themes).
+[Luke Smith](https://github.com/LukeSmithxyz/voidrice)

@@ -1,7 +1,12 @@
-#!/bin/bash
+#!/bin/sh
 
-read -p "Do you wish to install pacman packages? [y/n] " -n 1 -r
-echo
+ask() {
+    printf "$1 [y/n] "
+    read -rn 1
+    echo
+}
+
+ask "Do you wish to install pacman packages?"
 [ "$REPLY" = "y" ] && grep -v "#" pkgs-arch | sudo pacman -Syu --noconfirm -
 
 dot_config_folders="    \
@@ -24,20 +29,16 @@ mkdir -p "$HOME/.local/share/applications"
 
 stow autorandr bash git mpd mpv ncmpcpp neovim vim newsboat npm python sxhkd sxiv x11 xdg latex
 
-read -p "Do you wish to install ruby packages? [y/n] " -n 1 -r
-echo
+ask "Do you wish to install ruby packages?"
 [ "$REPLY" = "y" ] && xargs -a pkgs-gem gem install
 
-read -p "Do you wish to install python packages? [y/n] " -n 1 -r
-echo
+ask "Do you wish to install python packages?"
 [ "$REPLY" = "y" ] && pip install --user -r pkgs-pip
 
-read -p "Do you wish to install npm packages? [y/n] " -n 1 -r
-echo
+ask "Do you wish to install npm packages?"
 [ "$REPLY" = "y" ] && xargs -a pkgs-npm npm i -g
 
-read -p "Do you wish to install github packages? [y/n] " -n 1 -r
-echo
+ask "Do you wish to install github packages?"
 if [ "$REPLY" = "y" ]; then
     mkdir "$HOME/repos"
     for name in st dmenu dwm slock
