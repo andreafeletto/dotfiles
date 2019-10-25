@@ -46,7 +46,7 @@ xargs -a pkgs-npm npm i -g
 ```
 Termux:
 ```
-xargs -a pkgs-pip pkg install
+xargs -a pkgs-termux pkg install
 ```
 
 ## Download wallpapers
