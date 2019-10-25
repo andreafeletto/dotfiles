@@ -6,6 +6,21 @@ ask() {
     echo
 }
 
+clone() {
+    mkdir "$HOME/repos"
+    git clone "$1" "$HOME/repos/$2"
+}
+
+clone_and_make() {
+    clone $1 $2
+    (cd "$HOME/repos/$2" && sudo make install clean)
+}
+
+clone_and_makepkg() {
+    clone $1 $2
+    (cd "$HOME/repos/$2" && makepkg -si)
+}
+
 ask "Do you wish to install pacman packages?"
 [ "$REPLY" = "y" ] && grep -v "#" pkgs-arch | sudo pacman -Syu --noconfirm -
 
@@ -43,7 +58,12 @@ if [ "$REPLY" = "y" ]; then
     mkdir "$HOME/repos"
     for name in st dmenu dwm slock
     do
-        git clone "https://github.com/andreafeletto/$name.git" "$HOME/repos/$name"
-        (cd "$HOME/repos/$name" && sudo make install clean)
+        clone_and_make "https://github.com/andreafeletto/$name.git" $name
     done
+fi
+
+ask "Do you wish to install aur packages?"
+if [ "$REPLY" = "y" ]; then
+    clone_and_makepkg "https://github.com/Jguer/yay" "yay"
+    yay --noconfirm - < pkgs-aur
 fi
