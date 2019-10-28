@@ -6,6 +6,10 @@ xorg
 xf86-video-intel
 mesa
 
+# pdf
+zathura
+zathura-pdf-mupdf
+
 # utility
 git
 stow
@@ -46,8 +50,6 @@ blender
 # programming
 python2
 python3
-python-matplotlib
-python-numpy
 nodejs
 npm
 perl
