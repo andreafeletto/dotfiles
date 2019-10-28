@@ -48,7 +48,7 @@ ask "Do you wish to install ruby packages?"
 [ "$REPLY" = "y" ] && xargs -a pkgs-gem gem install
 
 ask "Do you wish to install python packages?"
-[ "$REPLY" = "y" ] && pip install --user -r pkgs-pip
+[ "$REPLY" = "y" ] && grep -v "#" pkgs-python | sudo pacman -Syu --noconfirm -
 
 ask "Do you wish to install npm packages?"
 [ "$REPLY" = "y" ] && xargs -a pkgs-npm npm i -g
