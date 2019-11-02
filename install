@@ -1,0 +1,78 @@
+#!/bin/sh
+
+ask() {
+    printf "$1 [y/n] "
+    read -rn 1
+    echo
+}
+
+clone() {
+    mkdir "$HOME/repos"
+    git clone "$1" "$HOME/repos/$2"
+}
+
+clone_and_make() {
+    clone $1 $2
+    (cd "$HOME/repos/$2" && sudo make install clean)
+}
+
+clone_and_makepkg() {
+    clone $1 $2
+    (cd "$HOME/repos/$2" && makepkg -si)
+}
+
+ask "Do you wish to install pacman packages?"
+[ "$REPLY" = "y" ] && grep -v "#" pkgs-arch | sudo pacman -Syu --noconfirm -
+
+dot_config_folders="    \
+    autorandr           \
+    git                 \
+    mpd                 \
+    mpv                 \
+    nvim                \
+    npm                 \
+    python              \
+    sxhkd               \
+    sxiv                \
+    fontconfig          \
+"
+for f in $dot_config_folders; do
+    mkdir -p "$HOME/.config/$f"
+done
+
+mkdir -p "$HOME/.local/share/applications"
+mkdir -p "$HOME/.ncmpcpp"
+
+stow autorandr bash git mpd mpv ncmpcpp neovim vim newsboat npm python sxhkd sxiv x11 xdg latex
+
+ask "Do you wish to install ruby packages?"
+[ "$REPLY" = "y" ] && xargs -a pkgs-gem gem install
+
+ask "Do you wish to install python packages?"
+[ "$REPLY" = "y" ] && grep -v "#" pkgs-python | sudo pacman -Syu --noconfirm -
+
+ask "Do you wish to install npm packages?"
+[ "$REPLY" = "y" ] && xargs -a pkgs-npm npm i -g
+
+ask "Do you wish to install github packages?"
+if [ "$REPLY" = "y" ]; then
+    mkdir "$HOME/repos"
+    for name in st dmenu dwm slock
+    do
+        clone_and_make "https://github.com/andreafeletto/$name.git" $name
+    done
+fi
+
+ask "Do you wish to install aur packages?"
+if [ "$REPLY" = "y" ]; then
+    clone_and_makepkg "https://github.com/Jguer/yay" "yay"
+    yay --noconfirm - < pkgs-aur
+fi
+
+ask "Do you wish to install Rust?"
+if [ "$REPLY" = "y" ]; then
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    mv "$HOME/.cargo" "$HOME/.local/cargo"
+    mv "$HOME/.rustup" "$HOME/.local/rustup"
+fi
+

@@ -1,0 +1,55 @@
+# browser
+chromium
+
+# x-org
+xorg
+xf86-video-intel
+mesa
+
+# pdf
+zathura
+zathura-pdf-mupdf
+
+# utility
+git
+stow
+xclip
+htop
+bc
+wget
+neofetch
+scrot
+qrencode
+zip
+unzip
+tree
+
+# text
+vim
+neovim
+tmux
+
+# system
+openssh
+alsa-utils
+pulseaudio
+pulsemixer
+pulseaudio-bluetooth
+blueman
+bluez
+networkmanager
+network-manager-applet
+
+# media
+mpd
+ncmpcpp
+imagemagick
+ffmpeg
+blender
+
+# programming
+python2
+python3
+nodejs
+npm
+perl

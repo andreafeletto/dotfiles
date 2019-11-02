@@ -12,10 +12,8 @@ alias gs="git status"
 alias gd="git diff"
 alias gc="git commit -m"
 
-# hledger
-alias hld="scp andrea@andreafeletto.com:~/.hledger.journal $HOME/.hledger.journal"
+# ssh
 alias hlc="ssh andrea@andreafeletto.com"
-alias hlbak="bzip2 -kf $HOME/.hledger.journal"
 
 # neovim
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"

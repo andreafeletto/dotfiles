@@ -7,6 +7,7 @@ if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
 	silent !mkdir -p ~/.config/nvim/autoload/
 	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
+        autocmd VimEnter * PlugInstall
 endif
 
 call plug#begin('~/.config/nvim/plugged')
@@ -19,6 +20,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'chrisbra/csv.vim'
 Plug 'neovimhaskell/haskell-vim'
+Plug 'tmhedberg/SimpylFold'
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 " Basics
@@ -26,30 +29,33 @@ set nocompatible
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4
 set smarttab autoindent smartindent cindent
 set encoding=utf-8
-set number
-set relativenumber
+set number relativenumber
+
 " Enable clipboard support
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
+
 " Disable search highlighting
 set nohlsearch
+
 " Enable mouse support in Normal Visual Insert Command-line modes
 set mouse=a
+
 " No copy when changing
 nnoremap c "_c
+
 " Enable loading plugin files for filetype detection
 filetype plugin indent on
 syntax on
+
 " Fuzzy find
 set path+=**
+
 " .viminfo path
 set viminfo+=n~/history/viminfo
 
 " Reload config
 autocmd! bufwritepost init.vim source %
 command! ReloadConfig :so /home/andrea/.config/nvim/init.vim
-
-" ctags (^] jump to tag, ^t prev tag)
-command! MakeTags !ctags -R .
 
 " Disable automatic comments on newlines
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
