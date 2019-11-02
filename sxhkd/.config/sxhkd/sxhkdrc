@@ -9,13 +9,10 @@ super + b
     blueman-manager
 super + o
     xdg-open "$(dbrowse)"
-super + p
-    passmenu
-super + shift + p
-    otpmenu
-
 ctrl + super + space
     slock
+super + n
+    $TERMINAL -e ncmpcpp
 
 {XF86MonBrightnessDown,XF86MonBrightnessUp}
     xbacklight {-dec,-inc} 5; statref

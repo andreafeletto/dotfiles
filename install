@@ -41,6 +41,7 @@ for f in $dot_config_folders; do
 done
 
 mkdir -p "$HOME/.local/share/applications"
+mkdir -p "$HOME/.ncmpcpp"
 
 stow autorandr bash git mpd mpv ncmpcpp neovim vim newsboat npm python sxhkd sxiv x11 xdg latex
 
