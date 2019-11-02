@@ -4,6 +4,9 @@ alias ref="source ~/.bashrc"
 # calcurse
 alias calcurse="calcurse -D $HOME/.config/calcurse"
 
+# docker
+alias dps="docker ps --format \"table {{.Names}}\t{{.Image}}\t{{.Status}}\""
+
 # git
 alias gs="git status"
 alias gd="git diff"
