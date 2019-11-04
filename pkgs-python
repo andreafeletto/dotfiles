@@ -9,3 +9,6 @@ python-progress
 python-requests
 python-stem
 python-arrow
+python-selenium
+python-phonenumbers
+python-html5lib

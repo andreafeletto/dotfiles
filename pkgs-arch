@@ -24,6 +24,11 @@ zip
 unzip
 tree
 
+# network
+net-tools
+nmap
+aircrack-ng
+
 # text
 vim
 neovim
