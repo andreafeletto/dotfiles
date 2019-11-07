@@ -8,6 +8,9 @@ export READER="zathura"
 export NPM_CONFIG_USERCONFIG="$HOME/.config/npm/npmrc"
 export GNUPGHOME="$HOME/.config/gnupg"
 export QT_SELECT="4"
+export _JAVA_AWT_WM_NONREPARENTING="1"
+export ANDROID_HOME="$HOME/.local/android/sdk"
+export ANDROID_SDK_ROOT="$ANDROID_HOME"
 
 # Rust
 export CARGO_HOME="$HOME/.local/cargo"
@@ -20,6 +23,7 @@ PATH="$PATH:$HOME/go/bin"
 PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
 PATH="$PATH:/usr/local/plan9/bin"
 PATH="$PATH:$HOME/.local/cargo/bin"
+PATH="$PATH:$ANDROID_HOME/platform-tools"
 export PATH
 
 # History files

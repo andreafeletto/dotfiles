@@ -22,6 +22,8 @@ Plug 'chrisbra/csv.vim'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'tmhedberg/SimpylFold'
 Plug 'rust-lang/rust.vim'
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'thosakwe/vim-flutter'
 call plug#end()
 
 " Basics
@@ -101,6 +103,15 @@ autocmd FileType haskell setlocal shiftwidth=2 softtabstop=2
 
 " sxhkd
 autocmd BufWritePost *sxhkdrc !pkill -USR1 sxhkd
+
+"""
+""" Flutter
+"""
+
+autocmd FileType dart nnoremap <leader>fa :FlutterRun<cr>
+autocmd FileType dart nnoremap <leader>fr :FlutterHotReload<cr>
+autocmd FileType dart nnoremap <leader>fR :FlutterHotRestart<cr>
+autocmd FileType dart nnoremap <leader>fq :FlutterQuit<cr>
 
 """
 """ Latex
