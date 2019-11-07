@@ -1,6 +1,7 @@
 #!/bin/bash
 
 shopt -s autocd histappend
+. /usr/share/bash-completion/bash_completion
 
 HISTSIZE=
 HISTFILESIZE=
