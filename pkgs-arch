@@ -5,6 +5,9 @@ chromium
 xorg
 xf86-video-intel
 mesa
+xurls
+xclip
+sxhkd
 
 # pdf
 zathura
@@ -13,7 +16,6 @@ zathura-pdf-mupdf
 # utility
 git
 stow
-xclip
 htop
 bc
 wget
@@ -28,6 +30,7 @@ tree
 net-tools
 nmap
 aircrack-ng
+wireshark-qt
 
 # text
 vim
