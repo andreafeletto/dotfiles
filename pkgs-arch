@@ -3,9 +3,9 @@ chromium
 
 # x-org
 xorg
+xorg-xinit
 xf86-video-intel
 mesa
-xurls
 xclip
 sxhkd
 

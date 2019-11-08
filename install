@@ -22,7 +22,7 @@ clone_and_makepkg() {
 }
 
 ask "Do you wish to install pacman packages?"
-[ "$REPLY" = "y" ] && grep -v "#" pkgs-arch | sudo pacman -Syu --noconfirm -
+[ "$REPLY" = "y" ] && grep -v "#" pkgs-arch | sudo pacman -Syu -
 
 dot_config_folders="    \
     autorandr           \
@@ -65,7 +65,7 @@ fi
 
 ask "Do you wish to install aur packages?"
 if [ "$REPLY" = "y" ]; then
-    clone_and_makepkg "https://github.com/Jguer/yay" "yay"
+    clone_and_makepkg "https://aur.archlinux.org/yay.git" "yay"
     yay --noconfirm - < pkgs-aur
 fi
 
