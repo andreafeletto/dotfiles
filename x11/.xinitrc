@@ -24,5 +24,8 @@ blueman-applet &
 # network manager
 nm-applet &
 
+# udiskie with tray icon and udisks2 backend
+udiskie --automount --no-notify --smart-tray --use-udisks2 &
+
 # window manager
 exec dwm

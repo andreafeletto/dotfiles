@@ -5,6 +5,6 @@ image/png=img.desktop;
 image/jpeg=img.desktop;
 image/gif=img.desktop;
 video/mp4=video.desktop;
-inode/directory=firefox.desktop;
+inode/directory=filemanager.desktop;
 x-scheme-handler/magnet=torrent.desktop;
 application/x-bittorent=torrent.desktop;
