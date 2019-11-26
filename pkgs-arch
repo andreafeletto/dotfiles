@@ -25,6 +25,8 @@ qrencode
 zip
 unzip
 tree
+incron
+udiskie
 
 # network
 net-tools
@@ -39,14 +41,18 @@ tmux
 
 # system
 openssh
-alsa-utils
-pulseaudio
-pulsemixer
-pulseaudio-bluetooth
 blueman
 bluez
 networkmanager
 network-manager-applet
+
+# audio
+alsa-utils
+pulseaudio
+pulsemixer
+pulseaudio-bluetooth
+pulseaudio-alsa
+pulseaudio-equalizer
 
 # media
 mpd

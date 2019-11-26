@@ -1,6 +1,9 @@
 
 alias ref="source ~/.bashrc"
 
+# trash
+alias rm="rmtrash"
+
 # calcurse
 alias calcurse="calcurse -D $HOME/.config/calcurse"
 

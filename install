@@ -21,6 +21,19 @@ clone_and_makepkg() {
     (cd "$HOME/repos/$2" && makepkg -si)
 }
 
+systemd_enable() {
+    sudo systemctl enable $1
+}
+
+systemd_start() {
+    sudo systemctl start $1
+}
+
+systemd() {
+    systemd_enable $1
+    systemd_start $1
+}
+
 ask "Do you wish to install pacman packages?"
 [ "$REPLY" = "y" ] && grep -v "#" pkgs-arch | sudo pacman -Syu -
 
@@ -74,5 +87,13 @@ if [ "$REPLY" = "y" ]; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     mv "$HOME/.cargo" "$HOME/.local/cargo"
     mv "$HOME/.rustup" "$HOME/.local/rustup"
+fi
+
+ask "Do you wish to install systemd services?"
+if [ "$REPLY" = "y" ]; then
+    for service in bluetooth NetworkManager
+    do
+        systemd "$service"
+    done
 fi
 
