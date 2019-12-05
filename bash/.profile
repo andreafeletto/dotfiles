@@ -18,11 +18,11 @@ export RUSTUP_HOME="$HOME/.local/rustup"
 
 PATH="$PATH:$HOME/.scripts"
 PATH="$PATH:$HOME/.local/bin"
+PATH="$PATH:$HOME/.local/cargo/bin"
 PATH="$PATH:/usr/local/go/bin"
 PATH="$PATH:$HOME/go/bin"
 PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
 PATH="$PATH:/usr/local/plan9/bin"
-PATH="$PATH:$HOME/.local/cargo/bin"
 PATH="$PATH:$ANDROID_HOME/platform-tools"
 export PATH
 
@@ -32,5 +32,3 @@ export PYTHONSTARTUP="$HOME/.config/python/startup.py"
 export LESSHISTFILE="$HOME/history/lesshst"
 
 [ "$(tty)" = "/dev/tty1" ] && exec startx > /tmp/startx.log 2>&1
-
-export PATH="$HOME/.cargo/bin:$PATH"
