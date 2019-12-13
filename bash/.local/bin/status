@@ -29,13 +29,65 @@ backlight() {
 }
 
 refresh() {
+    echo "$$" > /tmp/status.pid
     DATE=$(date '+%a %d %b %Y  %I:%M%p')
     xsetroot -name "| $(backlight) | $(volume) | $(battery) | $DATE"
 }
 
-[ "$1" = '-r' ] && pkill -USR1 status &>/dev/null && exit
+check() {
+    [ -s /tmp/status.pid ] && kill -0 "$(cat /tmp/status.pid)" >/dev/null 2>&1
+}
+
+# (option -h, --help) help
+
+if [ "$1" = '--help' ] || [ "$1" = '-h' ]; then
+    cat << EOF
+Usage: status [OPTION]
+Statusbar for dwm.
+
+  -h, --help    display this help and exit
+  -r            refresh
+  -d            start in the background (if not already running)
+
+Git repository: <https://github.com/andreafeletto/dotfiles>
+EOF
+    exit 0
+fi
+
+# (option -r) send signal to force refresh
+
+[ "$1" = '-r' ] && kill -USR1 "$(cat /tmp/status.pid)" >/dev/null 2>&1 && exit 0
+
+# (option -d) spawn new status process
+
+if [ "$1" = '-d' ]; then
+    echo "spawning new status process."
+    check && echo "status already running: aborting." && exit 1
+    ${SHELL:-"/bin/sh"} -c status >>/tmp/status.log 2>&1 &
+    exit 0
+fi
+
+# invalid options
+
+if [ -n "$1" ]; then
+    echo "status: invalid option $1"
+    echo "Try 'status --help' for more information."
+    exit 1
+fi
+
+# check for an already running status process
+
+check && echo "$(date): status already running: aborting." && exit 1
+
+# refresh upon receiving SIGUSR1 signal
 
 trap 'refresh' USR1
+
+# remove tmp files when stopped
+
+trap 'rm /tmp/status.pid && exit 0' INT TERM
+
+# refresh every 10 seconds
 
 while true; do
     refresh

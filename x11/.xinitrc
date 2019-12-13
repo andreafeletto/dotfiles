@@ -16,7 +16,7 @@ sxhkd &>> /tmp/sxhkd.log &
 [ ! -s ~/.config/mpd/pid ] && mpd
 
 # dwm statusbar script
-status &
+status -d
 
 # bluetooth manager
 blueman-applet &
