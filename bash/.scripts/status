@@ -1,7 +1,43 @@
 #!/bin/sh
 
-while true; do
+battery() {
+    value=$(cat /sys/class/power_supply/BAT1/capacity) || exit
+    status=$(cat /sys/class/power_supply/BAT1/status)
+    case $status in
+        "Discharging")
+            icon="🔋";;
+        "Charging")
+            icon="🔌";;
+        "Full")
+            icon="⚡";;
+        "Unknown")
+            icon="❓";;
+    esac
+    printf "$icon %5b\n" "$value%"
+}
+
+volume() {
+    if [ "$(pulsemixer --get-mute)" = "1" ]; then
+        printf "   🔇   \n"
+    else
+        printf "🔊 %5b\n" "$(pulsemixer --get-volume | awk '{print $1}')%"
+    fi
+}
+
+backlight() {
+    printf "💡 %5b\n" "$(xbacklight | cut -d. -f1)%"
+}
+
+refresh() {
     DATE=$(date '+%a %d %b %Y  %I:%M%p')
-    xsetroot -name "💡 $(xbacklight | head -c 4) | $(statvol) | $(statbat) | $DATE"
-    sleep 10
+    xsetroot -name "| $(backlight) | $(volume) | $(battery) | $DATE"
+}
+
+[ "$1" = '-r' ] && pkill -USR1 status &>/dev/null && exit
+
+trap 'refresh' USR1
+
+while true; do
+    refresh
+    sleep 10 & wait $!
 done

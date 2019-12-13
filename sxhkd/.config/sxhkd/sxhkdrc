@@ -15,11 +15,11 @@ super + n
     $TERMINAL -e ncmpcpp
 
 {XF86MonBrightnessDown,XF86MonBrightnessUp}
-    xbacklight {-dec,-inc} 5; statref
+    xbacklight {-dec,-inc} 5; status -r
 {XF86AudioLowerVolume,XF86AudioRaiseVolume}
-    pulsemixer --change-volume {-,+}5; statref
+    pulsemixer --change-volume {-,+}5; status -r
 XF86AudioMute
-    pulsemixer --toggle-mute; statref
+    pulsemixer --toggle-mute; status -r
 
 {XF86AudioPrev,XF86AudioNext,XF86AudioPlay}
     mpc {prev,next,toggle}

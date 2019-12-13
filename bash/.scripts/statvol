@@ -1,7 +1,0 @@
-#!/bin/sh
-
-if [ "$(pulsemixer --get-mute)" = "1" ]; then
-    printf %b "🔇\n"
-else
-    printf %b "🔊 $(pulsemixer --get-volume | awk '{print $1}')%\n"
-fi
