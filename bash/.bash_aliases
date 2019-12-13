@@ -1,4 +1,9 @@
 
+# UNIX commands
+alias ll='ls -ahlLn --group-directories-first --color=auto'
+alias grep='grep --color=auto'
+alias less='less -N'
+
 alias ref="source ~/.bashrc"
 
 # trash
@@ -34,8 +39,3 @@ if [ -x $HOME/arduino/arduino ]; then
     alias arduino="bash $HOME/arduino/arduino"
 fi
 
-if command -v lsd &> /dev/null; then
-    alias ll='lsd --group-dirs first -al'
-else
-    alias ll='ls -ahl --group-directories-first --color=auto'
-fi

@@ -8,6 +8,7 @@ xf86-video-intel
 mesa
 xclip
 sxhkd
+xautomation
 
 # pdf
 zathura
@@ -61,6 +62,9 @@ ncmpcpp
 imagemagick
 ffmpeg
 blender
+
+# image editing
+gthumb
 
 # programming
 python2

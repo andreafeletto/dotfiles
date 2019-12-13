@@ -102,7 +102,7 @@ nmap <leader><leader> /<++><Enter>c4l
 autocmd FileType haskell setlocal shiftwidth=2 softtabstop=2
 
 " sxhkd
-autocmd BufWritePost *sxhkdrc !pkill -USR1 sxhkd
+autocmd BufWritePost *sxhkdrc !pkill -USR1 -x sxhkd
 
 """
 """ Flutter
