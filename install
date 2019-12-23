@@ -9,6 +9,18 @@ ask() {
     echo
 }
 
+check() {
+    echo "Checking for $1..."
+    if command -v "$1" >/dev/null; then
+        echo "$1 is installed."
+    else
+        echo "$1 is not installed."
+        ask 'Would you like to continue anyway?'
+        [ "$REPLY" != 'y' ] && exit 0
+    fi
+    echo
+}
+
 clone() {
     (cd "$HOME/repos" && git clone "$1")
 }
@@ -35,15 +47,8 @@ if [ "$distroId" != 'arch' ]; then
 fi
 echo
 
-echo 'Checking for Git...'
-if command -v git >/dev/null; then
-    echo 'Git is installed.'
-else
-    echo 'Git is not installed.'
-    ask 'Would you like to continue anyway?'
-    [ "$REPLY" != 'y' ] && exit 0
-fi
-echo
+check 'git'
+check 'stow'
 
 printf 'Stowing the following directories:\n'
 folders="$(find . -maxdepth 1 -type d | cut -d/ -f2 | grep -v '^\.')"
