@@ -1,8 +1,5 @@
 #!/bin/sh
 
-## TODO
-# Check for git
-
 ask() {
     printf %b "$1 [y/n] "
     read -r REPLY
@@ -70,7 +67,7 @@ ask 'Is this what you just did?'
 [ "$REPLY" != 'y' ] && exit 0
 
 ask 'Do you wish to update the system and install pacman packages?'
-[ "$REPLY" = 'y' ] && grep -v "#" pkgs-arch | sudo pacman -Syu --needed - 2>/dev/null
+[ "$REPLY" = 'y' ] && grep -v '^#' pkgs-arch | sudo pacman -Syu --needed - 2>/dev/null
 echo
 
 ask 'Do you wish to install ruby packages?'
@@ -78,7 +75,7 @@ ask 'Do you wish to install ruby packages?'
 echo
 
 ask 'Do you wish to install python packages?'
-[ "$REPLY" = 'y' ] && grep -v "#" pkgs-python | sudo pacman -Syu --needed - 2>/dev/null
+[ "$REPLY" = 'y' ] && grep -v '^#' pkgs-python | sudo pacman -Syu --needed - 2>/dev/null
 echo
 
 ask 'Do you wish to install npm packages?'

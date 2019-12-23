@@ -24,23 +24,19 @@ stow neovim
 ```
 
 ## Install packages
-Arch linux packages:
+Arch Linux:
 ```
-sudo pacman -S - < pkgs-arch
+grep -vh '^#' pkgs-arch pkgs-python | sudo pacman -Syu --needed -
 ```
-Debian/Ubuntu packages (Not tested, packages may not exist):
+Debian/Ubuntu (Not tested, packages may not exist):
 ```
-xargs -a pkgs-arch sudo apt install
+grep -v '^#' pkgs-arch | xargs sudo apt install
 ```
-Gems:
+Ruby Gems:
 ```
 xargs -a pkgs-gem gem install
 ```
-Pip:
-```
-pip install --user -r pkgs-pip
-```
-Npm:
+NodeJs NPM:
 ```
 xargs -a pkgs-npm npm i -g
 ```
