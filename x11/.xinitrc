@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # disable bell sound
 xset b off
 
