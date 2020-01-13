@@ -1,6 +1,11 @@
 # display manager
 lightdm
 
+# fonts
+adobe-source-code-pro-fonts
+gnu-free-fonts
+otf-fira-code
+
 # browser
 chromium
 
