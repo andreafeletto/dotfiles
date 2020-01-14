@@ -30,9 +30,7 @@ backlight() {
 
 refresh() {
     echo "$$" > /tmp/status.pid
-    DATE=$(date '+%a %d %b %Y  %I:%M%p')
-    DATE=$(lolclock)
-    xsetroot -name "| $(backlight) | $(volume) | $(battery) | $DATE"
+    xsetroot -name "| $(backlight) | $(volume) | $(battery) | $(batclock)"
 }
 
 check() {
