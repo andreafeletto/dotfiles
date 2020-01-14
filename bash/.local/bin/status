@@ -30,7 +30,7 @@ backlight() {
 
 refresh() {
     echo "$$" > /tmp/status.pid
-    xsetroot -name "| $(backlight) | $(volume) | $(battery) | $(batclock)"
+    xsetroot -name "| $(backlight) | $(volume) | $(battery) | $(lolclock)"
 }
 
 check() {
