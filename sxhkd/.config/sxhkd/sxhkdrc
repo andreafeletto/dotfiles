@@ -11,8 +11,6 @@ super + o
     xdg-open "$(dbrowse)"
 ctrl + super + space
     slock
-super + n
-    $TERMINAL -e ncmpcpp
 
 {XF86MonBrightnessDown,XF86MonBrightnessUp}
     xbacklight {-dec,-inc} 5; status -r
