@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # disable bell sound
 xset b off
@@ -11,26 +11,10 @@ xset r rate 200 50
 # set keyboard layout
 setxkbmap -layout it
 
-# simple X hotkey daemon
-sxhkd &>> /tmp/sxhkd.log &
-
-# music player deamon
-[ ! -s ~/.config/mpd/pid ] && mpd
-
-# dwm statusbar script
-status -d
-
-# bluetooth manager
-blueman-applet &
-
-# network manager
-nm-applet &
-
-# udiskie with tray icon and udisks2 backend
-udiskie --automount --no-notify --smart-tray --use-udisks2 &
-
-# notification daemon
-twmnd &
+[ -f ~/.xprofile ] && source ~/.xprofile
 
 # window manager
-exec dwm
+case "$WM" in
+    dwm) exec dwm ;;
+    *)   echo "$WM window manager not found." ;;
+esac

@@ -5,6 +5,8 @@ export EDITOR='nvim'
 export BROWSER='chromium'
 export TERMINAL='st'
 export READER='zathura'
+export WM='dwm'
+
 export NPM_CONFIG_USERCONFIG="$HOME/.config/npm/npmrc"
 export GNUPGHOME="$HOME/.config/gnupg"
 export _JAVA_AWT_WM_NONREPARENTING='1'
@@ -30,4 +32,4 @@ export HISTFILE="$HOME/history/bash_history"
 export PYTHONSTARTUP="$HOME/.config/python/startup.py"
 export LESSHISTFILE="$HOME/history/lesshst"
 
-[ "$(tty)" = "/dev/tty1" ] && exec startx
+[ "$(tty)" = "/dev/tty1" ] && ! pgrep -x Xorg >/dev/null && exec startx

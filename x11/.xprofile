@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+
+# hotkey daemon
+sxhkd &>> /tmp/sxhkd.log &
+
+# music player deamon
+[ ! -s ~/.config/mpd/pid ] && mpd
+
+# statusbar script
+status -d
+
+# bluetooth manager
+blueman-applet &
+
+# network manager
+nm-applet &
+
+# usb daemon
+udiskie --automount --no-notify --smart-tray --use-udisks2 &
+
+# notification daemon
+twmnd &
