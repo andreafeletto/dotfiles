@@ -49,6 +49,7 @@ neovim
 tmux
 
 # system
+cronie
 openssh
 blueman
 bluez

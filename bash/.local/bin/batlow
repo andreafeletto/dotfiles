@@ -1,3 +1,0 @@
-#!/bin/sh
-
-/usr/bin/twmnc -t 'warning' -c 'battery level low'
