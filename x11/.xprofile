@@ -16,7 +16,7 @@ blueman-applet &
 nm-applet &
 
 # usb daemon
-udiskie --automount --no-notify --smart-tray --use-udisks2 &
+udiskie --automount --no-notify --smart-tray &
 
 # notification daemon
 twmnd &
