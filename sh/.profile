@@ -2,7 +2,7 @@
 [ -n "$BASH_VERSION" ] && [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
 
 export EDITOR='nvim'
-export BROWSER='chromium'
+export BROWSER='brave'
 export TERMINAL='st'
 export READER='zathura'
 export WM='dwm'
