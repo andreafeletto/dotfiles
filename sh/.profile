@@ -7,6 +7,7 @@ export TERMINAL='st'
 export READER='zathura'
 export WM='dwm'
 
+export ZDOTDIR="$HOME/.config/zsh"
 export NPM_CONFIG_USERCONFIG="$HOME/.config/npm/npmrc"
 export GNUPGHOME="$HOME/.config/gnupg"
 export _JAVA_AWT_WM_NONREPARENTING='1'
