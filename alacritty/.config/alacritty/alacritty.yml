@@ -1,0 +1,72 @@
+
+window:
+  padding:
+    x: 4
+    y: 4
+
+  title: Alacritty
+
+  class:
+    instance: Alacritty
+    general: Alacritty
+
+scrolling:
+  # Maximum number of lines in the scrollback buffer
+  history: 10000
+
+  # Number of lines the viewport will move for every line scrolled
+  multiplier: 1
+
+  # Scroll to the bottom when new text is written to the terminal.
+  auto_scroll: true
+
+font:
+  size: 7.0
+
+  offset:
+    x: 1
+    y: 1
+
+# Colors (Dracula)
+colors:
+  primary:
+    background: '0x282a36'
+    foreground: '0xbbc5ff'
+
+  selection:
+    text: '0x282a36'
+    background: '0xbbc5ff'
+
+  normal:
+    black:   '0x282a36'
+    red:     '0xf07178'
+    green:   '0xc3e88d'
+    yellow:  '0xffcb6b'
+    blue:    '0x82aaff'
+    magenta: '0xc792ea'
+    cyan:    '0x89ddff'
+    white:   '0xd0d0d0'
+
+  bright:
+    black:   '0x434758'
+    red:     '0xff8b92'
+    green:   '0xddffa7'
+    yellow:  '0xffe585'
+    blue:    '0x9cc4ff'
+    magenta: '0xe1acff'
+    cyan:    '0xa3f7ff'
+    white:   '0xffffff'
+
+mouse:
+  url:
+    launcher:
+      program: xdg-open
+
+key_bindings:
+  - { key: V,        mods: Alt,           action: Paste                        }
+  - { key: C,        mods: Alt,           action: Copy                         }
+  - { key: K,        mods: Alt|Shift,     action: IncreaseFontSize             }
+  - { key: J,        mods: Alt|Shift,     action: DecreaseFontSize             }
+  - { key: K,        mods: Alt,           action: ScrollLineUp }
+  - { key: J,        mods: Alt,           action: ScrollLineDown }
+

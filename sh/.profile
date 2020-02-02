@@ -3,7 +3,7 @@
 
 export EDITOR='nvim'
 export BROWSER='brave'
-export TERMINAL='st'
+export TERMINAL='alacritty'
 export READER='zathura'
 export WM='dwm'
 
