@@ -1,6 +1,13 @@
 # display manager
 lightdm
 
+# terminal
+alacritty
+
+# shell
+bash
+bash-completion
+
 # fonts
 adobe-source-code-pro-fonts
 gnu-free-fonts
@@ -37,6 +44,7 @@ unzip
 tree
 incron
 udiskie
+ripgrep
 
 # network
 net-tools
