@@ -10,7 +10,7 @@ sxhkd &>> /tmp/sxhkd.log &
 status -d
 
 # bluetooth manager
-blueman-applet &
+# blueman-applet &
 
 # network manager
 nm-applet &
