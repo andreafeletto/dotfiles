@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # hotkey daemon
-sxhkd &>> /tmp/sxhkd.log &
+sxhkd &
 
 # music player deamon
 [ ! -s ~/.config/mpd/pid ] && mpd
