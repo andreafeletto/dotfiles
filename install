@@ -6,7 +6,7 @@ ask() {
     echo
 }
 
-check() {
+check_prog() {
     echo "Checking for $1..."
     if command -v "$1" >/dev/null; then
         echo "$1 is installed."
@@ -15,6 +15,29 @@ check() {
         ask 'Would you like to continue anyway?'
         [ "$REPLY" != 'y' ] && exit 0
     fi
+    echo
+}
+
+check_distro() {
+    echo 'Checking for the distro...'
+    distroName="$(grep '^NAME=' /etc/os-release | cut -d= -f2 | tr -d '"')"
+    echo "You are running $distroName"
+    distroId="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d '"')"
+    if [ "$distroId" != 'arch' ]; then
+        echo 'This script is not garanteed to work in non-arch distros.'
+        ask 'Would you like to continue anyway?'
+        [ "$REPLY" != 'y' ] && exit 0
+    fi
+    echo
+}
+
+mystow() {
+    while read -r name; do
+        echo "Creating dirs before stowing $name"
+        find "$name" -mindepth 1 -type d | sed "s:^$name:$HOME:" | xargs -r mkdir -p
+    done < tostow
+    echo 'Stowing...'
+    xargs -a tostow stow && echo 'Done stowing.'
     echo
 }
 
@@ -33,49 +56,21 @@ You are installing Andrea Feletto's dotfiles.
 
 EOF
 
-echo 'Checking for the distro...'
-distroName="$(grep '^NAME=' /etc/os-release | cut -d= -f2 | tr -d '"')"
-echo "You are running $distroName"
-distroId="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d '"')"
-if [ "$distroId" != 'arch' ]; then
-    echo 'This script is not garanteed to work in non-arch distros.'
-    ask 'Would you like to continue anyway?'
-    [ "$REPLY" != 'y' ] && exit 0
-fi
-echo
-
-check 'git'
-check 'stow'
-
-printf 'Stowing the following directories:\n'
-folders="$(find . -maxdepth 1 -type d | cut -d/ -f2 | grep -v '^\.')"
-echo "$folders" | column
-echo
-
-echo 'Creating directories before stowing...'
-for folder in $folders; do
-    find "$folder" -mindepth 1 -type d | sed "s:^$folder:$HOME:" | xargs -r mkdir -p
-done
-printf 'Done\n\n'
-
-echo 'Stowing...'
-echo "$folders" | xargs stow
-printf 'Done\n\n'
+check_distro
+check_prog 'git'
+check_prog 'stow'
+mystow
 
 echo 'Now is the time to logout and login again.'
 ask 'Is this what you just did?'
 [ "$REPLY" != 'y' ] && exit 0
 
 ask 'Do you wish to update the system and install pacman packages?'
-[ "$REPLY" = 'y' ] && grep -v '^#' pkgs-arch | sudo pacman -Syu --needed - 2>/dev/null
+[ "$REPLY" = 'y' ] && grep -v '^#' pkgs-arch | sudo pacman -Syu --needed -
 echo
 
-ask 'Do you wish to install ruby packages?'
+ask 'Do you wish to install ruby gems?'
 [ "$REPLY" = 'y' ] && xargs -a pkgs-gem gem install
-echo
-
-ask 'Do you wish to install python packages?'
-[ "$REPLY" = 'y' ] && grep -v '^#' pkgs-python | sudo pacman -Syu --needed - 2>/dev/null
 echo
 
 ask 'Do you wish to install npm packages?'
@@ -98,9 +93,9 @@ ask "Do you wish to install aur packages?"
 if [ "$REPLY" = 'y' ]; then
     while read -r name; do
         printf '\n%b\n\n' "Installing $name from the AUR..."
-        pacman -Q "$name" && echo "$name already installed. Skipping." && continue
+        pacman -Q "$name" 2>/dev/null && echo "$name already installed. Skipping." && continue
         clone "https://aur.archlinux.org/$name.git" 2>/dev/null
-        (cd "$HOME/repos/$name" && makepkg -si)
+        (cd "$HOME/repos/$name" && makepkg -si --noconfirm)
     done < pkgs-aur
 fi
 echo
@@ -110,10 +105,12 @@ if [ "$REPLY" = 'y' ]; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     mv "$HOME/.cargo" "$HOME/.local/cargo"
     mv "$HOME/.rustup" "$HOME/.local/rustup"
+    source "$HOME/.local/cargo/env"
+    rustup self update
 fi
 echo
 
-ask "Do you wish to install systemd services?"
-[ "$REPLY" = 'y' ] && xargs -a services sudo systemctl enable --now
+ask "Do you wish to enable and start systemd services?"
+[ "$REPLY" = 'y' ] && xargs -a services systemctl enable --now
 echo
 

@@ -16,15 +16,15 @@ otf-fira-code
 # browser
 chromium
 brave
+firefox
 
-# x-org
+# xorg
 xorg
 xorg-xinit
+
+# drivers
 xf86-video-intel
 mesa
-xclip
-sxhkd
-xautomation
 
 # pdf
 zathura
@@ -45,6 +45,9 @@ tree
 incron
 udiskie
 ripgrep
+xclip
+sxhkd
+xautomation
 
 # network
 net-tools
@@ -90,3 +93,20 @@ python3
 nodejs
 npm
 perl
+
+# python libs
+python-beautifulsoup4
+python-colorama
+python-cryptography
+python-markdown
+python-matplotlib
+python-numpy
+python-pip
+python-progress
+python-requests
+python-stem
+python-arrow
+python-selenium
+python-phonenumbers
+python-html5lib
+
