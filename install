@@ -6,7 +6,7 @@ ask() {
     echo
 }
 
-check_prog() {
+check_pkg() {
     echo "Checking for $1..."
     if command -v "$1" >/dev/null; then
         echo "$1 is installed."
@@ -41,8 +41,38 @@ mystow() {
     echo
 }
 
-clone() {
-    (cd "$HOME/repos" && git clone "$1")
+install_from_github() {
+    mkdir -p "$HOME/repos"
+    for name in st dmenu dwm slock; do
+        printf '\n\n%b\n\n' "Installing $name from GitHub..."
+        (cd "$HOME/repos" &&
+            git clone "https://github.com/andreafeletto/$name.git" 2>/dev/null &&
+            cd "$name" && sudo make install clean)
+        echo 'Done'
+    done
+}
+
+install_from_aur() {
+    while read -r name; do
+        printf '\n%b\n\n' "Installing $name from the AUR..."
+        pacman -Q "$name" 2>/dev/null && echo "$name already installed. Skipping." && continue
+        (cd "$HOME/aur" &&
+            git clone "https://aur.archlinux.org/$name.git" 2>/dev/null &&
+            cd "$name" && makepkg -si --noconfirm)
+    done < pkgs-aur
+}
+
+install_rust() {
+    if [ -x /usr/bin/rust ]; then
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        mv "$HOME/.cargo" "$HOME/.local/cargo"
+        mv "$HOME/.rustup" "$HOME/.local/rustup"
+        . "$HOME/.local/cargo/env"
+    else
+        echo 'Rust already installed.'
+    fi
+    rustup self update
+    xargs -a pkgs-cargo cargo install
 }
 
 cat <<'EOF'
@@ -57,8 +87,8 @@ You are installing Andrea Feletto's dotfiles.
 EOF
 
 check_distro
-check_prog 'git'
-check_prog 'stow'
+check_pkg 'git'
+check_pkg 'stow'
 mystow
 
 echo 'Now is the time to logout and login again.'
@@ -78,39 +108,17 @@ ask 'Do you wish to install npm packages?'
 echo
 
 ask 'Do you wish to install github packages?'
-if [ "$REPLY" = 'y' ]; then
-    mkdir -p "$HOME/repos"
-    for name in st dmenu dwm slock; do
-        printf '\n\n%b\n\n' "Installing $name from GitHub..."
-        clone "https://github.com/andreafeletto/$name.git" 2>/dev/null
-        (cd "$HOME/repos/$name" && sudo make install clean)
-        echo 'Done'
-    done
-fi
+[ "$REPLY" = 'y' ] && install_from_github
 echo
 
 ask "Do you wish to install aur packages?"
-if [ "$REPLY" = 'y' ]; then
-    while read -r name; do
-        printf '\n%b\n\n' "Installing $name from the AUR..."
-        pacman -Q "$name" 2>/dev/null && echo "$name already installed. Skipping." && continue
-        clone "https://aur.archlinux.org/$name.git" 2>/dev/null
-        (cd "$HOME/repos/$name" && makepkg -si --noconfirm)
-    done < pkgs-aur
-fi
+[ "$REPLY" = 'y' ] && install_from_aur
 echo
 
-ask "Do you wish to install Rust?"
-if [ "$REPLY" = 'y' ]; then
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    mv "$HOME/.cargo" "$HOME/.local/cargo"
-    mv "$HOME/.rustup" "$HOME/.local/rustup"
-    source "$HOME/.local/cargo/env"
-    rustup self update
-fi
+ask "Do you wish to install Rust and cargo packages?"
+[ "$REPLY" = 'y' ] && install_rust
 echo
 
 ask "Do you wish to enable and start systemd services?"
 [ "$REPLY" = 'y' ] && xargs -a services systemctl enable --now
-echo
 
