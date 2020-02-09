@@ -8,7 +8,7 @@
 |-----------------|------------|
 | Display Manager | LightDM    |
 | Window Manager  | dwm        |
-| Terminal        | alacritty |
+| Terminal        | alacritty  |
 | Editor          | vim        |
 
 ## How to
@@ -37,7 +37,7 @@ stow neovim
 ## Install packages
 Arch Linux:
 ```
-grep -vh '^#' pkgs-arch pkgs-python | sudo pacman -Syu --needed -
+grep -v '^#' pkgs-arch | sudo pacman -Syu --needed -
 ```
 Debian/Ubuntu (Not tested, packages may not exist):
 ```
