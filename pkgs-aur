@@ -7,3 +7,5 @@ lolclock-git
 twmn-git
 xpub
 glow
+python-requests-futures
+python-torrequest

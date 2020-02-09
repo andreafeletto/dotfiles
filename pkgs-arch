@@ -94,18 +94,23 @@ npm
 perl
 
 # python libs
+python-arrow
 python-beautifulsoup4
+python-certifi
 python-colorama
 python-cryptography
+python-html5lib
+python-lxml
+python-lxml-docs
 python-markdown
 python-matplotlib
 python-numpy
+python-phonenumbers
 python-pip
 python-progress
+python-pysocks
 python-requests
-python-stem
-python-arrow
 python-selenium
-python-phonenumbers
-python-html5lib
+python-soupsieve
+python-stem
 
