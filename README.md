@@ -3,6 +3,14 @@
 ## Screenshot
 ![screenshot](./pictures/screenshot.png)
 
+## TL;DR
+|                 |            |
+|-----------------|------------|
+| Display Manager | LightDM    |
+| Window Manager  | dwm        |
+| Terminal        | alacritty |
+| Editor          | vim        |
+
 ## How to
 Every folder contains the dotfiles needed for the relative application.
 First make sure that [GNU Stow](https://www.gnu.org/software/stow) is installed.
