@@ -31,6 +31,7 @@ case "$file" in
 	*\.md) pandoc "$file" --pdf-engine=xelatex -o "$base".pdf ;;
 	*config.h) sudo make install ;;
         *\.c) cc "$file" -o "$base" && "$base" ;;
+        *\.cpp) clang++ "$file" -o "$base" && "$base" ;;
 	*\.py) python "$file" ;;
 	*\.go) go run "$file" ;;
 	*\.sent) setsid sent "$file" 2>/dev/null & ;;
