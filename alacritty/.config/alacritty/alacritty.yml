@@ -30,12 +30,12 @@ font:
 # Colors (Dracula)
 colors:
   primary:
-    background: '0x282a36'
-    foreground: '0xbbc5ff'
+    background: '0x000000'
+    foreground: '0xeeeeee'
 
   selection:
-    text: '0x282a36'
-    background: '0xbbc5ff'
+    text:       '0xeeeeee'
+    background: '0x555555'
 
   normal:
     black:   '0x282a36'
