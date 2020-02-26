@@ -9,7 +9,7 @@ shopt -s cmdhist
 BCPath='/usr/share/bash-completion/bash_completion'
 [ -f "$BCPath" ] && [ -r "$BCPath" ] && . "$BCPath"
 
-APath="$HOME/.config/aliasrc"
+APath="$HOME/.bash_aliases"
 [ -f "$APath" ] && [ -r "$APath" ] && . "$APath"
 
 HISTCONTROL=erasedups:ignoreboth

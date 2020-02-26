@@ -24,6 +24,7 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'rust-lang/rust.vim'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'thosakwe/vim-flutter'
+Plug 'ap/vim-css-color'
 call plug#end()
 
 " Basics
@@ -65,13 +66,21 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Autocompletition
 set wildmode=longest,list,full
 
+""
+"" Basic keymaps
+""
+
+map <leader>q :q<CR>
+map <leader>wq :wq<CR>
+map <leader>f :FZF<CR>
+
 " Spellcheck
 map <leader>oi :setlocal spell spelllang=it<CR>
 map <leader>oe :setlocal spell spelllang=en<CR>
 map <leader>oo :setlocal spell!<CR>
 
 " Goyo
-map <leader>f :Goyo \| set linebreak<CR>
+map <leader>g :Goyo \| set linebreak<CR>
 
 " NerdTree
 map <leader>t :NERDTreeToggle<CR>
