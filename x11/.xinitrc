@@ -11,7 +11,9 @@ xset r rate 200 50
 # set keyboard layout
 setxkbmap -layout it
 
-[ -f ~/.xprofile ] && . ~/.xprofile
+setxkbmap -option "caps:swapescape"
+
+[ -f "$HOME/.xprofile" ] && . "$HOME/.xprofile"
 
 # window manager
 case "$WM" in
