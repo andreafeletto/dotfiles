@@ -6,8 +6,12 @@ shopt -s autocd
 shopt -s cdspell
 shopt -s cmdhist
 
-BCPath='/usr/share/bash-completion/bash_completion'
-[ -f "$BCPath" ] && [ -r "$BCPath" ] && . "$BCPath"
+BCPath='/share/bash-completion/bash_completion'
+if [ -f "/usr$BCPath" ] && [ -r "/usr$BCPath" ]; then
+    . "/usr$BCPath"
+elif [ -f "$PREFIX$BCPath" ] && [ -r "$PREFIX$BCPath" ]; then
+    . "$PREFIX$BCPath"
+fi
 
 APath="$HOME/.bash_aliases"
 [ -f "$APath" ] && [ -r "$APath" ] && . "$APath"
