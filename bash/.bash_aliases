@@ -13,7 +13,8 @@ alias chown='chown -v'
 alias chmod='chmod -v'
 
 # Add Color and Format
-alias ll='ls -ahLnv --group-directories-first --color=auto'
+alias ll='ls -ahnvL --group-directories-first --color=auto'
+alias lll='ls -ahnv --group-directories-first --color=auto'
 alias grep='grep --color=auto'
 alias less='less -N'
 
@@ -41,5 +42,9 @@ fi
 
 if type -fP nvim &> /dev/null; then
     alias vim='nvim'
+fi
+
+if type -fP tree &> /dev/null; then
+    alias tree='tree -ahC --dirsfirst -I .git'
 fi
 
