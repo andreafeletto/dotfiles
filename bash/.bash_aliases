@@ -36,6 +36,7 @@ if type -fP git &> /dev/null; then
     alias gs='git status'
     alias gd='git diff'
     alias gc='git commit -m'
+    alias gl='git log --graph --pretty=oneline --abbrev-commit'
 fi
 
 if type -fP nvim &> /dev/null; then
