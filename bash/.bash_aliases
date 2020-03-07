@@ -48,3 +48,15 @@ if type -fP tree &> /dev/null; then
     alias tree='tree -ahC --dirsfirst -I .git'
 fi
 
+if type -fP dust &> /dev/null; then
+    alias du='dust'
+fi
+
+if type -fP fd &> /dev/null; then
+    alias find='fd'
+fi
+
+if type -fP rg &> /dev/null; then
+    alias grep='rg'
+fi
+
