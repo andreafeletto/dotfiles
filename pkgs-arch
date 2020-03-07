@@ -3,6 +3,7 @@ lightdm
 
 # terminal
 alacritty
+tmux
 
 # shell
 bash
@@ -18,83 +19,107 @@ chromium
 firefox
 
 # xorg
-xorg
+xorg-server
 xorg-xinit
+xorg-fonts-100dpi
+xorg-xbacklight
+xorg-xev
+xorg-xsetroot
+xclip
+sxhkd
 
-# drivers
+# video drivers
 xf86-video-intel
 mesa
+
+# audio drivers
+pulseaudio
+pulsemixer
+pulseaudio-alsa
+
+# bluetooth
+blueman
+bluez
+pulseaudio-bluetooth
 
 # pdf
 zathura
 zathura-pdf-mupdf
 
-# utility
+# docs
+man-pages
+xorg-docs
+python-docs
+python-lxml-docs
+arduino-docs
+arch-wiki-docs
+rust-docs
+ruby-docs
+imagemagick-doc
+linux-docs
+
+# dev
 git
+python2
+python3
+jupyter-notebook
+nodejs
+npm
+perl
+ruby
+ghc
+
+# archives
+tar
+zip
+unzip
+
+# utility
 stow
 htop
 bc
-wget
 neofetch
-scrot
-qrencode
-zip
-unzip
 tree
-incron
 udiskie
 ripgrep
-xclip
-sxhkd
-xautomation
-sxiv
-
-# network
-net-tools
-nmap
-aircrack-ng
-wireshark-qt
+xdg-utils
+xdg-user-dirs
 
 # text
 vim
 neovim
-tmux
 
 # system
 cronie
 openssh
-blueman
-bluez
+pacman-contrib
+pacutils
+incron
+
+# network
+iproute2
+ss
 networkmanager
 network-manager-applet
+wget
+curl
+nmap
 
-# audio
-alsa-utils
-pulseaudio
-pulsemixer
-pulseaudio-bluetooth
-pulseaudio-alsa
-pulseaudio-equalizer
-
-# media
+# media playback
 mpd
 mpv
 ncmpcpp
+
+# image/video/3d
+gthumb
 imagemagick
+gimp
 ffmpeg
 blender
+sxiv
+scrot
 
-# image editing
-gthumb
-
-# programming
-python2
-python3
-nodejs
-npm
-perl
-
-# python libs
+# python
 python-arrow
 python-beautifulsoup4
 python-certifi
@@ -102,17 +127,20 @@ python-colorama
 python-cryptography
 python-html5lib
 python-lxml
-python-lxml-docs
 python-markdown
 python-matplotlib
 python-numpy
+python-pandas
 python-phonenumbers
 python-pip
 python-progress
 python-pysocks
 python-requests
+python-scipy
+python-seaborn
 python-selenium
 python-soupsieve
+python-statsmodels
 python-stem
 python-pynvim
 
