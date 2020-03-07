@@ -13,6 +13,8 @@ export GNUPGHOME="$HOME/.config/gnupg"
 export _JAVA_AWT_WM_NONREPARENTING='1'
 export ANDROID_HOME="$HOME/.local/android/sdk"
 export ANDROID_SDK_ROOT="$ANDROID_HOME"
+export IPYTHONDIR="$HOME/.config/ipython"
+export JUPYTER_CONFIG_DIR="$HOME/.config/jupyter"
 
 # Rust
 export CARGO_HOME="$HOME/.local/cargo"
