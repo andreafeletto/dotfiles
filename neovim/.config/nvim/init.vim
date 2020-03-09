@@ -4,9 +4,9 @@ unlet! skip_defaults_vim
 let mapleader=" "
 
 if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
-	echo "Downloading junegunn/vim-plug to manage plugins..."
+	echo 'Downloading junegunn/vim-plug to manage plugins...'
 	silent !mkdir -p ~/.config/nvim/autoload/
-	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
+	silent !curl 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' > ~/.config/nvim/autoload/plug.vim
         autocmd VimEnter * PlugInstall
 endif
 
@@ -112,6 +112,9 @@ autocmd FileType haskell setlocal shiftwidth=2 softtabstop=2
 
 " sxhkd
 autocmd BufWritePost *sxhkdrc !pkill -USR1 -x sxhkd
+
+" shell script
+autocmd FileType sh setlocal tabstop=4 noexpandtab softtabstop=0 shiftwidth=4
 
 """
 """ Flutter
