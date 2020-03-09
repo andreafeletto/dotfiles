@@ -1,124 +1,190 @@
-#!/bin/sh
-
-ask() {
-    printf %b "$1 [y/n] "
-    read -r REPLY
-    echo
-}
-
-check_pkg() {
-    echo "Checking for $1..."
-    if command -v "$1" >/dev/null; then
-        echo "$1 is installed."
-    else
-        echo "$1 is not installed."
-        ask 'Would you like to continue anyway?'
-        [ "$REPLY" != 'y' ] && exit 0
-    fi
-    echo
-}
+#!/usr/bin/env bash
 
 check_distro() {
-    echo 'Checking for the distro...'
-    distroName="$(grep '^NAME=' /etc/os-release | cut -d= -f2 | tr -d '"')"
-    echo "You are running $distroName"
-    distroId="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d '"')"
-    if [ "$distroId" != 'arch' ]; then
-        echo 'This script is not garanteed to work in non-arch distros.'
-        ask 'Would you like to continue anyway?'
-        [ "$REPLY" != 'y' ] && exit 0
-    fi
-    echo
+	echo 'Checking for the distro...'
+	distroName="$(grep '^NAME=' /etc/os-release | cut -d= -f2 | tr -d '"')"
+	echo "You are running $distroName"
+	distroId="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d '"')"
+	if [ "$distroId" != 'arch' ]; then
+		echo 'This script is not garanteed to work in non-arch distros.'
+		ask 'Would you like to continue anyway?'
+		[ "$REPLY" != 'y' ] && exit 0
+	fi
+	echo
 }
 
-mystow() {
-    while read -r name; do
-        echo "Creating dirs before stowing $name"
-        find "$name" -mindepth 1 -type d | sed "s:^$name:$HOME:" | xargs -r mkdir -p
-    done < tostow
-    echo 'Stowing...'
-    xargs -a tostow stow && echo 'Done stowing.'
-    echo
+install_github() {
+	printf 'ciaone\n'
+	exit 0
+	mkdir -p "$HOME/repos"
+	for name in st dmenu dwm slock; do
+		printf '\n\n%s\n\n' "Installing $name from GitHub..."
+		(cd "$HOME/repos" &&
+			git clone "https://github.com/andreafeletto/$name.git" 2>/dev/null &&
+			cd "$name" && sudo make install clean)
+		echo 'Done'
+	done
 }
 
-install_from_github() {
-    mkdir -p "$HOME/repos"
-    for name in st dmenu dwm slock; do
-        printf '\n\n%b\n\n' "Installing $name from GitHub..."
-        (cd "$HOME/repos" &&
-            git clone "https://github.com/andreafeletto/$name.git" 2>/dev/null &&
-            cd "$name" && sudo make install clean)
-        echo 'Done'
-    done
-}
-
-install_from_aur() {
-    while read -r name; do
-        printf '\n%b\n\n' "Installing $name from the AUR..."
-        pacman -Q "$name" 2>/dev/null && echo "$name already installed. Skipping." && continue
-        (cd "$HOME/aur" &&
-            git clone "https://aur.archlinux.org/$name.git" 2>/dev/null &&
-            cd "$name" && makepkg -si --noconfirm)
-    done < pkgs-aur
+install_aur() {
+	while read -r name; do
+		printf '\n%b\n\n' "Installing $name from the AUR..."
+		pacman -Q "$name" 2>/dev/null && echo "$name already installed. Skipping." && continue
+		(cd "$HOME/aur" &&
+			git clone "https://aur.archlinux.org/$name.git" 2>/dev/null &&
+			cd "$name" && makepkg -si --noconfirm)
+	done < pkgs-aur
 }
 
 install_rust() {
-    if [ -x /usr/bin/rust ]; then
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-        mv "$HOME/.cargo" "$HOME/.local/cargo"
-        mv "$HOME/.rustup" "$HOME/.local/rustup"
-        . "$HOME/.local/cargo/env"
-    else
-        echo 'Rust already installed.'
-    fi
-    rustup self update
-    xargs -a pkgs-cargo cargo install
+	if [ -x /usr/bin/rust ]; then
+		curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+		mv "$HOME/.cargo" "$HOME/.local/cargo"
+		mv "$HOME/.rustup" "$HOME/.local/rustup"
+		. "$HOME/.local/cargo/env"
+	else
+		printf 'Rust already installed.'
+	fi
+	rustup self update
+	xargs -a pkgs-cargo cargo install
 }
 
-cat <<'EOF'
- ____   ___ _____ _____ ___ _     _____ ____
-|  _ \ / _ \_   _|  ___|_ _| |   | ____/ ___|
-| | | | | | || | | |_   | || |   |  _| \___ \
-| |_| | |_| || | |  _|  | || |___| |___ ___) |
-|____/ \___/ |_| |_|   |___|_____|_____|____/
+install_pacman() {
+	grep -v '^#' pkgs-arch | sudo pacman -Syu --needed -
+}
 
-You are installing Andrea Feletto's dotfiles.
+install_ruby() {
+	xargs -a pkgs-gem gem install
+}
+
+install_nodejs() {
+	xargs -a pkgs-npm npm i -g
+}
+
+Usage() {
+	while read -r Line; do
+		printf '%b\n' "$Line"
+	done <<-EOF
+		\rUsage: ${0##*/} OPTION...
+		\rInstall dotfiles and programs in arch automatically.
+
+		\rOptions:
+		\r-h, --help, -?              display this help
+		\r  -v, --version               output version information
+
+		\r  --all                       install packages from all sources
+		\r  --only [SOURCES...]         install packages only from SOURCES
+
+		\rSources:
+		\r  github                      read from pkgs-github
+		\r  pacman                      read from pkgs-arch
+		\r  aur                         read from pkgs-aur
+		\r  rust                        read from pkgs-cargo
+		\r  ruby                        read from pkgs-gem
+		\r  nodejs                      read from pkgs-npm
+	EOF
+}
+
+Die() {
+	printf '%s\n' "$1" 2>&1
+	Usage
+	exit 1
+}
+
+Version='0.0.1'
+
+AllSources='github pacman aur rust ruby nodejs'
+Sources=''
+Stow='false'
+
+while [ "$1" ]; do
+	case $1 in
+		--help|-h|-\?)
+			Usage; exit 0 ;;
+		--version|-v)
+			printf '%s\n' "$Version"; exit 0 ;;
+		-s|--stow)
+			Stow='true'; shift ;;
+		-ns|--nostow)
+			Stow='false'; shift ;;
+		--all)
+			Sources=$AllSources; shift ;;
+		--only)
+			shift
+			while [ -n "$1" ]; do
+				if [[ $1 = -* ]]; then
+					break
+				elif [[ $1 =~ ^${AllSources// /|}$ ]]; then
+					[[ $Sources ]] && Sources="$Sources $1" || Sources=$1
+				else
+					Die "$1 is not a valid source"
+				fi
+				shift
+			done ;;
+		*)
+			printf '%s is not a valid option' "$1"; exit 1 ;;
+	esac
+done
+
+while read -r; do
+	printf '%s\n' "$REPLY"
+done <<-'EOF'
+	 ____   ___ _____ _____ ___ _     _____ ____
+	|  _ \ / _ \_   _|  ___|_ _| |   | ____/ ___|
+	| | | | | | || | | |_   | || |   |  _| \___ \
+	| |_| | |_| || | |  _|  | || |___| |___ ___) |
+	|____/ \___/ |_| |_|   |___|_____|_____|____/
+
+	You are installing Andrea Feletto's dotfiles.
+
+	Here's what is about to be done to your arch installation:
 
 EOF
 
-check_distro
-check_pkg 'git'
-check_pkg 'stow'
-mystow
+if [[ "$Stow" = 'true' ]]; then
+	printf '\t* the following directories will be created:\n'
+	printf '\t| \n'
+	RelPaths=$(xargs -a tostow -I {} find {} -mindepth 1 -type d)
+	AbsPaths=$(for p in $RelPaths; do printf '%s/%s\n' "$HOME" "${p#*/}"; done)
+	UAbsPaths=$(printf '%s' "$AbsPaths" | sort -u)
+	for Path in $UAbsPaths; do
+		printf '\t| %s\n' "$Path"
+	done
+	printf '\n'
+fi
 
-echo 'Now is the time to logout and login again.'
-ask 'Is this what you just did?'
-[ "$REPLY" != 'y' ] && exit 0
+if [[ "$Sources" ]]; then
+	printf '\t* the following sources will be used:\n'
+	printf '\t| \n'
+	printf '\t| %s\n' "$Sources"
+	printf '\n'
+fi
 
-ask 'Do you wish to update the system and install pacman packages?'
-[ "$REPLY" = 'y' ] && grep -v '^#' pkgs-arch | sudo pacman -Syu --needed -
-echo
+read -p 'Are you OK with this? [Y/n]' -r
+printf '\n'
 
-ask 'Do you wish to install ruby gems?'
-[ "$REPLY" = 'y' ] && xargs -a pkgs-gem gem install
-echo
+[[ ! "$REPLY" =~ ^[Yy]?$ ]] && exit 1
 
-ask 'Do you wish to install npm packages?'
-[ "$REPLY" = 'y' ] && xargs -a pkgs-npm npm i -g
-echo
+if [[ "$Stow" = 'true' ]]; then
+	printf 'Stowing\n'
+	if xargs -a tostow stow; then
+		printf 'Done stowing\n\n'
+	else
+		printf 'Something went wrong when stowing, quitting'
+		exit 1
+	fi
+fi
 
-ask 'Do you wish to install github packages?'
-[ "$REPLY" = 'y' ] && install_from_github
-echo
-
-ask "Do you wish to install aur packages?"
-[ "$REPLY" = 'y' ] && install_from_aur
-echo
-
-ask "Do you wish to install Rust and cargo packages?"
-[ "$REPLY" = 'y' ] && install_rust
-echo
-
-ask "Do you wish to enable and start systemd services?"
-[ "$REPLY" = 'y' ] && xargs -a services systemctl enable --now
+if [[ "$Sources" ]]; then
+	for Source in $Sources; do
+		printf 'Sourcing from %s\n' "$Source"
+		if "install_$Source"; then
+			printf 'Done sourcing from %s\n' "$Source"
+		else
+			printf 'Something went wrong when sourcing from %s\n' "$Source"
+		fi
+	done
+fi
+	
+exit 0
 
