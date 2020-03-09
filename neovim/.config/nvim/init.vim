@@ -131,37 +131,3 @@ let g:tex_flavor='latex'
 
 " Inserts template in new files
 autocmd BufNewFile *.tex execute 'r ~/latex/template.tex' | 0 | delete
-
-" Equations
-autocmd Filetype tex imap ,ee \begin{equation}<enter>\end{equation}<enter><enter><++><esc>2kO
-autocmd Filetype tex imap ,ea \begin{align*}<enter>\end{align*}<enter><enter><++><esc>2kO
-
-" Derivatives
-autocmd Filetype tex imap ,dd \frac{d}{d}<++><esc>4hi
-autocmd Filetype tex imap ,dp \frac{\partial}{\partial }<++><esc>4hi
-
-" Integrals
-autocmd Filetype tex imap ,ii \int
-autocmd Filetype tex imap ,id \int_{}^{<++>}<++>d<++><esc>16hi
-autocmd Filetype tex imap ,ip \int\limits_{}<++>d<++><esc>9hi
-autocmd Filetype tex imap ,icp \oint\limits_{}<++>d<++><esc>9hi
-autocmd Filetype tex imap ,is \iint\limits_{}<++>d<++><esc>9hi
-autocmd Filetype tex imap ,ics \oiint\limits_{}<++>d<++><esc>9hi
-autocmd Filetype tex imap ,iv \iiint\limits_{}<++>d<++><esc>9hi
-
-" Vector calculus
-autocmd Filetype tex imap ,vv \vec{}<++><esc>4hi
-autocmd Filetype tex imap ,vc \nabla\times
-autocmd Filetype tex imap ,vd \nabla\cdot
-autocmd Filetype tex imap ,vg \nabla
-
-" Funtions
-autocmd Filetype tex imap ,ff \colon<++>\to<++><esc>16hi
-autocmd Filetype tex imap ,fF \colon&<++>\to<++>\\<enter>&<++>\mapsto<++><esc>k15hi
-
-" Sets
-autocmd Filetype tex imap ,sr \mathbb{R}
-autocmd Filetype tex imap ,sc \mathbb{C}
-autocmd Filetype tex imap ,sn \mathbb{N}
-autocmd Filetype tex imap ,sz \mathbb{Z}
-
