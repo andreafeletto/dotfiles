@@ -69,7 +69,7 @@ Usage() {
 		\rInstall dotfiles and programs in arch automatically.
 
 		\rOptions:
-		\r-h, --help, -?              display this help
+		\r  -h, --help, -?              display this help
 		\r  -v, --version               output version information
 
 		\r  --all                       install packages from all sources
