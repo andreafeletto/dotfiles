@@ -1,94 +1,163 @@
 #!/bin/sh
 
-battery() {
-    value=$(cat /sys/class/power_supply/BAT1/capacity) || exit
-    status=$(cat /sys/class/power_supply/BAT1/status)
-    case $status in
-        "Discharging")
-            icon="🔋";;
-        "Charging")
-            icon="🔌";;
-        "Full")
-            icon="⚡";;
-        "Unknown")
-            icon="❓";;
-    esac
-    printf "$icon %5b\n" "$value%"
+Version='0.0.1'
+PrgName=${0##*/}
+
+PrgDir="$HOME/.local/share/$PrgName"
+mkdir -p "$PrgDir"
+PidPath="$PrgDir/$PrgName.pid"
+LogPath="$PrgDir/$PrgName.log"
+
+Usage() {
+	while read -r Line; do
+		printf '%b\n' "$Line"
+	done <<-EOF
+		\rUsage: $PrgName OPTION
+		\rStatusbar for dwm.
+
+		\rOptions:
+		\r	-h, --help, -?		display this help and exit
+		\r  -v, --version		output version infromation
+		\r  -r, --refresh		refresh
+		\r  -d, --daemon		start in the background (if not already running)
+		\r  -s, --stop			stop daemon if one exists
+
+		\rGit repository: <https://github.com/andreafeletto/dotfiles>
+	EOF
 }
 
-volume() {
-    if [ "$(pulsemixer --get-mute)" = "1" ]; then
-        printf "   🔇   \n"
+Die() {
+	printf '%s\n' "$1" 1>&2
+	Usage
+	exit 1
+}
+
+################################################################################
+##																			  ##
+## Status Bar Elements														  ##
+##																			  ##
+################################################################################
+
+Battery() {
+	CapacityPath='/sys/class/power_supply/BAT1/capacity'
+	StatusPath='/sys/class/power_supply/BAT1/status'
+	if [ -r "$CapacityPath" ] && [ -r "$StatusPath" ]; then
+		read -r Status < "$StatusPath"
+		case $Status in
+			Discharging)
+				Icon="🔋";;
+			Charging)
+				Icon="🔌";;
+			Full)
+				Icon="⚡";;
+			Unknown)
+				Icon="❓";;
+		esac
+		read -r Capacity < "$CapacityPath"
+		printf '%s %5s\n' "$Icon" "$Capacity"
+	else
+		Die 'Error: Unable to access power supply files'
+	fi
+}
+
+Volume() {
+	if ! command -v pulsemixer > /dev/null; then
+		Die 'Missing Dependency: pulsemixer'
+	fi
+
+    if [ "$(pulsemixer --get-mute)" -eq 1 ]; then
+        printf '   🔇   \n'
     else
-        printf "🔊 %5b\n" "$(pulsemixer --get-volume | awk '{print $1}')%"
+		Value=$(pulsemixer --get-volume)
+        printf '🔊 %4s%%\n' "${Value%% *}"
     fi
 }
 
-backlight() {
-    printf "💡 %5b\n" "$(xbacklight | cut -d. -f1)%"
+Backlight() {
+	Value=$(xbacklight)
+    printf '💡 %4b%%\n' "${Value%%.*}"
 }
 
-refresh() {
-    echo "$$" > /tmp/status.pid
-    xsetroot -name "| $(backlight) | $(volume) | $(battery) | $(lolclock)"
+Clock() {
+	if command -v lolclock > /dev/null; then
+		lolclock
+	else
+		date '+%R'
+	fi
 }
 
-check() {
-    [ -s /tmp/status.pid ] && kill -0 "$(cat /tmp/status.pid)" >/dev/null 2>&1
+################################################################################
+##																			  ##
+## Utility Functions														  ##
+##																			  ##
+################################################################################
+
+Refresh() {
+    printf '%s' "$$" > "$PidPath"
+    xsetroot -name "| $(Backlight) | $(Volume) | $(Battery) | $(Clock)"
 }
 
-# (option -h, --help) help
+GetDaemonPid() {
+	if [ -r "$PidPath" ]; then
+		read -r Pid < "$PidPath"
+		printf '%s' "$Pid"
+	fi
+}
 
-if [ "$1" = '--help' ] || [ "$1" = '-h' ]; then
-    cat << EOF
-Usage: status [OPTION]
-Statusbar for dwm.
+SendRefresh() {
+	kill -USR1 "$(GetDaemonPid)"
+}
 
-  -h, --help    display this help and exit
-  -r            refresh
-  -d            start in the background (if not already running)
+StartDaemon() {
+	if kill -0 "$(GetDaemonPid)" 2> /dev/null; then
+		Die 'Error: Daemon already running'
+	fi
+	${SHELL:-"/bin/sh"} -c "$0" >> "$LogPath" 2>&1 &
+}
 
-Git repository: <https://github.com/andreafeletto/dotfiles>
-EOF
-    exit 0
+StopDaemon() {
+	Pid=$(GetDaemonPid)
+	if ! kill -0 "$Pid"; then
+		Die 'Error: No daemon to kill'
+	fi
+	kill -15 "$Pid"
+}
+
+################################################################################
+##																			  ##
+## Argument Parsing															  ##
+##																			  ##
+################################################################################
+
+if [ $# -gt 1 ]; then
+	Usage
+	exit 1
 fi
 
-# (option -r) send signal to force refresh
+case $1 in
+	--help|-h|-\?)
+		Usage; exit 0 ;;
+	--version|-v)
+		printf '%s\n' "$Version"; exit 0 ;;
+	--refresh|-r)
+		SendRefresh; exit 0 ;;
+	--daemon|-d)
+		StartDaemon; exit 0 ;;
+	--stop|-s)
+		StopDaemon; exit 0 ;;
+esac
 
-[ "$1" = '-r' ] && kill -USR1 "$(cat /tmp/status.pid)" >/dev/null 2>&1 && exit 0
+################################################################################
+##																			  ##
+## Main Loop and Traps														  ##
+##																			  ##
+################################################################################
 
-# (option -d) spawn new status process
-
-if [ "$1" = '-d' ]; then
-    echo "spawning new status process."
-    check && echo "status already running: aborting." && exit 1
-    ${SHELL:-"/bin/sh"} -c status >>/tmp/status.log 2>&1 &
-    exit 0
-fi
-
-# invalid options
-
-if [ -n "$1" ]; then
-    echo "status: invalid option $1"
-    echo "Try 'status --help' for more information."
-    exit 1
-fi
-
-# check for an already running status process
-
-check && echo "$(date): status already running: aborting." && exit 1
-
-# refresh upon receiving SIGUSR1 signal
-
-trap 'refresh' USR1
-
-# remove tmp files when stopped
-
-trap 'rm /tmp/status.pid && exit 0' INT TERM
-
-# refresh every 10 seconds
+trap 'Refresh' USR1
+trap 'rm $PidPath; exit 0' INT TERM
 
 while true; do
-    refresh
+    Refresh
     sleep 10 & wait $!
 done
+
