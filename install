@@ -86,7 +86,7 @@ Usage() {
 }
 
 Die() {
-	printf '%s\n' "$1" 2>&1
+	printf '%s\n' "$1" 1>&2
 	Usage
 	exit 1
 }
