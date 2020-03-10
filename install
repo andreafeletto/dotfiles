@@ -1,71 +1,13 @@
 #!/usr/bin/env bash
 
-check_distro() {
-	echo 'Checking for the distro...'
-	distroName="$(grep '^NAME=' /etc/os-release | cut -d= -f2 | tr -d '"')"
-	echo "You are running $distroName"
-	distroId="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d '"')"
-	if [ "$distroId" != 'arch' ]; then
-		echo 'This script is not garanteed to work in non-arch distros.'
-		ask 'Would you like to continue anyway?'
-		[ "$REPLY" != 'y' ] && exit 0
-	fi
-	echo
-}
-
-install_github() {
-	printf 'ciaone\n'
-	exit 0
-	mkdir -p "$HOME/repos"
-	for name in st dmenu dwm slock; do
-		printf '\n\n%s\n\n' "Installing $name from GitHub..."
-		(cd "$HOME/repos" &&
-			git clone "https://github.com/andreafeletto/$name.git" 2>/dev/null &&
-			cd "$name" && sudo make install clean)
-		echo 'Done'
-	done
-}
-
-install_aur() {
-	while read -r name; do
-		printf '\n%b\n\n' "Installing $name from the AUR..."
-		pacman -Q "$name" 2>/dev/null && echo "$name already installed. Skipping." && continue
-		(cd "$HOME/aur" &&
-			git clone "https://aur.archlinux.org/$name.git" 2>/dev/null &&
-			cd "$name" && makepkg -si --noconfirm)
-	done < pkgs-aur
-}
-
-install_rust() {
-	if [ -x /usr/bin/rust ]; then
-		curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-		mv "$HOME/.cargo" "$HOME/.local/cargo"
-		mv "$HOME/.rustup" "$HOME/.local/rustup"
-		. "$HOME/.local/cargo/env"
-	else
-		printf 'Rust already installed.'
-	fi
-	rustup self update
-	xargs -a pkgs-cargo cargo install
-}
-
-install_pacman() {
-	grep -v '^#' pkgs-arch | sudo pacman -Syu --needed -
-}
-
-install_ruby() {
-	xargs -a pkgs-gem gem install
-}
-
-install_nodejs() {
-	xargs -a pkgs-npm npm i -g
-}
+Version='0.0.2'
+PrgName="${0##*/}"
 
 Usage() {
 	while read -r Line; do
 		printf '%b\n' "$Line"
 	done <<-EOF
-		\rUsage: ${0##*/} OPTION...
+		\rUsage: $PrgName OPTION...
 		\rInstall dotfiles and programs in arch automatically.
 
 		\rOptions:
@@ -91,7 +33,51 @@ Die() {
 	exit 1
 }
 
-Version='0.0.1'
+Install_github() {
+	mkdir -p "$HOME/repos"
+	for name in st dmenu dwm slock; do
+		printf '\n\n%s\n\n' "Installing $name from GitHub..."
+		(cd "$HOME/repos" &&
+			git clone "https://github.com/andreafeletto/$name.git" 2>/dev/null &&
+			cd "$name" && sudo make install clean)
+		echo 'Done'
+	done
+}
+
+Install_aur() {
+	while read -r name; do
+		printf '\n%b\n\n' "Installing $name from the AUR..."
+		pacman -Q "$name" 2>/dev/null && echo "$name already installed. Skipping." && continue
+		(cd "$HOME/aur" &&
+			git clone "https://aur.archlinux.org/$name.git" 2>/dev/null &&
+			cd "$name" && makepkg -si --noconfirm)
+	done < pkgs-aur
+}
+
+Install_rust() {
+	if [ -x /usr/bin/rust ]; then
+		curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+		mv "$HOME/.cargo" "$HOME/.local/cargo"
+		mv "$HOME/.rustup" "$HOME/.local/rustup"
+		. "$HOME/.local/cargo/env"
+	else
+		printf 'Rust already installed.'
+	fi
+	rustup self update
+	xargs -a pkgs-cargo cargo install
+}
+
+Install_pacman() {
+	grep -v '^#' pkgs-arch | sudo pacman -Syu --needed -
+}
+
+Install_ruby() {
+	xargs -a pkgs-gem gem install
+}
+
+Install_nodejs() {
+	xargs -a pkgs-npm npm i -g
+}
 
 AllSources='github pacman aur rust ruby nodejs'
 Sources=''
@@ -175,16 +161,14 @@ if [[ "$Stow" = 'true' ]]; then
 	fi
 fi
 
-if [[ "$Sources" ]]; then
-	for Source in $Sources; do
-		printf 'Sourcing from %s\n' "$Source"
-		if "install_$Source"; then
-			printf 'Done sourcing from %s\n' "$Source"
-		else
-			printf 'Something went wrong when sourcing from %s\n' "$Source"
-		fi
-	done
-fi
+for Source in $Sources; do
+	printf 'Sourcing from %s\n' "$Source"
+	if "Install_$Source"; then
+		printf 'Done sourcing from %s\n' "$Source"
+	else
+		printf 'Something went wrong when sourcing from %s\n' "$Source"
+	fi
+done
 	
 exit 0
 
