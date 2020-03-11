@@ -7,6 +7,7 @@ PrgDir="$HOME/.local/share/$PrgName"
 mkdir -p "$PrgDir"
 PidPath="$PrgDir/$PrgName.pid"
 LogPath="$PrgDir/$PrgName.log"
+#BacklightPath='/sys/class/backlight/intel_backlight'
 
 Usage() {
 	while read -r Line; do
@@ -74,8 +75,14 @@ Volume() {
 }
 
 Backlight() {
-	Value=$(xbacklight)
-    printf '💡 %4b%%\n' "${Value%%.*}"
+	if [ -n "$BacklightPath" ]; then
+		read -r Brightness < "$BacklightPath/brightness"
+		read -r MaxBrightness < "$BacklightPath/max_brightness"
+		Value=$((100 * Brightness / MaxBrightness))
+	elif xbacklight > /dev/null; then
+		Value=$(xbacklight)
+	fi
+    printf '💡 %4d%%\n' "${Value%%.*}"
 }
 
 Clock() {
@@ -154,7 +161,7 @@ esac
 ################################################################################
 
 trap 'Refresh' USR1
-trap 'rm $PidPath; exit 0' INT TERM
+trap 'rm $PidPath $LogPath; exit 0' INT TERM
 
 while true; do
     Refresh
