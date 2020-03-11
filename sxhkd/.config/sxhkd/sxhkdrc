@@ -15,7 +15,7 @@ ctrl + super + space
 {XF86MonBrightnessDown,XF86MonBrightnessUp}
     xbacklight {-dec,-inc} 5; status -r
 {XF86AudioLowerVolume,XF86AudioRaiseVolume}
-    pulsemixer --change-volume {-,+}5; status -r
+    pulsemixer --unmute --change-volume {-,+}5; status -r
 XF86AudioMute
     pulsemixer --toggle-mute; status -r
 
