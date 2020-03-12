@@ -1,11 +1,29 @@
 #!/usr/bin/env bash
+#
+#-------------------------------------------------------------------------------
+# Project Name          - dotfiles/install
+# Author E-mail         - andrea@andreafeletto.com
+# Author Website        - https://andreafeletto.com
+# Author Github         - https://github.com/andreafeletto
+#-------------------------------------------------------------------------------
+# Bash script to be run on a fresh arch installation.
+#
+# Dependencies:
+#
+#   bash (>= 4.0)
+#-------------------------------------------------------------------------------
 
-Version='0.0.2'
-PrgName="${0##*/}"
+readonly Version='0.0.3'
+readonly PrgName=${0##*/}
 
-Usage() {
-	while read -r Line; do
-		printf '%b\n' "$Line"
+readonly GitUrl='https://github.com/andreafeletto'
+readonly GitDir="$HOME/repos"
+readonly AurUrl='https://aur.archlinux.org'
+readonly AurDir="$HOME/aur"
+
+function Usage {
+	while read -r; do
+		printf '%b\n' "$REPLY"
 	done <<-EOF
 		\rUsage: $PrgName OPTION...
 		\rInstall dotfiles and programs in arch automatically.
@@ -13,6 +31,9 @@ Usage() {
 		\rOptions:
 		\r  -h, --help, -?              display this help
 		\r  -v, --version               output version information
+
+		\r  -s, --stow                  stow directories listed in ./tostow
+		\r  -ns, --nostow               do not stow
 
 		\r  --all                       install packages from all sources
 		\r  --only [SOURCES...]         install packages only from SOURCES
@@ -27,10 +48,17 @@ Usage() {
 	EOF
 }
 
-Die() {
-	printf '%s\n' "$1" 1>&2
-	Usage
-	exit 1
+function Die {
+	printf 'error: %s\n' "${1:-generic}" >&2
+	exit "${2:-1}"
+}
+
+function Warn {
+	printf 'warning: %s\n' "${1:-generic}" >&2
+}
+
+function Title {
+	printf '\n\033[0;31m%s\033[0m\n\n' "$1"
 }
 
 ################################################################################
@@ -39,49 +67,61 @@ Die() {
 ##																			  ##
 ################################################################################
 
-Install_github() {
-	mkdir -p "$HOME/repos"
-	for name in st dmenu dwm slock; do
-		printf '\n\n%s\n\n' "Installing $name from GitHub..."
-		(cd "$HOME/repos" &&
-			git clone "https://github.com/andreafeletto/$name.git" 2>/dev/null &&
-			cd "$name" && sudo make install clean)
-		echo 'Done'
+declare -A AllDeps
+AllDeps['stow']='stow xargs find'
+
+AllDeps['github']='git make'
+function Install_github {
+	local Name
+	
+	mkdir -p "$GitDir"
+	for Name in st dmenu dwm slock; do
+		local Dir="$GitDir/$Name"
+		if [[ -d $Dir ]]; then
+			Warn "$Name already cloned. skipping."
+			continue
+		fi
+		git clone -q "$GitUrl/$Name.git" "$Dir"
+		sudo make --directory="$Dir" install clean
 	done
 }
 
-Install_aur() {
-	while read -r name; do
-		printf '\n%b\n\n' "Installing $name from the AUR..."
-		pacman -Q "$name" 2>/dev/null && echo "$name already installed. Skipping." && continue
-		(cd "$HOME/aur" &&
-			git clone "https://aur.archlinux.org/$name.git" 2>/dev/null &&
-			cd "$name" && makepkg -si --noconfirm)
+AllDeps['aur']='git makepkg'
+function Install_aur {
+	mkdir -p "$AurDir"
+	while read -r; do
+		local Dir="$AurDir/$REPLY"
+		if pacman -Q "$REPLY" &> /dev/null; then
+			Warn "$REPLY already installed. skipping."
+			continue
+		fi
+		if [[ -d $Dir ]]; then
+			Warn "$REPLY already cloned. skipping."
+			continue
+		fi
+		git clone -q "$AurUrl/$REPLY.git" "$Dir"
+		(cd "$AurDir/$REPLY" || Die; makepkg -si --noconfirm)
 	done < pkgs-aur
 }
 
-Install_rust() {
-	if [ -x /usr/bin/rust ]; then
-		curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-		mv "$HOME/.cargo" "$HOME/.local/cargo"
-		mv "$HOME/.rustup" "$HOME/.local/rustup"
-		. "$HOME/.local/cargo/env"
-	else
-		printf 'Rust already installed.'
-	fi
+AllDeps['rust']='rustup cargo xargs'
+function Install_rust {
 	rustup self update
 	xargs -a pkgs-cargo cargo install
 }
 
-Install_pacman() {
+AllDeps['pacman']='grep'
+function Install_pacman {
 	grep -v '^#' pkgs-arch | sudo pacman -Syu --needed -
 }
 
-Install_ruby() {
+AllDeps['ruby']='xargs gem'
+function Install_ruby {
 	xargs -a pkgs-gem gem install
 }
 
-Install_nodejs() {
+AllDeps['nodejs']='xargs npm'
+function Install_nodejs {
 	xargs -a pkgs-npm npm i -g
 }
 
@@ -95,7 +135,7 @@ AllSources='github pacman aur rust ruby nodejs'
 Sources=''
 Stow='false'
 
-while [ "$1" ]; do
+while [[ ${1} ]]; do
 	case $1 in
 		--help|-h|-\?)
 			Usage; exit 0 ;;
@@ -109,20 +149,57 @@ while [ "$1" ]; do
 			Sources=$AllSources; shift ;;
 		--only)
 			shift
-			while [ -n "$1" ]; do
+			while [[ $1 ]]; do
 				if [[ $1 = -* ]]; then
 					break
-				elif [[ $1 =~ ^${AllSources// /|}$ ]]; then
-					[[ $Sources ]] && Sources="$Sources $1" || Sources=$1
+				elif [[ ${AllSources} = *${1}* ]]; then
+					if [[ ${Sources} != *${1}* ]]; then
+						Sources="$Sources $1"
+					fi
 				else
-					Die "$1 is not a valid source"
+					Die "invalid source: \"$1\""
 				fi
 				shift
 			done ;;
 		*)
-			printf '%s is not a valid option' "$1"; exit 1 ;;
+			Die "invalid option: \"$1\"" ;;
 	esac
 done
+
+Sources=${Sources## }
+
+################################################################################
+##																			  ##
+## Dependency Check															  ##
+##																			  ##
+################################################################################
+
+declare MissingDeps
+declare SourcesToCheck=$Sources
+
+if [[ $Stow = 'true' ]]; then
+	SourcesToCheck="$SourcesToCheck stow"
+fi
+
+for Source in $SourcesToCheck; do
+	for Dep in ${AllDeps[$Source]}; do
+		if ! type -fP "$Dep" &> /dev/null; then
+			if [[ ${MissingDeps} != *${Dep}* ]]; then
+				MissingDeps="$MissingDeps $Dep"
+			fi
+		fi
+	done
+done
+
+MissingDeps=${MissingDeps## }
+
+if [[ $MissingDeps ]]; then
+	printf 'error: missing option-specific dependencies:\n\n'
+	for Dep in $MissingDeps; do
+		printf '\t- %s\n' "$Dep"
+	done
+	exit 1
+fi
 
 ################################################################################
 ##																			  ##
@@ -145,11 +222,11 @@ done <<-'EOF'
 
 EOF
 
-if [[ "$Stow" = 'true' ]]; then
+if [[ $Stow = 'true' ]]; then
 	printf '\t* the following directories will be created:\n'
 	printf '\t| \n'
 	RelPaths=$(xargs -a tostow -I {} find {} -mindepth 1 -type d)
-	AbsPaths=$(for p in $RelPaths; do printf '%s/%s\n' "$HOME" "${p#*/}"; done)
+	AbsPaths=$(for P in $RelPaths; do printf '%s/%s\n' "$HOME" "${P#*/}"; done)
 	UAbsPaths=$(printf '%s' "$AbsPaths" | sort -u)
 	for Path in $UAbsPaths; do
 		printf '\t| %s\n' "$Path"
@@ -157,7 +234,7 @@ if [[ "$Stow" = 'true' ]]; then
 	printf '\n'
 fi
 
-if [[ "$Sources" ]]; then
+if [[ $Sources ]]; then
 	printf '\t* the following sources will be used:\n'
 	printf '\t| \n'
 	printf '\t| %s\n' "$Sources"
@@ -166,33 +243,31 @@ fi
 
 ################################################################################
 ##																			  ##
-## Excecution																  ##
+## Execution																  ##
 ##																			  ##
 ################################################################################
 
 read -p 'Are you OK with this? [Y/n]' -r
-printf '\n'
+[[ ! $REPLY =~ ^[Yy]?$ ]] && exit 1
 
-[[ ! "$REPLY" =~ ^[Yy]?$ ]] && exit 1
-
-if [[ "$Stow" = 'true' ]]; then
-	printf 'Stowing\n'
+if [[ $Stow = 'true' ]]; then
+	Title 'Stowing'
+	for P in $AbsPaths; do
+		mkdir -p "$P"
+	done
 	if xargs -a tostow stow; then
-		printf 'Done stowing\n\n'
+		printf 'Done stowing\n'
 	else
-		printf 'Something went wrong when stowing, quitting'
-		exit 1
+		Die 'something went wrong when stowing. quitting.'
 	fi
 fi
 
 for Source in $Sources; do
-	printf 'Sourcing from %s\n' "$Source"
+	Title "Sourcing from $Source"
 	if "Install_$Source"; then
 		printf 'Done sourcing from %s\n' "$Source"
 	else
-		printf 'Something went wrong when sourcing from %s\n' "$Source"
+		Warn "something went wrong when sourcing from $Source"
 	fi
 done
-	
-exit 0
 

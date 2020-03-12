@@ -7,7 +7,7 @@ sxhkd &
 [ ! -s ~/.config/mpd/pid ] && mpd
 
 # statusbar script
-status -d
+status -d 2> /dev/null
 
 # bluetooth manager
 # blueman-applet &

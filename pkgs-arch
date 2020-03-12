@@ -98,7 +98,6 @@ incron
 
 # network
 iproute2
-ss
 networkmanager
 network-manager-applet
 wget

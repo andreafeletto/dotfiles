@@ -13,8 +13,6 @@ setxkbmap -layout it
 
 setxkbmap -option "caps:swapescape"
 
-[ -f "$HOME/.xprofile" ] && . "$HOME/.xprofile"
-
 # window manager
 case "$WM" in
     dwm) exec dwm ;;
