@@ -260,6 +260,7 @@ if [[ $Stow = 'true' ]]; then
 	else
 		Die 'something went wrong when stowing. quitting.'
 	fi
+	ln -sf "$HOME/.config/nvim" "$HOME/.vim"
 fi
 
 for Source in $Sources; do

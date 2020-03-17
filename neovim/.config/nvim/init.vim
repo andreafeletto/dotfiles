@@ -54,7 +54,9 @@ syntax on
 set path+=**
 
 " .viminfo path
-set viminfo+=n~/history/viminfo
+if !has('nvim')
+    set viminfo+=n~/history/viminfo
+endif
 
 " Reload config
 autocmd! bufwritepost init.vim source %
