@@ -16,6 +16,13 @@ export ANDROID_SDK_ROOT="$ANDROID_HOME"
 export IPYTHONDIR="$HOME/.config/ipython"
 export JUPYTER_CONFIG_DIR="$HOME/.config/jupyter"
 
+export FFF_HIDDEN=1
+if command -v rmtrash > /dev/null 2>&1; then
+	export FFF_TRASH_CMD='rmtrash'
+else
+	export FFF_TRASH_CMD='mv'
+fi
+
 # Rust
 export CARGO_HOME="$HOME/.local/cargo"
 export RUSTUP_HOME="$HOME/.local/rustup"

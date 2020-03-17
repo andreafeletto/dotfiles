@@ -9,6 +9,9 @@ tmux
 bash
 bash-completion
 
+# file manager
+fff
+
 # fonts
 adobe-source-code-pro-fonts
 gnu-free-fonts

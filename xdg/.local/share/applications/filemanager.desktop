@@ -1,4 +1,4 @@
 [Desktop Entry]
 Type=Application
-Name=lf
-Exec=/usr/local/bin/st -e lf %u
+Name=fff
+Exec=/usr/local/bin/st -e fff %u

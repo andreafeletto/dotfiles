@@ -5,6 +5,8 @@ super + w
     $BROWSER
 super + e
     $TERMINAL
+super + a
+    $TERMINAL -e fff
 super + b
     blueman-manager
 super + o
