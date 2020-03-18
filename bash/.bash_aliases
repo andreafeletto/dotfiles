@@ -48,3 +48,7 @@ if type -fP tree &> /dev/null; then
     alias tree='tree -ahC --dirsfirst -I .git'
 fi
 
+if type -fP irssi &> /dev/null; then
+	alias irssi="irssi --config="$XDG_CONFIG_HOME"/irssi/config --home="$XDG_DATA_HOME"/irssi"
+fi
+

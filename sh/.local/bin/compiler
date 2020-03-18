@@ -35,6 +35,7 @@ case "$file" in
 	*\.py) python "$file" ;;
 	*\.go) go run "$file" ;;
 	*\.sent) setsid sent "$file" 2>/dev/null & ;;
-        *\.hs) ghc -O2 -dynamic "$file" ;;
+    *\.hs) ghc -O2 -dynamic "$file" ;;
+	src/*\.rs) cargo run ;;
 	*) sed 1q "$file" | grep "^#!/" | sed "s/^#!//" | xargs -r -I % "$file" ;;
 esac

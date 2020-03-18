@@ -20,6 +20,7 @@ otf-fira-code
 # browser
 chromium
 firefox
+w3m
 
 # xorg
 xorg-server
@@ -87,6 +88,7 @@ udiskie
 ripgrep
 xdg-utils
 xdg-user-dirs
+syncthing
 
 # text
 vim

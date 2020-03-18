@@ -55,7 +55,7 @@ Battery() {
 				Icon="❓";;
 		esac
 		read -r Capacity < "$CapacityPath"
-		printf '%s %5s\n' "$Icon" "$Capacity"
+		printf '%s %4s%%\n' "$Icon" "$Capacity"
 	else
 		Die 'Error: Unable to access power supply files'
 	fi
