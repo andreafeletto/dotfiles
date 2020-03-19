@@ -58,10 +58,6 @@ if !has('nvim')
     set viminfo+=n~/history/viminfo
 endif
 
-" Reload config
-autocmd! bufwritepost init.vim source %
-command! ReloadConfig :so /home/andrea/.config/nvim/init.vim
-
 " Disable automatic comments on newlines
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
@@ -135,4 +131,5 @@ autocmd FileType dart nnoremap <leader>fq :FlutterQuit<cr>
 let g:tex_flavor='latex'
 
 " Inserts template in new files
-autocmd BufNewFile *.tex execute 'r ~/latex/template.tex' | 0 | delete
+autocmd BufNewFile *.tex execute "r $HOME/.config/latex/template.tex" | 0 | delete
+

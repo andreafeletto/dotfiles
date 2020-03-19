@@ -1,0 +1,4 @@
+#!/bin/sh
+
+export ANDROID_HOME="$HOME/.local/android/sdk"
+export ANDROID_SDK_ROOT="$ANDROID_HOME"

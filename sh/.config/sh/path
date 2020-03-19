@@ -9,4 +9,5 @@ PATH="$PATH:$XDG_DATA_HOME/npm/bin"
 PATH="$PATH:/usr/local/plan9/bin"
 PATH="$PATH:$ANDROID_HOME/platform-tools"
 PATH="$PATH:$HOME/.emacs.d/bin"
+PATH="$PATH:/usr/lib/w3m"
 export PATH

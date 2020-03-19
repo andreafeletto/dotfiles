@@ -17,18 +17,18 @@ Usage() {
 		\rStatusbar for dwm.
 
 		\rOptions:
-		\r	-h, --help, -?		display this help and exit
-		\r  -v, --version		output version infromation
-		\r  -r, --refresh		refresh
-		\r  -d, --daemon		start in the background (if not already running)
-		\r  -s, --stop			stop daemon if one exists
+		\r  -h, --help, -?      display this help and exit
+		\r  -v, --version       output version infromation
+		\r  -r, --refresh       refresh
+		\r  -d, --daemon        start in the background (if not already running)
+		\r  -s, --stop          stop daemon if one exists
 
 		\rGit repository: <https://github.com/andreafeletto/dotfiles>
 	EOF
 }
 
 Die() {
-	printf '%s\n' "$1" 1>&2
+	printf 'error: %s\n' "$1" 1>&2
 	Usage
 	exit 1
 }
@@ -57,13 +57,13 @@ Battery() {
 		read -r Capacity < "$CapacityPath"
 		printf '%s %4s%%\n' "$Icon" "$Capacity"
 	else
-		Die 'Error: Unable to access power supply files'
+		Die 'unable to access power supply files'
 	fi
 }
 
 Volume() {
 	if ! command -v pulsemixer > /dev/null; then
-		Die 'Missing Dependency: pulsemixer'
+		Die 'missing dependency: pulsemixer'
 	fi
 
     if [ "$(pulsemixer --get-mute)" -eq 1 ]; then
@@ -117,7 +117,7 @@ SendRefresh() {
 
 StartDaemon() {
 	if kill -0 "$(GetDaemonPid)" 2> /dev/null; then
-		Die 'Error: Daemon already running'
+		Die 'daemon already running'
 	fi
 	${SHELL:-"/bin/sh"} -c "$0" >> "$LogPath" 2>&1 &
 }
@@ -125,7 +125,7 @@ StartDaemon() {
 StopDaemon() {
 	Pid=$(GetDaemonPid)
 	if ! kill -0 "$Pid"; then
-		Die 'Error: No daemon to kill'
+		Die 'no daemon to kill'
 	fi
 	kill -15 "$Pid"
 }

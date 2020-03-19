@@ -1,0 +1,3 @@
+#!/bin/sh
+
+export IPYTHONDIR="$XDG_CONFIG_HOME/jupyter"

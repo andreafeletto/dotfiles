@@ -1,25 +1,7 @@
 #!/bin/sh
 
-export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
-export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/startup.py"
 
-export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 
-export IPYTHONDIR="$XDG_CONFIG_HOME/jupyter"
-export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
 
-export HISTFILE="$XDG_CACHE_HOME/bash/history"
-export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
-
-export ANDROID_HOME="$HOME/.local/android/sdk"
-export ANDROID_SDK_ROOT="$ANDROID_HOME"
-
-export CARGO_HOME="$HOME/.local/cargo"
-export RUSTUP_HOME="$HOME/.local/rustup"
-
-export GEM_HOME="$XDG_DATA_HOME/gem"
-export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
 
