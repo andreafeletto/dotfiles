@@ -25,6 +25,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'thosakwe/vim-flutter'
 Plug 'ap/vim-css-color'
+Plug 'mzlogin/vim-markdown-toc'
 call plug#end()
 
 " Basics
