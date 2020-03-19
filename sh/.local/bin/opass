@@ -1,6 +1,6 @@
 #!/bin/sh
 
-Version='0.0.1'
+Version='0.0.2'
 PrgName=${0##*/}
 
 for Dep in op dmenu jq xclip; do
@@ -81,7 +81,7 @@ UpdateTokenAge() {
 NewToken() {
 	Log 'generating new token'
 	while true; do
-		Entry=$(printf '' | dmenu -p 'password') || exit 1
+		Entry=$(dmenu -P -p 'password') || exit 1
 		Token=$(printf '%s' "$Entry" | op signin my --raw 2> /dev/null) && break
 	done
 	printf '%s' "$Token"
@@ -145,6 +145,7 @@ fi
 
 Log 'running dmenu'
 Choice=$(dmenu -p 'choose' -i < "$DBFile") || exit 1
+ItemName=${Choice%%: *}
 Uuid=${Choice##*: }
 
 Log "got uuid: $Uuid"
@@ -165,6 +166,9 @@ Result=$(printf '%s' "$Item" | jq -r "$JQCmd")
 
 if [ -n "$MustYank" ]; then
 	printf '%s' "$Result" | xclip -selection 'clipboard'
+	if command -v notify-send > /dev/null 2>&1; then
+		notify-send "$PrgName" "$Field yanked from item: $ItemName"
+	fi
 fi
 
 if [ -n "$MustPrint" ]; then
