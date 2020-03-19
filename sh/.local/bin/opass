@@ -1,0 +1,177 @@
+#!/bin/sh
+
+Version='0.0.1'
+PrgName=${0##*/}
+
+for Dep in op dmenu jq xclip; do
+	if ! command -v "$Dep" > /dev/null 2>&1; then
+		printf 'error: missing dependency %s\n' "$Dep"
+		exit 1
+	fi
+done
+
+DataDir="${XDG_DATA_HOME:-$HOME/.local/share}/opass"
+LogFile="$DataDir/logs"
+TokenFile="$DataDir/token"
+DBFile="$DataDir/db"
+TokenAgeFile="$DataDir/tokenage"
+TokenAgeLimit=1800
+
+Usage() {
+	while read -r Line; do
+		printf '%b\n' "$Line"
+	done <<-EOF
+		\rUsage: $PrgName [OPTION...]
+		\rWrapper for 1Password using dmenu.
+
+		\rOptions:
+		\r  -h, --help, -?      display this help and exit
+		\r  -v, --version       output version infromation and exit
+		\r  --verbose           print logs
+		\r  --token-age         print token age and exit
+		\r  --update-db         update database containing uuids
+		\r  -p, --password      query password
+		\r  -a, --all           query entire item
+		\r  -y, --yank, --copy  copy result to CLIPBOARD
+		\r  --stdout            print result to stdout
+		\r  --purge             delete files created by this script
+
+		\rGit repository: <https://github.com/andreafeletto/dotfiles>
+	EOF
+}
+
+Die() {
+	printf 'error: %s\n' "$1" 1>&2
+	exit 1
+}
+
+Log() {
+	[ -n "$Verbose" ] && printf 'log: %s\n' "$1" 1>&2
+	printf '%s: %s\n' "$(date '+%T')" "$1" >> "$LogFile"
+}
+
+Purge() {
+	for File in "$DataDir"/*; do
+		rm "$File"
+	done
+}
+
+GetTokenAge() {
+	Log 'getting token age'
+	if [ -r "$TokenAgeFile" ]; then
+		Log 'token age file found'
+		Now=$(date +%s)
+		read -r TokenAge < "$TokenAgeFile"
+		printf '%s\n' "$((Now - TokenAge))"
+	else
+		Die 'unknown token age'
+	fi
+}
+
+ValidateTokenAge() {
+	Log 'validating token age'
+	[ -r "$TokenAgeFile" ] && [ "$(GetTokenAge)" -lt "$TokenAgeLimit" ]
+}
+
+UpdateTokenAge() {
+	Log 'updating token age'
+	date '+%s' > "$TokenAgeFile"
+}
+
+NewToken() {
+	Log 'generating new token'
+	while true; do
+		Entry=$(printf '' | dmenu -p 'password') || exit 1
+		Token=$(printf '%s' "$Entry" | op signin my --raw 2> /dev/null) && break
+	done
+	printf '%s' "$Token"
+}
+
+GetToken() {
+	Log 'getting token'
+	if [ -r "$TokenFile" ] && ValidateTokenAge; then
+		Log 'found valid token: reading'
+		read -r SessionToken < "$TokenFile"
+		Log "got token: $SessionToken"
+	else
+		Log 'token file not found or too old'
+		SessionToken=$(NewToken)
+		Log "got new token: $SessionToken"
+		UpdateTokenAge
+		printf '%s\n' "$SessionToken" > "$TokenFile"
+	fi
+}
+
+while [ -n "$1" ]; do
+	case $1 in
+		-h|--help|-\?)
+			Usage; exit 0 ;;
+		-v|--version)
+			printf '%s\n' "$Version"; exit 0 ;;
+		--verbose)
+			Verbose=1 ;;
+		--token-age)
+			GetTokenAge; exit 0 ;;
+		--update-db)
+			MustUpdateDb=1 ;;
+		-p|--password)
+			Field='password' ;;
+		-a|--all)
+			Field='all' ;;
+		-y|--yank|--copy)
+			MustYank=1 ;;
+		--stdout)
+			MustPrint=1 ;;
+		--purge)
+			Purge; exit 0 ;;
+		*)
+			Die "unknown option: $1" ;;
+	esac
+	shift
+done
+
+mkdir -p "$DataDir"
+
+GetToken
+
+if [ -n "$MustUpdateDb" ] || [ ! -f "$DBFile" ]; then
+	Log 'updating db'
+	JQCmd='.[] | .overview.title + ": " + .uuid' 
+	op list items --session="$SessionToken" | jq -r "$JQCmd" > "$DBFile"
+	UpdateTokenAge
+fi
+
+[ -z "$Field" ] && exit 0
+
+Log 'running dmenu'
+Choice=$(dmenu -p 'choose' -i < "$DBFile") || exit 1
+Uuid=${Choice##*: }
+
+Log "got uuid: $Uuid"
+Item=$(op get item "$Uuid" --session="$SessionToken")
+# printf '%s' "$Item" | jq '.'
+
+Log "querying field: $Field"
+case $Field in
+	all)
+		JQCmd='.' ;;
+	password)
+		JQCmd='.details.fields 
+			| map(select(.designation == "password")) 
+			| .[0].value' ;;
+esac
+
+Result=$(printf '%s' "$Item" | jq -r "$JQCmd")
+
+if [ -n "$MustYank" ]; then
+	printf '%s' "$Result" | xclip -selection 'clipboard'
+fi
+
+if [ -n "$MustPrint" ]; then
+	printf '%s\n' "$Result"
+fi
+
+unset DataDir TokenFile LastActionFile \
+	  TokenAgeLimit Now TokenAge SessionToken \
+	  JQCmd DBFile
+

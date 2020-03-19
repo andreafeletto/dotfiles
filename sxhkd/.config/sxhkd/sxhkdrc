@@ -11,6 +11,8 @@ super + b
     blueman-manager
 super + o
     xdg-open "$(dbrowse)"
+super + p
+    opass -p -y
 ctrl + super + space
     slock
 
