@@ -1,67 +1,83 @@
-# My Dotfiles
+My Dotfiles
+===========
 
-## Screenshot
+Table of Contents
+-----------------
+
+<!-- vim-markdown-toc GFM -->
+
+* [Screenshot](#screenshot)
+* [Main Software](#main-software)
+* [The `install` script](#the-install-script)
+    * [Dependencies](#dependencies)
+    * [Usage](#usage)
+* [Major Scripts](#major-scripts)
+    * [opass](#opass)
+    * [status](#status)
+
+<!-- vim-markdown-toc -->
+
+Screenshot
+----------
+
 ![screenshot](./pictures/screenshot.png)
 
-## TL;DR
-|                 |            |
-|-----------------|------------|
-| Display Manager | LightDM    |
-| Window Manager  | dwm        |
-| Terminal        | alacritty  |
-| Editor          | vim        |
+Main Software
+-------------
 
-## How to
-Every folder contains the dotfiles needed for the relative application.
-First make sure that [GNU Stow](https://www.gnu.org/software/stow) is installed.
+| Type                    | Program          |
+|-------------------------|------------------|
+| Display Manager         | lightdm          |
+| Window Manager          | dwm              |
+| Terminal                | alacritty        |
+| Editor                  | neovim           |
+| Browser                 | brave            |
+| App Launcher            | dmenu_run        |
+| Hotkey Daemon           | sxhkd            |
+| Network Manager         | networkmanager   |
+| Notifications Daemon    | twmn             |
+| Usb Auto-Mounting       | udiskie          |
+
+The `install` script
+--------------------
+
+### Dependencies
+
+- `bash`
+- `git`
+- `stow`
+
+### Usage
+
+Download the required dependencies:
+```sh
+sudo pacman -Syu bash git stow
+```
 Clone this repository into the home directory:
 ```sh
-cd ~
 git clone https://github.com/andreafeletto/dotfiles.git
 ```
 Move into the repository and run the install script:
 ```sh
 cd dotfiles
-./install
-```
-To install a subset of the configuration files just use Stow.
-Just know that if a subdirectory of the chosen directory is not already
-present it will be symlinked. This means that new files in the
-subdirectory will also be added to the repository, which may not be
-what you want.
-```sh
-mkdir -p ~/.config/nvim
-stow neovim
+./install --all --stow
 ```
 
-## Install packages
-Arch Linux:
-```
-grep -v '^#' pkgs-arch | sudo pacman -Syu --needed -
-```
-Debian/Ubuntu (Not tested, packages may not exist):
-```
-grep -v '^#' pkgs-arch | xargs sudo apt install
-```
-Ruby Gems:
-```
-xargs -a pkgs-gem gem install
-```
-NodeJs NPM:
-```
-xargs -a pkgs-npm npm i -g
-```
-Termux:
-```
-xargs -a pkgs-termux pkg install
-```
+Major Scripts
+-------------
 
-## Download wallpapers
-Change the $dir and $urls (space separated string) variables then run:
-```
-./wall-download
-```
+### opass
 
-## Partially stolen from...
+**Dependencies**: `op`, `dmenu`, `jq`, `xclip`
 
-[Luke Smith](https://github.com/LukeSmithxyz/voidrice)
+Wrapper for the 1Password cli tool `op` written in POSIX-compliant shell script.
+Requires `dmenu` with the password patch applied.
+
+### status
+
+**Dependencies**: `xorg-xsetroot`
+
+Statusbar daemon for `dwm` written in POSIX-compliant shell script.
+The bar updates automatically every 10 seconds and 
+can be manually refreshed with a USR1 signal.
+
