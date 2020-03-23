@@ -22,6 +22,10 @@ chromium
 firefox
 w3m
 
+# GTK
+arc-solid-gtk-theme
+arc-icon-theme
+
 # xorg
 xorg-server
 xorg-xinit
