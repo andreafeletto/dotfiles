@@ -7,6 +7,8 @@ super + e
     $TERMINAL
 super + a
     $TERMINAL -e fff
+super + Return
+    emacsclient -c
 super + b
     blueman-manager
 super + o
