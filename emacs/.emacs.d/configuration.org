@@ -2,7 +2,7 @@
 #+AUTHOR: Andrea Feletto
 #+EMAIL: andrea@andreafeletto.com
 
-* Package management
+* Package Management
 Automatically install packages if not already present on the system.
 #+begin_src emacs-lisp :exports code
   (require 'use-package-ensure)
@@ -20,7 +20,7 @@ Install =try= to test packages without installing them.
 #+begin_src emacs-lisp
   (use-package try)
 #+end_src
-* =evil-mode=
+* Evil Mode
 Enable evil mode.
 #+begin_src emacs-lisp
   (use-package evil
@@ -44,28 +44,28 @@ Use =evil= with Org agendas.
     (require 'evil-org-agenda)
     (evil-org-agenda-set-keys))
 #+end_src
-* UI preferences
+* User Interface
 ** Font
 #+begin_src emacs-lisp
   (set-face-attribute 'default nil :height 140)
 #+end_src
-** Disable GUI elements
+** Disable GUI Elements
 #+begin_src emacs-lisp
   (tool-bar-mode 0)
   (menu-bar-mode 0)
   (scroll-bar-mode -1)
   (set-window-scroll-bars (minibuffer-window) nil nil)
 #+end_src
-** Line numbers
+** Line Numbers
 #+begin_src emacs-lisp
   (global-display-line-numbers-mode)
 #+end_src
-** Use fancy lambdas
+** Greek Lambdas
 #+begin_src emacs-lisp
   (global-prettify-symbols-mode t)
 #+end_src
-** Load Theme
-Loading "dracula-theme" without any tweak nor transparency.
+** Theme
+Loading =dracula-theme= according to the [[https://github.com/tarsius/moody][moody]] documentation.
 #+begin_src emacs-lisp
   (use-package dracula-theme
     :config
@@ -77,8 +77,8 @@ Loading "dracula-theme" without any tweak nor transparency.
     (set-face-attribute 'mode-line-inactive nil :box        nil)
     (set-face-attribute 'mode-line-inactive nil :background "#000000")))
 #+end_src
-** Use =moody= for a beautiful modeline
-This gives me a truly lovely ribbon-based modeline.
+** Modeline
+Setup =moody=, a ribbon-based modeline.
 #+begin_src emacs-lisp
   (use-package moody
     :config
@@ -86,70 +86,38 @@ This gives me a truly lovely ribbon-based modeline.
     (moody-replace-mode-line-buffer-identification)
     (moody-replace-vc-mode))
 #+end_src
-** Scroll conservatively
+** Scroll Conservatively
 Change scrolling behavior to only scroll as far as point goes.
 #+begin_src emacs-lisp
   (setq scroll-conservatively 100)
 #+end_src
-** Highlight the current line
+** Highlight Current Line
 =global-hl-line-mode= softly highlights the background color of the line
 containing point. It makes it a bit easier to find point, and it's useful when
 pairing or presenting code.
 #+begin_src emacs-lisp
   (global-hl-line-mode)
 #+end_src
-** Highlight uncommitted changes
-Use the =diff-hl= package to highlight changed-and-uncommitted lines when
-programming.
-#+begin_src emacs-lisp
-  (use-package diff-hl
-    :config
-    (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
-    (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode))
-#+end_src
-* Project management
-I use a few packages in virtually every programming or writing environment to
-manage the project, handle auto-completion, search for terms, and deal with
-version control. That's all in here.
-** =dumb-jump=
-The =dumb-jump= package works well enough in a [[https://github.com/jacktasia/dumb-jump#supported-languages][ton of environments]], and it
-doesn't require any additional setup. I've bound its most useful command to
-=M-.=.
-#+begin_src emacs-lisp
-  (use-package dumb-jump
-    :config
-    (define-key evil-normal-state-map (kbd "M-.") 'dumb-jump-go)
-    (setq dumb-jump-selector 'ivy))
-#+end_src
-** =magit=
-I use =magit= to handle version control. It's lovely, but I tweak a few things:
-- I bring up the status menu with =C-x g=.
-- Use =evil= keybindings with =magit=.
-- Per [[http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html][tpope's suggestions]], highlight commit text in the summary line that goes
-  beyond 50 characters.
-- I'd like to start in the insert state when writing a commit message.
-#+begin_src emacs-lisp
-  (use-package magit
-    :bind
-    ("C-x g" . magit-status)
-
-    :config
-    (use-package evil-magit)
-    (use-package with-editor)
-    (setq git-commit-summary-max-length 50)
-
-    (add-hook 'with-editor-mode-hook 'evil-insert-state))
-#+end_src
-** =undo-tree=
-I like tree-based undo management. I only rarely need it, but when I do, oh boy.
-#+begin_src emacs-lisp
-  (use-package undo-tree)
-#+end_src
-* Programming environments
+* Software Development
 ** General
 Tabs displayed as 4 characters by default.
 #+begin_src emacs-lisp
   (setq-default tab-width 4)
+#+end_src
+Setup =dumbo-jump= for automatic jump to definition.
+#+begin_src emacs-lisp
+  (use-package dumb-jump
+    :after magit
+    :config
+    (define-key evil-normal-state-map (kbd "M-.") 'dumb-jump-go)
+    (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
+#+end_src
+Highlight changes dinamically.
+#+begin_src emacs-lisp
+  (use-package diff-hl
+    :config
+    (global-diff-hl-mode)
+    (diff-hl-flydiff-mode))
 #+end_src
 ** Lisps
 Color-matching parenthesis.
@@ -182,6 +150,21 @@ I add a bunch of hooks to =term-mode=:
     (lambda ()
       (goto-address-mode)
       (define-key term-raw-map (kbd "M-o") 'other-window)))
+#+end_src
+* Git
+Always follow symlink to file under vc.
+#+begin_src emacs-lisp
+  (setq vc-follow-symlinks t)
+#+end_src
+Use =magit= to manage git repositories. Highlight commit text longer
+than 50 characters.
+#+begin_src emacs-lisp
+  (use-package magit
+    :bind
+    ("C-x g" . magit-status)
+    :config
+    (setq git-commit-summary-max-length 50)
+    (use-package evil-magit))
 #+end_src
 * Org
 ** Personal Info
@@ -261,7 +244,7 @@ Table of content in its own page.
     :config
     (add-to-list 'org-modules 'org-drill))
 #+end_src
-* Writing prose
+* Plain Text
 ** Editing with Markdown
 Use github-flavored markdown by default ad use pandoc for compilation.
 #+begin_src emacs-lisp
@@ -291,7 +274,7 @@ Markdown, or Org.
           deft-recursive t)
     (evil-define-key 'normal deft-mode-map (kbd "dd") 'deft-delete-file))
 #+end_src
-* File management with =dired=
+* File Management
 Kill buffers of files/directories that are deleted in =dired=.
 #+begin_src emacs-lisp
   (setq dired-clean-up-buffers-too t)
@@ -315,8 +298,8 @@ Use "j" and "k" to move around in =dired=.
   (evil-define-key 'normal dired-mode-map (kbd "j") 'dired-next-line)
   (evil-define-key 'normal dired-mode-map (kbd "k") 'dired-previous-line)
 #+end_src
-* Editing settings
-** Quickly visit Emacs configuration
+* Editor Settings
+** Visit Emacs Configuration
 #+begin_src emacs-lisp
   (defun visit-emacs-config ()
     (interactive)
@@ -324,9 +307,12 @@ Use "j" and "k" to move around in =dired=.
 
   (global-set-key (kbd "C-c e") 'visit-emacs-config)
 #+end_src
-** Set up =helpful=
-The =helpful= package provides, among other things, more context in Help
-buffers.
+** Undo Tree
+#+begin_src emacs-lisp
+  (use-package undo-tree)
+#+end_src
+** Help
+The =helpful= package provides more context in Help buffers.
 #+begin_src emacs-lisp
   (use-package helpful
     :config
@@ -335,11 +321,25 @@ buffers.
     (global-set-key (kbd "C-h k") #'helpful-key)
     (evil-define-key 'normal helpful-mode-map (kbd "q") 'quit-window))
 #+end_src
-** Always indent with spaces
+** Indentation
+Always indent with spaces.
 #+begin_src emacs-lisp
   (setq-default indent-tabs-mode nil)
 #+end_src
-** Add a bunch of engines for =engine-mode=
+** Backups
+Set sensible backup folder.
+#+begin_src emacs-lisp
+  (setq backup-by-copying t)
+  (setq backup-directory-alist '(("." . "~/.cache/emacs")))
+#+end_src
+Multiple backups.
+#+begin_src emacs-lisp
+  (setq delete-old-versions t
+    kept-new-versions 6
+    kept-old-versions 2
+    version-control t)
+#+end_src
+** Browser Interaction
 Enable [[https://github.com/hrs/engine-mode][engine-mode]] and define a few useful engines.
 #+begin_src emacs-lisp
   (use-package engine-mode
@@ -356,4 +356,9 @@ Enable [[https://github.com/hrs/engine-mode][engine-mode]] and define a few usef
       :keybinding "w")
     (defengine youtube "https://www.youtube.com/results?search_query=%s"
       :keybinding "y"))
+#+end_src
+** Other
+Lorem Ipsum
+#+begin_src emacs-lisp
+  (use-package lorem-ipsum)
 #+end_src

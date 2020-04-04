@@ -98,6 +98,9 @@ syncthing
 vim
 neovim
 
+# latex
+texlive-latexextra
+
 # system
 cronie
 openssh
@@ -150,5 +153,6 @@ python-selenium
 python-soupsieve
 python-statsmodels
 python-stem
+python-pygments
 python-pynvim
 

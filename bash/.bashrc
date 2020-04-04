@@ -20,11 +20,8 @@ HISTCONTROL=erasedups:ignoreboth
 HISTSIZE=
 HISTFILESIZE=
 
-if [ $UID -eq 0 ]; then
-    export PS1='# '
-else
-    export PS1='$ '
-fi
+[ $UID -eq 0 ] && PS1='# ' || PS1='$ '
+export PS1
 
 unset BCPath APath
 
