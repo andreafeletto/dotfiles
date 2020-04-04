@@ -17,9 +17,6 @@ scrolling:
   # Number of lines the viewport will move for every line scrolled
   multiplier: 1
 
-  # Scroll to the bottom when new text is written to the terminal.
-  auto_scroll: true
-
 font:
   size: 7.0
 
