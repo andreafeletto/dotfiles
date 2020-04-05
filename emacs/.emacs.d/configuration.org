@@ -21,11 +21,27 @@ Install =try= to test packages without installing them.
   (use-package try)
 #+end_src
 * Evil Mode
-Enable evil mode.
+Enable evil mode. Wait for =evil-leader= otherwise it won't work in *scratch*.
 #+begin_src emacs-lisp
   (use-package evil
+    :after evil-leader
     :config
     (evil-mode 1))
+#+end_src
+Add <leader> functionality.
+#+begin_src emacs-lisp
+  (use-package evil-leader
+    :config
+    (evil-leader/set-leader ",")
+    (evil-leader/set-key
+      "e" 'find-file
+      "q" 'kill-current-buffer
+      "w" 'save-buffer
+      "1" 'delete-other-windows
+      "c" (lambda () (interactive) (find-file "~/.emacs.d/configuration.org"))
+      "g" 'magit-status)
+    (evil-leader/set-key-for-mode 'org-mode "x" 'org-export-dispatch)
+    (global-evil-leader-mode))
 #+end_src
 Enable =surround= everywhere.
 #+begin_src emacs-lisp
@@ -131,6 +147,17 @@ Code completion.
     :config
     (ac-config-default))
 #+end_src
+Use =projectile= to jump between file in a project.
+#+begin_src emacs-lisp
+  (use-package projectile
+    :config
+    (define-key projectile-mode-map (kbd "C-c p")
+      'projectile-command-map)
+    (evil-leader/set-key "f"
+      'projectile-find-file)
+    (setq projectile-completion-system 'ivy)
+    (projectile-mode +1))
+#+end_src
 ** Python
 Setup code completion with =jedi= and =auto-complete=.
 #+begin_src emacs-lisp
@@ -186,25 +213,26 @@ than 50 characters.
     (use-package evil-magit))
 #+end_src
 * Org
-** Personal Info
+** General
+Defaults.
 #+begin_src emacs-lisp
   (setq
     user-full-name "Andrea Feletto"
     user-mail-address "andrea@andreafeletto.com")
 #+end_src
-** Emacs Startup
-start emacs with in empty buffer in org-mode.
-#+begin_src emacs-lisp
-    (setq initial-major-mode 'org-mode)
-    (setq inhibit-splash-screen t)
-    (setq initial-scratch-message "")
-#+end_src
-** Indentation
 Disable paragraph indentation.
 #+begin_src emacs-lisp
-    (setq org-adapt-indentation nil)
+  (setq org-adapt-indentation nil)
 #+end_src
-** Display preferences
+Don't ask before evaluating code blocks.
+#+begin_src emacs-lisp
+  (setq org-confirm-babel-evaluate nil)
+#+end_src
+Translate quotes to typographically-correct curly quotes when exporting.
+#+begin_src emacs-lisp
+  (setq org-export-with-smart-quotes t)
+#+end_src
+** Display Preferences
 Pretty bullets.
 #+begin_src emacs-lisp
   (use-package org-bullets
@@ -228,15 +256,6 @@ new one (which shows the same information).
 #+begin_src emacs-lisp
   (setq org-src-window-setup 'current-window)
 #+end_src
-** Exporting
-Don't ask before evaluating code blocks.
-#+begin_src emacs-lisp
-  (setq org-confirm-babel-evaluate nil)
-#+end_src
-Translate quotes to typographically-correct curly quotes when exporting.
-#+begin_src emacs-lisp
-  (setq org-export-with-smart-quotes t)
-#+end_src
 ** LaTeX
 Enable code highlighting with minted.
 #+begin_src emacs-lisp
@@ -257,23 +276,44 @@ Table of content in its own page.
     :config
     (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"))
 #+end_src
-** =org-drill=
+** Concept Mapping
+Setup =org-brain=.
 #+begin_src emacs-lisp
-  (use-package org-drill
+  (use-package org-brain
+    :init
+    (with-eval-after-load 'evil
+      (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
+    :bind ("C-c b" . org-brain-visualize)
     :config
-    (add-to-list 'org-modules 'org-drill))
+    (setq org-id-track-globally t)
+    (setq org-brain-title-max-length 12)
+    (setq org-brain-visualize-default-choices 'root)
+    (setq org-brain-include-file-entries nil
+          org-brain-file-entries-use-title nil))
 #+end_src
 ** PDF Viewing
 Custom keybindings for DocView mode.
 #+begin_src emacs-lisp
+  (require 'doc-view)
   (define-key doc-view-mode-map (kbd "j")
-    'doc-view-next-line-or-next-page)
+	'doc-view-next-line-or-next-page)
   (define-key doc-view-mode-map (kbd "k")
-    'doc-view-previous-line-or-previous-page)
+	'doc-view-previous-line-or-previous-page)
   (define-key doc-view-mode-map (kbd "l")
-    'doc-view-next-page)
+	'doc-view-next-page)
   (define-key doc-view-mode-map (kbd "h")
-    'doc-view-previous-page)
+	'doc-view-previous-page)
+#+end_sr
+** Other Export Formats
+Hugo-compatible markdown.
+#+begin_src emacs-lisp
+  (use-package ox-hugo
+    :after ox)
+#+end_src
+Twitter Bootstrap.
+#+begin_src emacs-lisp
+  (use-package ox-twbs
+    :after ox)
 #+end_src
 * Plain Text
 ** Editing with Markdown
@@ -330,13 +370,19 @@ Use "j" and "k" to move around in =dired=.
   (evil-define-key 'normal dired-mode-map (kbd "k") 'dired-previous-line)
 #+end_src
 * Editor Settings
-** Visit Emacs Configuration
+** Generic Completion
+Setup =ivy= everywere.
 #+begin_src emacs-lisp
-  (defun visit-emacs-config ()
-    (interactive)
-    (find-file "~/.emacs.d/configuration.org"))
-
-  (global-set-key (kbd "C-c e") 'visit-emacs-config)
+  (use-package ivy
+    :config
+    (ivy-mode 1))
+#+end_src
+** Emacs Startup
+start emacs with in empty buffer in org-mode.
+#+begin_src emacs-lisp
+    (setq initial-major-mode 'org-mode)
+    (setq inhibit-splash-screen t)
+    (setq initial-scratch-message "")
 #+end_src
 ** Undo Tree
 #+begin_src emacs-lisp
