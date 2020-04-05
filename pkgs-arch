@@ -53,6 +53,7 @@ pulseaudio-bluetooth
 # pdf
 zathura
 zathura-pdf-mupdf
+ghostscript
 
 # docs
 man-pages
@@ -131,12 +132,14 @@ sxiv
 scrot
 
 # python
+flake8
 python-arrow
 python-beautifulsoup4
 python-certifi
 python-colorama
 python-cryptography
 python-html5lib
+python-jedi
 python-lxml
 python-markdown
 python-matplotlib
@@ -155,4 +158,5 @@ python-statsmodels
 python-stem
 python-pygments
 python-pynvim
+python-virtualenv
 

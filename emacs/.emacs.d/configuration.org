@@ -119,6 +119,25 @@ Highlight changes dinamically.
     (global-diff-hl-mode)
     (diff-hl-flydiff-mode))
 #+end_src
+Syntax checking.
+#+begin_src emacs-lisp
+  (use-package flycheck
+    :init
+    (global-flycheck-mode t))
+#+end_src
+Code completion.
+#+begin_src emacs-lisp
+  (use-package auto-complete
+    :config
+    (ac-config-default))
+#+end_src
+** Python
+Setup code completion with =jedi= and =auto-complete=.
+#+begin_src emacs-lisp
+  (use-package jedi
+    :config
+    (add-hook 'python-mode-hook 'jedi:setup))
+#+end_src
 ** Lisps
 Color-matching parenthesis.
 #+begin_src emacs-lisp
@@ -243,6 +262,18 @@ Table of content in its own page.
   (use-package org-drill
     :config
     (add-to-list 'org-modules 'org-drill))
+#+end_src
+** PDF Viewing
+Custom keybindings for DocView mode.
+#+begin_src emacs-lisp
+  (define-key doc-view-mode-map (kbd "j")
+    'doc-view-next-line-or-next-page)
+  (define-key doc-view-mode-map (kbd "k")
+    'doc-view-previous-line-or-previous-page)
+  (define-key doc-view-mode-map (kbd "l")
+    'doc-view-next-page)
+  (define-key doc-view-mode-map (kbd "h")
+    'doc-view-previous-page)
 #+end_src
 * Plain Text
 ** Editing with Markdown
