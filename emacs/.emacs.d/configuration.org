@@ -28,6 +28,7 @@ Enable evil mode. Wait for =evil-leader= otherwise it won't work in *scratch*.
     :config
     (evil-mode 1))
 #+end_src
+
 Add <leader> functionality.
 #+begin_src emacs-lisp
   (use-package evil-leader
@@ -48,6 +49,12 @@ Enable =surround= everywhere.
   (use-package evil-surround
     :config
     (global-evil-surround-mode 1))
+#+end_src
+Multiple cursors.
+#+begin_src emacs-lisp
+  (use-package evil-mc
+    :config
+    (global-evil-mc-mode 1))
 #+end_src
 Use =evil= with Org agendas.
 #+begin_src emacs-lisp
@@ -158,6 +165,19 @@ Use =projectile= to jump between file in a project.
     (setq projectile-completion-system 'ivy)
     (projectile-mode +1))
 #+end_src
+** Web
+Enable =web-mode=.
+#+begin_src emacs-lisp
+  (use-package web-mode
+    :config
+    (setq web-mode-markup-indent-offset 2)
+    (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
+#+end_src
+Enable =emmet-mode= for html and css snippets.
+#+begin_src emacs-lisp
+  (use-package emmet-mode
+    :hook web-mode)
+#+end_src
 ** Python
 Setup code completion with =jedi= and =auto-complete=.
 #+begin_src emacs-lisp
@@ -232,6 +252,12 @@ Translate quotes to typographically-correct curly quotes when exporting.
 #+begin_src emacs-lisp
   (setq org-export-with-smart-quotes t)
 #+end_src
+Auto completion.
+#+begin_src emacs-lisp
+  (use-package org-ac
+    :config
+    (org-ac/config-default))
+#+end_src
 ** Display Preferences
 Pretty bullets.
 #+begin_src emacs-lisp
@@ -303,7 +329,21 @@ Custom keybindings for DocView mode.
 	'doc-view-next-page)
   (define-key doc-view-mode-map (kbd "h")
 	'doc-view-previous-page)
-#+end_sr
+#+end_src
+** Static Site Generation
+Setup projects.
+#+begin_src emacs-lisp
+  (require 'ox-publish)
+  (setq org-publish-project-alist '(
+    ("andreafeletto.com"
+      :components ("af-org"))
+    ("af-org"
+      :base-directory "~/documents/andreafeletto.com"
+      :publishing-directory "~/repos/andreafeletto.com/public"
+      :recursive t
+      :publishing-function org-twbs-publish-to-html)))
+#+end_src
+
 ** Other Export Formats
 Hugo-compatible markdown.
 #+begin_src emacs-lisp
@@ -315,6 +355,28 @@ Twitter Bootstrap.
   (use-package ox-twbs
     :after ox)
 #+end_src
+* Mail
+Setup SMTP bindings for sending emails.
+#+begin_src emacs-lisp
+  (setq send-mail-function 'smtpmail-send-it
+        message-send-mail-function 'smtpmail-send-it
+        smtpmail-smtp-server "127.0.0.1"
+        smtpmail-smtp-service 1025)
+#+end_src
+Manage emails with =mu4e=.
+#+begin_src emacs-lisp
+  (require 'mu4e)
+  (setq mu4e-maildir "~/.mail/protonmail"
+        mu4e-sent-folder "/Sent"
+        mu4e-drafts-folder "/Drafts"
+        mu4e-trash-folder "/Trash"
+        mu4e-refile-folder "/Archive"
+        mu4e-get-mail-command "mbsync -a"
+        mu4e-update-interval 1800
+        mu4e-change-filenames-when-moving t
+        mu4e-sent-messages-behavior 'delete)
+#+end_src
+
 * Plain Text
 ** Editing with Markdown
 Use github-flavored markdown by default ad use pandoc for compilation.
