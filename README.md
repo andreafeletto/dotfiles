@@ -27,7 +27,7 @@ Main Software
 
 | Type                    | Program          |
 |-------------------------|------------------|
-| Display Manager         | lightdm          |
+| Display Manager         | xdm              |
 | Window Manager          | dwm              |
 | Terminal                | alacritty        |
 | Editor                  | neovim           |
@@ -75,7 +75,7 @@ Requires `dmenu` with the password patch applied.
 
 ### status
 
-**Dependencies**: `xorg-xsetroot`
+**Dependencies**: `xsetroot`, `pulseaudio`
 
 Statusbar daemon for `dwm` written in POSIX-compliant shell script.
 The bar updates automatically every 10 seconds and 

@@ -1,0 +1,16 @@
+
+# Bash
+.cache/bash
+
+# Less
+.cache/less
+
+# OpenSS
+.local/share/openssl
+
+# Python
+.local/share/python
+
+# X11
+.local/share/xorg
+

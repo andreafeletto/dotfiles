@@ -1,8 +1,0 @@
-#!/bin/sh
-
-sxhkd &
-status -d 2> /dev/null
-nm-applet &
-udiskie --automount --no-notify --smart-tray &
-twmnd &
-

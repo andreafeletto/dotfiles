@@ -18,15 +18,8 @@ alias lll='ls -ahnv --group-directories-first --color=auto'
 alias grep='grep --color=auto'
 alias less='less -N'
 
-# Reload .bashrc
-alias ref='source ~/.bashrc'
-
 if type -fP rmtrash &> /dev/null; then
     alias rm='rmtrash -v'
-fi
-
-if type -fP calcurse &> /dev/null; then
-    alias calcurse='calcurse -D $HOME/.config/calcurse'
 fi
 
 if type -fP docker &> /dev/null; then
@@ -46,9 +39,5 @@ fi
 
 if type -fP tree &> /dev/null; then
     alias tree='tree -ahC --dirsfirst -I .git'
-fi
-
-if type -fP irssi &> /dev/null; then
-	alias irssi="irssi --config="$XDG_CONFIG_HOME"/irssi/config --home="$XDG_DATA_HOME"/irssi"
 fi
 

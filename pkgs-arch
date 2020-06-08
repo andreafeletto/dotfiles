@@ -94,6 +94,7 @@ ripgrep
 xdg-utils
 xdg-user-dirs
 syncthing
+fzf
 
 # text
 vim

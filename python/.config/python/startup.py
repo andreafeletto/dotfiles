@@ -1,9 +1,10 @@
+
 import readline
 import atexit
 from os.path import expanduser
 from functools import partial
 
-hist_path = expanduser('~/history/python_history')
+hist_path = expanduser('~/.local/share/python')
 
 try:
     readline.read_history_file(hist_path)
@@ -14,3 +15,4 @@ except FileNotFoundError:
 atexit.register(readline.write_history_file, hist_path)
 
 print(f'Saving history at {hist_path}')
+

@@ -1,8 +1,0 @@
-#!/usr/bin/env sh
-
-ffmpeg \
-    -f x11grab \
-    -video_size 1920x1080 \
-    -framerate 30 \
-    -i $DISPLAY -f alsa -i default -c:v libx264 -preset ultrafast -c:a aac \
-    "$HOME/screencast/$(date '+%s').mp4" &

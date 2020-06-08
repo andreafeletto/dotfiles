@@ -21,6 +21,12 @@ readonly GitDir="$HOME/repos"
 readonly AurUrl='https://aur.archlinux.org'
 readonly AurDir="$HOME/aur"
 
+readonly ConfigDir=${XDG_CONFIG_HOME:-$HOME/.config}
+readonly CacheDir=${XDG_CACHE_HOME:-$HOME/.cache}
+readonly DataDir=${XDG_DATA_HOME:-$HOME/.local/share}
+readonly LibDir="$HOME/.local/lib"
+mkdir -p "$ConfigDir" "$CacheDir" "$DataDir" "$LibDir"
+
 function Usage {
 	while read -r; do
 		printf '%b\n' "$REPLY"
@@ -228,9 +234,15 @@ if [[ $Stow = 'true' ]]; then
 	RelPaths=$(xargs -a tostow -I {} find {} -mindepth 1 -type d)
 	AbsPaths=$(for P in $RelPaths; do printf '%s/%s\n' "$HOME" "${P#*/}"; done)
 	UAbsPaths=$(printf '%s' "$AbsPaths" | sort -u)
+
 	for Path in $UAbsPaths; do
 		printf '\t| %s\n' "$Path"
 	done
+
+	grep -v '^$\|^#' 'dirs' | while read -r; do
+		printf '\t| %s/%s\n' "$HOME" "$REPLY"
+	done
+
 	printf '\n'
 fi
 
@@ -252,15 +264,22 @@ read -p 'Are you OK with this? [Y/n]' -r
 
 if [[ $Stow = 'true' ]]; then
 	Title 'Stowing'
+
 	for P in $AbsPaths; do
 		mkdir -p "$P"
 	done
+
+	grep -v '^$\|^#' 'dirs' | while read -r; do
+		mkdir -p "$HOME/$REPLY"
+	done
+
+	rm -rf "$ConfigDir/user-dirs.dirs"
+
 	if xargs -a tostow stow; then
 		printf 'Done stowing\n'
 	else
 		Die 'something went wrong when stowing. quitting.'
 	fi
-	ln -sf "$HOME/.config/nvim" "$HOME/.vim"
 fi
 
 for Source in $Sources; do

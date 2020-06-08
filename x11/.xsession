@@ -8,13 +8,14 @@ xset b off
 # repeat rate = 50ms
 xset r rate 200 50
 
-# set keyboard layout
 setxkbmap -layout it
-
 setxkbmap -option "caps:swapescape"
 
-# window manager
-case "$WM" in
-    dwm) exec dwm ;;
-    *)   echo "$WM window manager not found." ;;
-esac
+sxhkd &
+cstatus -d 2>/dev/null &
+nm-applet &
+udiskie --automount --no-notify --smart-tray &
+twmnd >/dev/null &
+
+exec dwm
+

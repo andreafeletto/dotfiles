@@ -1,5 +1,0 @@
-#!/bin/sh
-
-ACCOUNTS_PATH='/home/andrea/.config/ledger/.hledger_accounts'
-
-hledger bal --flat | grep -f $ACCOUNTS_PATH | awk '{ print $2, $1}' | awk -F ':' '{ print $NF }' | awk '{ print $1 ": " $2 }' | paste -sd ' '
