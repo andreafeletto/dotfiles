@@ -1,0 +1,50 @@
+
+Xcursor.theme: Adwaita
+Xcursor.size: 16
+
+xlogin*login.translations: #override \
+	Ctrl<Key>R: abort-display()\n\
+	<Key>F1: set-session-argument(failsafe) finish-field()\n\
+	<Key>Delete: delete-character()\n\
+	<Key>Left: move-backward-character()\n\
+	<Key>Right: move-forward-character()\n\
+	<Key>Home: move-to-begining()\n\
+	<Key>End: move-to-end()\n\
+	Ctrl<Key>KP_Enter: set-session-argument(failsafe) finish-field()\n\
+	<Key>KP_Enter: set-session-argument() finish-field()\n\
+	Ctrl<Key>Return: set-session-argument(failsafe) finish-field()\n\
+	<Key>Return: set-session-argument() finish-field()
+
+xlogin*greeting: CLIENTHOST
+xlogin*namePrompt: ::
+xlogin*passwdPrompt: ::
+xlogin*fail: wrong password
+xlogin*echoPasswd: true
+
+xlogin.Login.greetFace: Ubuntu Nerd Font-13
+xlogin.Login.face: Ubuntu Nerd Font-12
+xlogin.Login.promptFace: Ubuntu Nerd Font-12:style=Bold
+xlogin.Login.failFace: Ubuntu Nerd Font-12:style=Bold
+
+xlogin.Login.borderWidth: 0
+xlogin.Login.frameWidth: 0
+xlogin.Login.innerFramesWidth: 0
+xlogin.Login.sepWidth: 0
+
+xlogin.Login.width: 550
+xlogin.Login.height: 250
+
+xlogin.Login.background: #0f1013 
+xlogin.Login.foreground: #D2D2D2
+xlogin.Login.inpColor:   #717171
+
+xlogin.Login*shdColor: #0f1013
+xlogin.Login*hiColor: #0f1013
+
+*Background: #717171
+*Foreground: #717171
+
+xlogin.Login.greetColor: #717171
+xlogin.Login.promptColor: #717171
+xlogin.Login.failColor: #aa0000
+
