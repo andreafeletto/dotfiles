@@ -2,10 +2,13 @@
 # Bash
 .cache/bash
 
+# Go
+.local/share/go
+
 # Less
 .cache/less
 
-# OpenSS
+# OpenSSL
 .local/share/openssl
 
 # Python
