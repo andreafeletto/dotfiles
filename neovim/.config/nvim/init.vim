@@ -1,8 +1,5 @@
 
-unlet! skip_defaults_vim
-
-let mapleader=" "
-set nocompatible
+let mapleader = " "
 syntax on
 
 set number relativenumber
@@ -37,10 +34,6 @@ nnoremap c "_c
 set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
-if !has('nvim')
-    set viminfo+=n~/history/viminfo
-endif
-
 if executable('rg')
     let g:rg_derive_root='true'
 endif
@@ -74,17 +67,17 @@ noremap <C-j> :wincmd j<CR>
 noremap <C-k> :wincmd k<CR>
 noremap <C-l> :wincmd l<CR>
 
-map <leader>c :w! <bar> !compiler <c-r>%<CR>
-map <leader>p :!opout <c-r>%<CR><CR>
+noremap <leader>c :write <bar> !compiler %<CR>
+noremap <leader>p :!opout %<CR><CR>
 
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>e :Vexplore <bar> :vertical resize 30<CR>
 nnoremap <leader>f :Files<CR>
 
-nmap <leader>jd <Plug>(coc-definition)
-nmap <leader>ji <Plug>(coc-implementation)
-nmap <leader>jr <Plug>(coc-references)
-nmap <leader>gs :Git<CR>
+nnoremap <leader>jd <Plug>(coc-definition)
+nnoremap <leader>ji <Plug>(coc-implementation)
+nnoremap <leader>jr <Plug>(coc-references)
+nnoremap <leader>gs :Git<CR>
 
 map <Left>  <nop>
 map <Down>  <nop>
@@ -96,4 +89,14 @@ autocmd FileType sh setlocal tabstop=4 noexpandtab softtabstop=0 shiftwidth=4
 
 let g:tex_flavor='latex'
 autocmd BufNewFile *.tex execute "r $HOME/.config/latex/template.tex" | 0 | delete
+
+function! ToggleConcealLevel()
+    if &conceallevel == 0
+        setlocal conceallevel=2
+    else
+        setlocal conceallevel=0
+    endif
+endfunction
+
+nnoremap <leader>tc :call ToggleConcealLevel()<CR>
 

@@ -18,6 +18,16 @@ alias lll='ls -ahnv --group-directories-first --color=auto'
 alias grep='grep --color=auto'
 alias less='less -N'
 
+for Conf in \
+	'.bashrc':bashrc \
+	'.bash_aliases':bashaliases \
+	'.profile':profile \
+	'.config/nvim/init.vim':vimrc \
+	'.config/sxhkd/sxhkdrc':sxhkdrc
+do
+	[ -r "$HOME/${Conf%:*}" ] && alias ${Conf/*:}="$EDITOR $HOME/${Conf%:*}"
+done
+
 if type -fP rmtrash &> /dev/null; then
     alias rm='rmtrash -v'
 fi

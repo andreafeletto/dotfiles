@@ -2,7 +2,7 @@
 
 export EDITOR='nvim'
 if [ -n "$DISPLAY" ]; then
-	export BROWSER='brave'
+	export BROWSER='chromium'
 else
 	export BROWSER='w3m'
 fi

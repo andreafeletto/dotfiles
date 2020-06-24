@@ -71,7 +71,7 @@ linux-docs
 git
 python2
 python3
-jupyter-notebook
+jupyterlab
 nodejs
 npm
 perl
@@ -84,6 +84,7 @@ zip
 unzip
 
 # utility
+dex
 stow
 htop
 bc

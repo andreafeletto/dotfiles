@@ -12,3 +12,6 @@ glow
 asciiquarium
 python-requests-futures
 python-torrequest
+python-dask
+python-panel
+python-holoviews
