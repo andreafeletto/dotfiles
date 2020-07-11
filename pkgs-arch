@@ -161,4 +161,5 @@ python-stem
 python-pygments
 python-pynvim
 python-virtualenv
+python-xlrd
 

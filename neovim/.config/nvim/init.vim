@@ -57,6 +57,8 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'mzlogin/vim-markdown-toc'
 Plug 'gruvbox-community/gruvbox'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 call plug#end()
 
 colorscheme gruvbox
