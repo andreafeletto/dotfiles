@@ -1,0 +1,36 @@
+#!/bin/sh
+
+Prompt='destination: '
+
+lsd() {
+	ls -1a | while read -r Entry; do
+		[ -d "$Entry" ] && printf '%s\n' "$Entry"
+	done
+}
+
+if [ -z "$1" ]; then
+	printf 'usage: dzip <file.zip>\n' 1>&2
+	exit 1
+fi
+
+case "$1" in
+	/*) Zip="$1" ;;
+	*)  Zip="$PWD/$1" ;;
+esac
+
+while true; do
+	res=$(lsd | dmenu -p "$Prompt")
+
+	# quit
+	[ -z "$res" ] && exit 1
+
+	# target chosen
+	if [ "$res" = '.' ]; then
+		printf '%s\n' "$PWD"
+		unzip -o "$Zip" -d "$PWD"
+		exit 0
+	fi
+
+	# navigate
+	cd "$res"
+done

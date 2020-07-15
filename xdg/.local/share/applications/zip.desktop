@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=dzip
+Exec=dzip %u
