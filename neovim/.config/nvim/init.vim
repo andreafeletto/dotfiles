@@ -11,6 +11,7 @@ set shiftwidth=4
 set expandtab
 set smartindent
 set nowrap
+set nofoldenable
 set smartcase
 set noswapfile
 set nobackup
@@ -38,28 +39,7 @@ if executable('rg')
     let g:rg_derive_root='true'
 endif
 
-if ! filereadable(glob('~/.config/nvim/autoload/plug.vim'))
-    echo 'Downloading junegunn/vim-plug to manage plugins...'
-    !mkdir -p ~/.config/nvim/autoload/
-    !curl -S 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' > ~/.config/nvim/autoload/plug.vim
-    autocmd VimEnter * PlugInstall
-endif
-
-call plug#begin('~/.config/nvim/plugged')
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'tpope/vim-fugitive'
-Plug 'vim-utils/vim-man'
-Plug 'mbbill/undotree'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'mzlogin/vim-markdown-toc'
-Plug 'gruvbox-community/gruvbox'
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
-call plug#end()
+let g:ale_disable_lsp = 1
 
 colorscheme gruvbox
 set background=dark
@@ -88,6 +68,7 @@ map <Right> <nop>
 
 autocmd FileType haskell setlocal shiftwidth=2 softtabstop=2
 autocmd FileType sh setlocal tabstop=4 noexpandtab softtabstop=0 shiftwidth=4
+autocmd FileType pandoc setlocal nospell
 
 let g:tex_flavor='latex'
 autocmd BufNewFile *.tex execute "r $HOME/.config/latex/template.tex" | 0 | delete

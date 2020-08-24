@@ -1,3 +1,4 @@
+
 # display manager
 lightdm
 
@@ -15,12 +16,16 @@ fff
 # fonts
 adobe-source-code-pro-fonts
 gnu-free-fonts
-otf-fira-code
 
 # browser
 chromium
 firefox
 w3m
+
+# engineering
+octave
+xcircuit
+datamash
 
 # GTK
 arc-solid-gtk-theme
@@ -100,6 +105,11 @@ fzf
 # text
 vim
 neovim
+vim-spell-it
+vim-airline
+vim-ale
+vim-fugitive
+vim-surround
 
 # latex
 texlive-latexextra
@@ -150,6 +160,7 @@ python-pandas
 python-phonenumbers
 python-pip
 python-progress
+python-pylint
 python-pysocks
 python-requests
 python-scipy

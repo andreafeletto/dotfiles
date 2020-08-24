@@ -55,6 +55,9 @@ export RANDFILE="$XDG_DATA_HOME/openssl/rnd"
 # Python
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/startup.py"
 
+# Pylint
+export PYLINTHOME="$XDG_CACHE_HOME/pylint"
+
 # Readline
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 
@@ -65,6 +68,9 @@ export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
 # Rust
 export CARGO_HOME="$HOME/.local/cargo"
 export RUSTUP_HOME="$HOME/.local/rustup"
+
+# Visual Studio Code
+export VSCODE_PORTABLE="$XDG_DATA_HOME/vscode"
 
 ##  ____   _  _____ _   _
 ## |  _ \ / \|_   _| | | |

@@ -1,6 +1,4 @@
 yay
-xinit-xsession
-brave-bin
 xurls
 rmtrash
 lightdm-mini-greeter
@@ -10,8 +8,20 @@ twmn-git
 xpub
 glow
 asciiquarium
+scilab-bin
+archimedes
 python-requests-futures
 python-torrequest
 python-dask
 python-panel
 python-holoviews
+neovim-coc
+vim-undotree
+vim-fzf-git
+vim-multiple-cursors-git
+vim-gruvbox-community
+vim-pandoc-git
+vim-pandoc-syntax-git
+vim-markdown-toc
+vim-man-git
+vim-visual-multi
