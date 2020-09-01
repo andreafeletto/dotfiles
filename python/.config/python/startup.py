@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+
+'''
+Script intended to be run at startup through $PYTHONSTARTUP.
+It changes the history file path according to the XDG Base Directory Spec.
+'''
 
 import readline
 import atexit
@@ -18,4 +24,3 @@ readline.set_history_length(-1)
 atexit.register(readline.write_history_file, hist_path)
 
 print(f'history file: {hist_path}')
-

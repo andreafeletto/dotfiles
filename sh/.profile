@@ -6,7 +6,7 @@ if [ -n "$DISPLAY" ]; then
 else
 	export BROWSER='w3m'
 fi
-export TERMINAL='alacritty'
+export TERMINAL='st'
 export READER='zathura'
 export WM='dwm'
 

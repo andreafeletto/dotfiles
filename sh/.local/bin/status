@@ -43,18 +43,22 @@ Battery() {
 	CapacityPath='/sys/class/power_supply/BAT1/capacity'
 	StatusPath='/sys/class/power_supply/BAT1/status'
 	if [ -r "$CapacityPath" ] && [ -r "$StatusPath" ]; then
-		read -r Status < "$StatusPath"
+		read -r Status <"$StatusPath"
 		case $Status in
-			Discharging)
-				Icon="🔋";;
-			Charging)
-				Icon="🔌";;
-			Full)
-				Icon="⚡";;
-			Unknown)
-				Icon="❓";;
+		Discharging)
+			Icon="🔋"
+			;;
+		Charging)
+			Icon="🔌"
+			;;
+		Full)
+			Icon="⚡"
+			;;
+		Unknown)
+			Icon="❓"
+			;;
 		esac
-		read -r Capacity < "$CapacityPath"
+		read -r Capacity <"$CapacityPath"
 		printf '%s %4s%%\n' "$Icon" "$Capacity"
 	else
 		Die 'unable to access power supply files'
@@ -62,31 +66,31 @@ Battery() {
 }
 
 Volume() {
-	if ! command -v pulsemixer > /dev/null; then
+	if ! command -v pulsemixer >/dev/null; then
 		Die 'missing dependency: pulsemixer'
 	fi
 
-    if [ "$(pulsemixer --get-mute)" -eq 1 ]; then
-        printf '   🔇   \n'
-    else
+	if [ "$(pulsemixer --get-mute)" -eq 1 ]; then
+		printf '   🔇   \n'
+	else
 		Value=$(pulsemixer --get-volume)
-        printf '🔊 %4s%%\n' "${Value%% *}"
-    fi
+		printf '🔊 %4s%%\n' "${Value%% *}"
+	fi
 }
 
 Backlight() {
 	if [ -n "$BacklightPath" ]; then
-		read -r Brightness < "$BacklightPath/brightness"
-		read -r MaxBrightness < "$BacklightPath/max_brightness"
+		read -r Brightness <"$BacklightPath/brightness"
+		read -r MaxBrightness <"$BacklightPath/max_brightness"
 		Value=$((100 * Brightness / MaxBrightness))
-	elif xbacklight > /dev/null; then
+	elif xbacklight >/dev/null; then
 		Value=$(xbacklight)
 	fi
-    printf '💡 %4d%%\n' "${Value%%.*}"
+	printf '💡 %4d%%\n' "${Value%%.*}"
 }
 
 Clock() {
-	if command -v lolclock > /dev/null; then
+	if command -v lolclock >/dev/null; then
 		lolclock
 	else
 		date '+%R'
@@ -100,13 +104,13 @@ Clock() {
 ################################################################################
 
 Refresh() {
-    printf '%s' "$$" > "$PidPath"
-    xsetroot -name "| $(Backlight) | $(Volume) | $(Battery) | $(Clock)"
+	printf '%s' "$$" >"$PidPath"
+	xsetroot -name "| $(Backlight) | $(Volume) | $(Battery) | $(Clock)"
 }
 
 GetDaemonPid() {
 	if [ -r "$PidPath" ]; then
-		read -r Pid < "$PidPath"
+		read -r Pid <"$PidPath"
 		printf '%s' "$Pid"
 	fi
 }
@@ -116,10 +120,10 @@ SendRefresh() {
 }
 
 StartDaemon() {
-	if kill -0 "$(GetDaemonPid)" 2> /dev/null; then
+	if kill -0 "$(GetDaemonPid)" 2>/dev/null; then
 		Die 'daemon already running'
 	fi
-	${SHELL:-"/bin/sh"} -c "$0" >> "$LogPath" 2>&1 &
+	${SHELL:-"/bin/sh"} -c "$0" >>"$LogPath" 2>&1 &
 }
 
 StopDaemon() {
@@ -142,16 +146,26 @@ if [ $# -gt 1 ]; then
 fi
 
 case $1 in
-	--help|-h|-\?)
-		Usage; exit 0 ;;
-	--version|-v)
-		printf '%s\n' "$Version"; exit 0 ;;
-	--refresh|-r)
-		SendRefresh; exit 0 ;;
-	--daemon|-d)
-		StartDaemon; exit 0 ;;
-	--stop|-s)
-		StopDaemon; exit 0 ;;
+--help | -h | -\?)
+	Usage
+	exit 0
+	;;
+--version | -v)
+	printf '%s\n' "$Version"
+	exit 0
+	;;
+--refresh | -r)
+	SendRefresh
+	exit 0
+	;;
+--daemon | -d)
+	StartDaemon
+	exit 0
+	;;
+--stop | -s)
+	StopDaemon
+	exit 0
+	;;
 esac
 
 ################################################################################
@@ -164,7 +178,7 @@ trap 'Refresh' USR1
 trap 'rm $PidPath $LogPath; exit 0' INT TERM
 
 while true; do
-    Refresh
-    sleep 10 & wait $!
+	Refresh
+	sleep 10 &
+	wait $!
 done
-

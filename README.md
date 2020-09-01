@@ -27,11 +27,11 @@ Main Software
 
 | Type                    | Program          |
 |-------------------------|------------------|
-| Display Manager         | xdm              |
+| Display Manager         | ly               |
 | Window Manager          | dwm              |
-| Terminal                | alacritty        |
+| Terminal Emulator       | st               |
 | Editor                  | neovim           |
-| Browser                 | brave            |
+| Browser                 | chromium         |
 | App Launcher            | dmenu_run        |
 | Hotkey Daemon           | sxhkd            |
 | Network Manager         | networkmanager   |

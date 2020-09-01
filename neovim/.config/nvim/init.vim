@@ -1,5 +1,5 @@
 
-let mapleader = " "
+let mapleader = ' '
 syntax on
 
 set number relativenumber
@@ -33,13 +33,7 @@ set clipboard+=unnamedplus
 nnoremap c "_c
 
 set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=lightgrey
-
-if executable('rg')
-    let g:rg_derive_root='true'
-endif
-
-let g:ale_disable_lsp = 1
+highlight ColorColumn ctermbg=0
 
 colorscheme gruvbox
 set background=dark
@@ -56,22 +50,40 @@ nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>e :Vexplore <bar> :vertical resize 30<CR>
 nnoremap <leader>f :Files<CR>
 
-nnoremap <leader>jd <Plug>(coc-definition)
-nnoremap <leader>ji <Plug>(coc-implementation)
-nnoremap <leader>jr <Plug>(coc-references)
 nnoremap <leader>gs :Git<CR>
-
-map <Left>  <nop>
-map <Down>  <nop>
-map <Up>    <nop>
-map <Right> <nop>
 
 autocmd FileType haskell setlocal shiftwidth=2 softtabstop=2
 autocmd FileType sh setlocal tabstop=4 noexpandtab softtabstop=0 shiftwidth=4
 autocmd FileType pandoc setlocal nospell
 
-let g:tex_flavor='latex'
-autocmd BufNewFile *.tex execute "r $HOME/.config/latex/template.tex" | 0 | delete
+""     _    _     _____
+""    / \  | |   | ____|
+""   / _ \ | |   |  _|
+""  / ___ \| |___| |___
+"" /_/   \_\_____|_____|
+"" 
+
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '.'
+
+let g:ale_disable_lsp = 1
+let g:ale_fix_on_save = 1
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'python': ['autopep8'],
+\   'sh': ['shfmt'],
+\   'c': ['clang-format']
+\}
+
+let g:ale_c_clangformat_options = '-style=GNU'
+
+""   ____ ___  _   _  ____ _____    _    _
+""  / ___/ _ \| \ | |/ ___| ____|  / \  | |
+"" | |  | | | |  \| | |   |  _|   / _ \ | |
+"" | |__| |_| | |\  | |___| |___ / ___ \| |___
+""  \____\___/|_| \_|\____|_____/_/   \_\_____|
+"" 
 
 function! ToggleConcealLevel()
     if &conceallevel == 0

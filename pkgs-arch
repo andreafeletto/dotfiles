@@ -9,11 +9,14 @@ tmux
 # shell
 bash
 bash-completion
+shfmt
+shellcheck
 
 # file manager
 fff
 
 # fonts
+ttf-jetbrains-mono
 adobe-source-code-pro-fonts
 gnu-free-fonts
 
@@ -104,6 +107,7 @@ fzf
 
 # text
 vim
+vint
 neovim
 vim-spell-it
 vim-airline
@@ -144,6 +148,7 @@ sxiv
 scrot
 
 # python
+autopep8
 flake8
 python-arrow
 python-beautifulsoup4
