@@ -27,3 +27,7 @@ vim-man-git
 vim-visual-multi
 vim-codi-git
 bashate
+jupyter-octave_kernel
+jupyter-gnuplot_kernel
+languagetool-ngrams-it
+languagetool-ngrams-en

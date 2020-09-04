@@ -1,6 +1,10 @@
 
-# display manager
+# desktop
 lightdm
+sxhkd
+fff
+udiskie
+network-manager-applet
 
 # terminal
 alacritty
@@ -11,9 +15,6 @@ bash
 bash-completion
 shfmt
 shellcheck
-
-# file manager
-fff
 
 # fonts
 ttf-jetbrains-mono
@@ -29,6 +30,12 @@ w3m
 octave
 xcircuit
 datamash
+sagemath
+
+# Jupyter
+jupyterlab
+sagemath
+sagemath-jupyter
 
 # GTK
 arc-solid-gtk-theme
@@ -42,7 +49,6 @@ xorg-xbacklight
 xorg-xev
 xorg-xsetroot
 xclip
-sxhkd
 
 # video drivers
 xf86-video-intel
@@ -62,24 +68,19 @@ pulseaudio-bluetooth
 zathura
 zathura-pdf-mupdf
 ghostscript
+pdfmixtool
 
 # docs
 man-pages
 xorg-docs
 python-docs
-python-lxml-docs
-arduino-docs
 arch-wiki-docs
-rust-docs
-ruby-docs
-imagemagick-doc
 linux-docs
 
 # dev
 git
 python2
 python3
-jupyterlab
 nodejs
 npm
 perl
@@ -98,14 +99,13 @@ htop
 bc
 neofetch
 tree
-udiskie
 ripgrep
 xdg-utils
 xdg-user-dirs
-syncthing
 fzf
 
 # text
+bat
 vim
 vint
 neovim
@@ -114,8 +114,15 @@ vim-airline
 vim-ale
 vim-fugitive
 vim-surround
+languagetool
 
 # latex
+texlive-bin
+texlive-core
+texlive-science
+texlive-bibtexextra
+texlive-fontextra
+texlive-formatextra
 texlive-latexextra
 
 # system
@@ -128,7 +135,6 @@ incron
 # network
 iproute2
 networkmanager
-network-manager-applet
 wget
 curl
 nmap
@@ -145,6 +151,7 @@ gimp
 ffmpeg
 blender
 sxiv
+feh
 scrot
 
 # python

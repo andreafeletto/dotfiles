@@ -12,6 +12,8 @@ export WM='dwm'
 
 export _JAVA_AWT_WM_NONREPARENTING='1'
 
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 ## __  ______   ____
 ## \ \/ /  _ \ / ___|
 ##  \  /| | | | |  _
@@ -49,6 +51,9 @@ export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
 # Npm
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 
+# Octave
+export OCTAVE_HISTFILE="$XDG_CACHE_HOME/octave-hsts"
+
 # OpenSSL
 export RANDFILE="$XDG_DATA_HOME/openssl/rnd"
 
@@ -68,9 +73,6 @@ export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
 # Rust
 export CARGO_HOME="$HOME/.local/cargo"
 export RUSTUP_HOME="$HOME/.local/rustup"
-
-# Visual Studio Code
-export VSCODE_PORTABLE="$XDG_DATA_HOME/vscode"
 
 ##  ____   _  _____ _   _
 ## |  _ \ / \|_   _| | | |

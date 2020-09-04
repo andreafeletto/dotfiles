@@ -18,5 +18,7 @@ udiskie --automount --no-notify --smart-tray &
 twmnd >/dev/null &
 jupyter lab 2> "${XDG_DATA_DIR:-$HOME/.local/share}/jupyter/log" &
 
+feh --no-fehbg --bg-scale pictures/wallpapers/free-as-in-freedom.png &
+
 exec dwm
 
