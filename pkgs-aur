@@ -1,20 +1,29 @@
+
+# AUR Helper
 yay
+
+# Fonts
+ttf-symbola
+
+# Utilities
 xurls
 rmtrash
-lightdm-mini-greeter
-ttf-symbola
-lolclock-git
-twmn-git
 xpub
-glow
-asciiquarium
-scilab-bin
-archimedes
+twmn-git
+bashate
+wikiman
+lolclock-git
+
+# Python
+jupyter-octave_kernel
+jupyter-gnuplot_kernel
 python-requests-futures
 python-torrequest
 python-dask
 python-panel
 python-holoviews
+
+# Vim
 neovim-coc
 vim-undotree
 vim-fzf-git
@@ -26,8 +35,8 @@ vim-markdown-toc
 vim-man-git
 vim-visual-multi
 vim-codi-git
-bashate
-jupyter-octave_kernel
-jupyter-gnuplot_kernel
-languagetool-ngrams-it
-languagetool-ngrams-en
+
+# Engineering
+scilab-bin
+archimedes
+

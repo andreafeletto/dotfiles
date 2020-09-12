@@ -74,6 +74,9 @@ export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
 export CARGO_HOME="$HOME/.local/cargo"
 export RUSTUP_HOME="$HOME/.local/rustup"
 
+# wget
+export WGETRC="$XDG_CONFIG_HOME/wgetrc"
+
 ##  ____   _  _____ _   _
 ## |  _ \ / \|_   _| | | |
 ## | |_) / _ \ | | | |_| |

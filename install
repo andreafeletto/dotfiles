@@ -95,19 +95,21 @@ function Install_github {
 AllDeps['aur']='git makepkg'
 function Install_aur {
 	mkdir -p "$AurDir"
-	while read -r; do
+	grep -v '^#' pkgs-aur | while read -r; do
+        [ -z "$REPLY" ] && continue
 		local Dir="$AurDir/$REPLY"
+        local Url="$AurUrl/$REPLY.git"
 		if pacman -Q "$REPLY" &> /dev/null; then
-			Warn "$REPLY already installed. skipping."
+			Warn "package already installed: $REPLY"
 			continue
 		fi
 		if [[ -d $Dir ]]; then
-			Warn "$REPLY already cloned. skipping."
-			continue
-		fi
-		git clone -q "$AurUrl/$REPLY.git" "$Dir"
-		(cd "$AurDir/$REPLY" || Die; makepkg -si --noconfirm)
-	done < pkgs-aur
+            (cd "$Dir" && git pull --no-rebase)
+        else
+            (cd "$AurDir" && git clone -q "$Url")
+        fi
+		(cd "$Dir" || Die; makepkg -si --noconfirm)
+	done
 }
 
 AllDeps['rust']='rustup cargo xargs'

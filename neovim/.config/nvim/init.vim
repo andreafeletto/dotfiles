@@ -52,22 +52,35 @@ nnoremap <leader>f :Files<CR>
 
 nnoremap <leader>gs :Git<CR>
 
-autocmd FileType haskell setlocal shiftwidth=2 softtabstop=2
-autocmd FileType sh setlocal tabstop=4 noexpandtab softtabstop=0 shiftwidth=4
-autocmd FileType pandoc setlocal nospell
+""  _____ __________
+"" |  ___|__  /  ___|
+"" | |_    / /| |_
+"" |  _|  / /_|  _|
+"" |_|   /____|_|
+""
+
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+
+""  ____   _    _   _ ____   ___   ____
+"" |  _ \ / \  | \ | |  _ \ / _ \ / ___|
+"" | |_) / _ \ |  \| | | | | | | | |
+"" |  __/ ___ \| |\  | |_| | |_| | |___
+"" |_| /_/   \_\_| \_|____/ \___/ \____|
+""
+
+let g:pandoc#spell#default_langs = ['it', 'en']
 
 ""     _    _     _____
 ""    / \  | |   | ____|
 ""   / _ \ | |   |  _|
 ""  / ___ \| |___| |___
 "" /_/   \_\_____|_____|
-"" 
+""
 
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '.'
 
 let g:ale_disable_lsp = 1
-let g:ale_fix_on_save = 1
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -83,7 +96,7 @@ let g:ale_c_clangformat_options = '-style=GNU'
 "" | |  | | | |  \| | |   |  _|   / _ \ | |
 "" | |__| |_| | |\  | |___| |___ / ___ \| |___
 ""  \____\___/|_| \_|\____|_____/_/   \_\_____|
-"" 
+""
 
 function! ToggleConcealLevel()
     if &conceallevel == 0
