@@ -51,7 +51,7 @@ The `install` script
 
 Download the required dependencies:
 ```sh
-sudo pacman -Syu bash git stow
+sudo pacman -Syu git stow
 ```
 Clone this repository into the home directory:
 ```sh
@@ -60,7 +60,7 @@ git clone https://github.com/andreafeletto/dotfiles.git
 Move into the repository and run the install script:
 ```sh
 cd dotfiles
-./install --all --stow
+./install --all
 ```
 
 Major Scripts

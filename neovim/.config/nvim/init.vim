@@ -1,4 +1,6 @@
 
+scriptencoding utf-8
+
 let mapleader = ' '
 syntax on
 

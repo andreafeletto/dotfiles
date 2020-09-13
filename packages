@@ -1,10 +1,14 @@
 
+# AUR helpers
+yay
+
 # desktop
-lightdm
 sxhkd
 fff
 udiskie
 network-manager-applet
+lolclock-git
+twmn-git
 
 # terminal
 alacritty
@@ -13,53 +17,54 @@ tmux
 # shell
 bash
 bash-completion
-shfmt
-shellcheck
+dash
 dosbox
 
 # fonts
 ttf-jetbrains-mono
+ttf-symbola
 adobe-source-code-pro-fonts
 gnu-free-fonts
 
-# browser
+# browsers
 chromium
 firefox
 w3m
 
 # engineering
-octave
-xcircuit
+archimedes
 datamash
-sagemath
+octave
 openscad
+sagemath
+scilab-bin
+xcircuit
 
 # Jupyter
+jupyter-gnuplot_kernel
+jupyter-octave_kernel
 jupyterlab
 sagemath
 sagemath-jupyter
 
-# GTK
+# GTK themes
 arc-solid-gtk-theme
 arc-icon-theme
 
 # xorg
-xorg-server
-xorg-xinit
+xclip
 xorg-fonts-100dpi
+xorg-server
 xorg-xbacklight
 xorg-xev
+xorg-xinit
 xorg-xsetroot
-xclip
 
-# video drivers
-xf86-video-intel
+# drivers
 mesa
-
-# audio drivers
 pulseaudio
-pulsemixer
 pulseaudio-alsa
+xf86-video-intel
 
 # bluetooth
 blueman
@@ -74,6 +79,8 @@ pdfmixtool
 
 # docs
 man-pages
+ruby-bropages
+wikiman
 xorg-docs
 python-docs
 arch-wiki-docs
@@ -95,28 +102,50 @@ zip
 unzip
 
 # utility
-dex
-stow
-htop
-bc
-neofetch
-tree
-ripgrep
-xdg-utils
-xdg-user-dirs
-fzf
-
-# text
 bat
-vim
+bc
+dex
+fzf
+htop
+neofetch
+nodejs-fx
+ripgrep
+rmtrash
+stow
+tree
+xdg-user-dirs
+xdg-utils
+xpub
+xurls
+
+# linters
+bashate
+languagetool
+shellcheck
+shfmt
 vint
+
+# vim
+vim
 neovim
-vim-spell-it
+neovim-coc
+nodejs-neovim
+ruby-neovim
 vim-airline
 vim-ale
+vim-codi-git
 vim-fugitive
+vim-fzf-git
+vim-gruvbox-community
+vim-man-git
+vim-markdown-toc
+vim-multiple-cursors-git
+vim-pandoc-git
+vim-pandoc-syntax-git
+vim-spell-it
 vim-surround
-languagetool
+vim-undotree
+vim-visual-multi
 
 # latex
 texlive-bin
@@ -142,6 +171,7 @@ curl
 nmap
 
 # media playback
+pulsemixer
 mpd
 mpv
 ncmpcpp
@@ -164,6 +194,8 @@ python-beautifulsoup4
 python-certifi
 python-colorama
 python-cryptography
+python-dask
+python-holoviews
 python-html5lib
 python-jedi
 python-lxml
@@ -171,22 +203,27 @@ python-markdown
 python-matplotlib
 python-numpy
 python-pandas
+python-panel
 python-phonenumbers
 python-pip
 python-progress
+python-pygments
 python-pylint
+python-pynvim
+python-pynvim
 python-pysocks
 python-requests
+python-requests-futures
 python-scipy
 python-seaborn
 python-selenium
 python-soupsieve
 python-statsmodels
 python-stem
-python-pygments
-python-pynvim
+python-torrequest
 python-virtualenv
 python-xlrd
+python2-pynvim
 
 # games
 teeworlds
