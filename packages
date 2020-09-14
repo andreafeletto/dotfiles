@@ -119,7 +119,9 @@ xpub
 xurls
 
 # linters
+bash-language-server
 bashate
+ctags
 languagetool
 shellcheck
 shfmt
@@ -129,6 +131,18 @@ vint
 vim
 neovim
 neovim-coc
+neovim-coc-clangd-git
+neovim-coc-css-git
+neovim-coc-dictionary-git
+neovim-coc-emoji-git
+neovim-coc-html-git
+neovim-coc-json-git
+neovim-coc-sh-git
+neovim-coc-tag-git
+neovim-coc-tsserver-git
+neovim-coc-vimlsp-git
+neovim-coc-word-git
+neovim-coc-yaml-git
 nodejs-neovim
 ruby-neovim
 vim-airline

@@ -54,6 +54,32 @@ nnoremap <leader>f :Files<CR>
 
 nnoremap <leader>gs :Git<CR>
 
+""   ____ ___   ____
+""  / ___/ _ \ / ___|
+"" | |  | | | | |
+"" | |__| |_| | |___
+""  \____\___/ \____|
+"" 
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+inoremap <silent><expr> <c-space> coc#refresh()
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
 ""  _____ __________
 "" |  ___|__  /  ___|
 "" | |_    / /| |_

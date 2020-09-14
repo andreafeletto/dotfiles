@@ -108,7 +108,7 @@ fi
 
 if [ -n "$Pacman" ]; then
     Title 'Installing ABR and AUR Packages'
-    grep -v '^$\|^#' packages | yay -Syu --needed \
+    grep -v '^$\|^#' packages | yay -Syu --needed - \
         --answerclean None \
         --answerdiff None \
         --answerupgrade ''
