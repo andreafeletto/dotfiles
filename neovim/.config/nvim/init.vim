@@ -21,7 +21,7 @@ set undodir=~/.local/share/vim
 set undofile
 set incsearch
 set termguicolors
-set scrolloff=8
+set scrolloff=15
 
 set path+=**
 set wildmenu
@@ -79,6 +79,22 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+""   ____  _____   _____
+""  / ___|/ _ \ \ / / _ \
+"" | |  _| | | \ V / | | |
+"" | |_| | |_| || || |_| |
+""  \____|\___/ |_| \___/
+"" 
+
+let g:goyo_width = 70
+
+nnoremap <silent> <leader>cc :Goyo<CR>
+
+augroup goyogroup
+    autocmd! User GoyoEnter Limelight
+    autocmd! User GoyoLeave Limelight!
+augroup END
 
 ""  _____ __________
 "" |  ___|__  /  ___|

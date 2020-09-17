@@ -150,7 +150,9 @@ vim-ale
 vim-codi-git
 vim-fugitive
 vim-fzf-git
+vim-goyo-git
 vim-gruvbox-community
+vim-limelight-git
 vim-man-git
 vim-markdown-toc
 vim-multiple-cursors-git
@@ -234,6 +236,7 @@ python-selenium
 python-soupsieve
 python-statsmodels
 python-stem
+python-telegram-bot
 python-torrequest
 python-virtualenv
 python-xlrd
