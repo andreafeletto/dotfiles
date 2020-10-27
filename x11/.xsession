@@ -20,7 +20,5 @@ udiskie --automount --no-notify --smart-tray &
 twmnd >/dev/null &
 
 jupyter lab 2> "${XDG_DATA_DIR:-$HOME/.local/share}/jupyter/log" &
-julia -e 'import Pluto; Pluto.run(9999)' 2> /dev/null &
 
 exec dwm
-

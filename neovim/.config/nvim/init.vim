@@ -114,27 +114,6 @@ let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 
 let g:pandoc#spell#default_langs = ['it', 'en']
 
-""     _    _     _____
-""    / \  | |   | ____|
-""   / _ \ | |   |  _|
-""  / ___ \| |___| |___
-"" /_/   \_\_____|_____|
-""
-
-let g:ale_sign_error = '●'
-let g:ale_sign_warning = '.'
-
-let g:ale_disable_lsp = 1
-
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'python': ['autopep8'],
-\   'sh': ['shfmt'],
-\   'c': ['clang-format']
-\}
-
-let g:ale_c_clangformat_options = '-style=GNU'
-
 ""   ____ ___  _   _  ____ _____    _    _
 ""  / ___/ _ \| \ | |/ ___| ____|  / \  | |
 "" | |  | | | |  \| | |   |  _|   / _ \ | |

@@ -1,11 +1,17 @@
 [Default Applications]
-text/plain=text.desktop;
+application/gzip=zip.desktop
 application/pdf=pdf.desktop;
-image/png=img.desktop;
-image/jpeg=img.desktop;
-image/gif=img.desktop;
-video/mp4=video.desktop;
-inode/directory=filemanager.desktop;
-x-scheme-handler/magnet=torrent.desktop;
 application/x-bittorent=torrent.desktop;
 application/zip=zip.desktop
+image/vnd.djvu=pdf.desktop;
+image/gif=img.desktop;
+image/jpeg=img.desktop;
+image/png=img.desktop;
+inode/directory=filemanager.desktop;
+text/html=chromium.desktop;
+text/plain=text.desktop;
+text/x-c=text.desktop;
+text/x-makefile=text.desktop;
+text/x-shellscript=text.desktop;
+video/mp4=video.desktop;
+x-scheme-handler/magnet=torrent.desktop;

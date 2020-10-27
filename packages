@@ -10,6 +10,13 @@ network-manager-applet
 lolclock-git
 twmn-git
 
+# power management
+acpid
+cpupower
+hdparm
+laptop-mode-tools
+nvme-cli
+
 # terminal
 alacritty
 tmux
@@ -25,19 +32,25 @@ ttf-jetbrains-mono
 ttf-symbola
 adobe-source-code-pro-fonts
 gnu-free-fonts
+gwaterfall
 
 # browsers
 chromium
 firefox
 w3m
+onionshare
 
 # engineering
 archimedes
+celestia
 datamash
+gramps
 octave
 openscad
+osm-gps-map
 sagemath
 scilab-bin
+stellarium
 xcircuit
 
 # Jupyter
@@ -60,11 +73,16 @@ xorg-xev
 xorg-xinit
 xorg-xsetroot
 
+# wayland
+wlroots
+
 # drivers
+alsa-utils
 mesa
 pulseaudio
 pulseaudio-alsa
 xf86-video-intel
+intel-gpu-tools
 
 # bluetooth
 blueman
@@ -87,19 +105,20 @@ arch-wiki-docs
 linux-docs
 
 # dev
+deno
+ghc
 git
-python2
-python3
 nodejs
 npm
 perl
+python2
+python3
 ruby
-ghc
 
 # archives
 tar
-zip
 unzip
+zip
 
 # utility
 bat
@@ -113,6 +132,8 @@ ripgrep
 rmtrash
 stow
 tree
+usbutils
+words
 xdg-user-dirs
 xdg-utils
 xpub
@@ -146,7 +167,6 @@ neovim-coc-yaml-git
 nodejs-neovim
 ruby-neovim
 vim-airline
-vim-ale
 vim-codi-git
 vim-fugitive
 vim-fzf-git
@@ -154,7 +174,7 @@ vim-goyo-git
 vim-gruvbox-community
 vim-limelight-git
 vim-man-git
-vim-markdown-toc
+vim-markdown-toc-git
 vim-multiple-cursors-git
 vim-pandoc-git
 vim-pandoc-syntax-git
@@ -164,43 +184,46 @@ vim-undotree
 vim-visual-multi
 
 # latex
+pandoc
+pandoc-citeproc
+pandoc-crossref
+texlive-bibtexextra
 texlive-bin
 texlive-core
-texlive-science
-texlive-bibtexextra
 texlive-fontsextra
 texlive-formatsextra
 texlive-latexextra
+texlive-science
 
 # system
 cronie
+incron
 openssh
 pacman-contrib
 pacutils
-incron
 
 # network
+curl
 iproute2
 networkmanager
-wget
-curl
 nmap
+wget
 
 # media playback
-pulsemixer
 mpd
 mpv
 ncmpcpp
+pulsemixer
 
 # image/video/3d
+blender
+feh
+ffmpeg
+gimp
 gthumb
 imagemagick
-gimp
-ffmpeg
-blender
-sxiv
-feh
 scrot
+sxiv
 
 # python
 autopep8
@@ -230,6 +253,7 @@ python-pynvim
 python-pysocks
 python-requests
 python-requests-futures
+python-scikit-learn
 python-scipy
 python-seaborn
 python-selenium
@@ -243,5 +267,12 @@ python-xlrd
 python2-pynvim
 
 # games
+abuse
+astromenace
+bsd-games
+curseofwar
+frogatto
+gnujump
+mari0
 teeworlds
 

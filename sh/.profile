@@ -2,9 +2,9 @@
 
 export EDITOR='nvim'
 if [ -n "$DISPLAY" ]; then
-	export BROWSER='chromium'
+    export BROWSER='chromium'
 else
-	export BROWSER='w3m'
+    export BROWSER='w3m'
 fi
 export TERMINAL='st'
 export READER='zathura'
@@ -27,7 +27,11 @@ export XDG_DATA_HOME="$HOME/.local/share"
 
 # Android
 export ANDROID_HOME="$HOME/.local/android/sdk"
+export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
+export ANDROID_AVD_HOME="$XDG_DATA_HOME/android"
+export ANDROID_EMULATOR_HOME="$XDG_DATA_HOME/android"
 export ANDROID_SDK_ROOT="$ANDROID_HOME"
+export ADB_VENDOR_KEY="$XDG_CONFIG_HOME/android"
 
 # Bash
 export HISTFILE="$XDG_CACHE_HOME/bash/history"
@@ -37,6 +41,9 @@ export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 
 # Go
 export GOPATH="$XDG_DATA_HOME/go"
+
+# Gramps
+export GRAMPSHOME="$XDG_CONFIG_HOME"
 
 # IPython
 export IPYTHONDIR="$XDG_CONFIG_HOME/jupyter"
@@ -107,9 +114,4 @@ export FFF_KEY_SCROLL_UP2='off'
 export FFF_KEY_SCROLL_DOWN2='off'
 export FFF_KEY_PARENT2='off'
 export FFF_KEY_CHILD2='off'
-if command -v rmtrash > /dev/null 2>&1; then
-	export FFF_TRASH_CMD='rmtrash'
-else
-	export FFF_TRASH_CMD='mv'
-fi
 
