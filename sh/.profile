@@ -1,18 +1,12 @@
 #!/bin/sh
 
-export EDITOR='nvim'
-if [ -n "$DISPLAY" ]; then
-    export BROWSER='chromium'
-else
-    export BROWSER='w3m'
-fi
+export EDITOR='vis'
+export BROWSER='chromium'
 export TERMINAL='st'
 export READER='zathura'
 export WM='dwm'
 
 export _JAVA_AWT_WM_NONREPARENTING='1'
-
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 ## __  ______   ____
 ## \ \/ /  _ \ / ___|
@@ -50,6 +44,7 @@ export IPYTHONDIR="$XDG_CONFIG_HOME/jupyter"
 
 # Jupyter
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
+export JUPYTERLAB_DIR="$XDG_DATA_HOME/jupyter/lab"
 
 # Less
 export LESSKEY="$XDG_CONFIG_HOME/less/lesskey"
@@ -72,6 +67,9 @@ export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/startup.py"
 
 # Pylint
 export PYLINTHOME="$XDG_CACHE_HOME/pylint"
+
+# R
+export R_LIBS_USER="$XDG_DATA_HOME/R/lib"
 
 # Readline
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
@@ -96,11 +94,21 @@ export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 
 PATH="$PATH:$HOME/.local/bin"
 PATH="$PATH:$HOME/.local/cargo/bin"
-PATH="$PATH:$HOME/go/bin"
+PATH="$PATH:$HOME/.local/maple2020/bin"
+PATH="$PATH:$GOPATH/bin"
 PATH="$PATH:$GEM_HOME/bin"
 PATH="$PATH:$XDG_DATA_HOME/npm/bin"
 PATH="$PATH:$ANDROID_HOME/platform-tools"
 export PATH
+
+##  _____ __________
+## |  ___|__  /  ___|
+## | |_    / /| |_
+## |  _|  / /_|  _|
+## |_|   /____|_|
+## 
+
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 
 ##  _____ _____ _____
 ## |  ___|  ___|  ___|

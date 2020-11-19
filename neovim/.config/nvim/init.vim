@@ -80,6 +80,10 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+augroup latex
+    autocmd! FileType tex setlocal tabstop=2 shiftwidth=2
+augroup END
+
 ""   ____  _____   _____
 ""  / ___|/ _ \ \ / / _ \
 "" | |  _| | | \ V / | | |

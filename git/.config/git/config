@@ -1,3 +1,7 @@
 [user]
 	email = andrea@andreafeletto.com
 	name = Andrea Feletto
+[pull]
+	rebase = false
+[sendemail]
+	annotate = yes

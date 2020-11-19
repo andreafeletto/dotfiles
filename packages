@@ -2,6 +2,11 @@
 # AUR helpers
 yay
 
+# login
+kmscon
+greetd
+greetd-tuigreet
+
 # desktop
 sxhkd
 fff
@@ -57,8 +62,9 @@ xcircuit
 jupyter-gnuplot_kernel
 jupyter-octave_kernel
 jupyterlab
-sagemath
-sagemath-jupyter
+maxima-jupyter-git
+evcxr_jupyter
+python-jupytext
 
 # GTK themes
 arc-solid-gtk-theme
@@ -75,6 +81,7 @@ xorg-xsetroot
 
 # wayland
 wlroots
+cage
 
 # drivers
 alsa-utils
@@ -113,7 +120,10 @@ npm
 perl
 python2
 python3
+r
 ruby
+rust
+zig
 
 # archives
 tar
@@ -124,7 +134,9 @@ zip
 bat
 bc
 dex
+fd
 fzf
+gource
 htop
 neofetch
 nodejs-fx
@@ -168,6 +180,7 @@ nodejs-neovim
 ruby-neovim
 vim-airline
 vim-codi-git
+vim-editorconfig
 vim-fugitive
 vim-fzf-git
 vim-goyo-git
@@ -183,10 +196,20 @@ vim-surround
 vim-undotree
 vim-visual-multi
 
-# latex
+# vis
+vis
+vis-cscope-git
+vis-fzf-open-git
+vis-go-git
+vis-open_rej-git
+vis-pairs-git
+vis-surround-git
+vis-toggler-git
+
+# prose
 pandoc
-pandoc-citeproc
 pandoc-crossref
+pandoc-plot-bin
 texlive-bibtexextra
 texlive-bin
 texlive-core
@@ -249,7 +272,6 @@ python-progress
 python-pygments
 python-pylint
 python-pynvim
-python-pynvim
 python-pysocks
 python-requests
 python-requests-futures
@@ -265,6 +287,10 @@ python-torrequest
 python-virtualenv
 python-xlrd
 python2-pynvim
+
+# perl
+perl-term-readline-gnu
+perl-log-log4perl
 
 # games
 abuse
