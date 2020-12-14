@@ -293,6 +293,7 @@ perl-term-readline-gnu
 perl-log-log4perl
 
 # games
+0ad
 abuse
 astromenace
 bsd-games
@@ -300,5 +301,6 @@ curseofwar
 frogatto
 gnujump
 mari0
+picomc
 teeworlds
 

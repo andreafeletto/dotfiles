@@ -122,4 +122,3 @@ export FFF_KEY_SCROLL_UP2='off'
 export FFF_KEY_SCROLL_DOWN2='off'
 export FFF_KEY_PARENT2='off'
 export FFF_KEY_CHILD2='off'
-

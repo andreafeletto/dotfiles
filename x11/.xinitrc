@@ -16,7 +16,6 @@ cstatus -d 2>/dev/null &
 nm-applet &
 udiskie --automount --no-notify --smart-tray &
 twmnd >/dev/null &
-battery-stats-collector -o "$HOME/.local/share/battery-stats" &
 
 jupyter lab 2> "$HOME/.local/share/jupyter/log" &
 

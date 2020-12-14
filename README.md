@@ -27,15 +27,15 @@ Main Software
 
 | Type                    | Program          |
 |-------------------------|------------------|
-| Display Manager         | ly               |
+| Display Manager         | greetd           |
 | Window Manager          | dwm              |
 | Terminal Emulator       | st               |
-| Editor                  | neovim           |
+| Editor                  | vis              |
 | Browser                 | chromium         |
-| App Launcher            | dmenu_run        |
+| App Launcher            | dmenu            |
 | Hotkey Daemon           | sxhkd            |
 | Network Manager         | networkmanager   |
-| Notifications Daemon    | twmn             |
+| Notifications           | twmn             |
 | Usb Auto-Mounting       | udiskie          |
 
 The `install` script
