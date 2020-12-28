@@ -3,9 +3,9 @@
 yay
 
 # login
-kmscon
+kmscon-patched-git
 greetd
-greetd-tuigreet
+greetd-tuigreet-bin
 
 # desktop
 sxhkd
@@ -43,19 +43,14 @@ gwaterfall
 chromium
 firefox
 w3m
-onionshare
+tor
 
 # engineering
 archimedes
-celestia
-datamash
+freecad
 gramps
 octave
 openscad
-osm-gps-map
-sagemath
-scilab-bin
-stellarium
 xcircuit
 
 # Jupyter
@@ -90,6 +85,7 @@ pulseaudio
 pulseaudio-alsa
 xf86-video-intel
 intel-gpu-tools
+intel-media-sdk
 
 # bluetooth
 blueman
@@ -160,42 +156,6 @@ shellcheck
 shfmt
 vint
 
-# vim
-vim
-neovim
-neovim-coc
-neovim-coc-clangd-git
-neovim-coc-css-git
-neovim-coc-dictionary-git
-neovim-coc-emoji-git
-neovim-coc-html-git
-neovim-coc-json-git
-neovim-coc-sh-git
-neovim-coc-tag-git
-neovim-coc-tsserver-git
-neovim-coc-vimlsp-git
-neovim-coc-word-git
-neovim-coc-yaml-git
-nodejs-neovim
-ruby-neovim
-vim-airline
-vim-codi-git
-vim-editorconfig
-vim-fugitive
-vim-fzf-git
-vim-goyo-git
-vim-gruvbox-community
-vim-limelight-git
-vim-man-git
-vim-markdown-toc-git
-vim-multiple-cursors-git
-vim-pandoc-git
-vim-pandoc-syntax-git
-vim-spell-it
-vim-surround
-vim-undotree
-vim-visual-multi
-
 # vis
 vis
 vis-cscope-git
@@ -209,14 +169,8 @@ vis-toggler-git
 # prose
 pandoc
 pandoc-crossref
-pandoc-plot-bin
-texlive-bibtexextra
-texlive-bin
-texlive-core
-texlive-fontsextra
-texlive-formatsextra
-texlive-latexextra
-texlive-science
+scdoc
+texlive-most
 
 # system
 cronie
@@ -229,13 +183,10 @@ pacutils
 curl
 iproute2
 networkmanager
-nmap
 wget
 
 # media playback
-mpd
 mpv
-ncmpcpp
 pulsemixer
 
 # image/video/3d
@@ -253,37 +204,25 @@ autopep8
 flake8
 python-arrow
 python-beautifulsoup4
-python-certifi
 python-colorama
-python-cryptography
 python-dask
 python-holoviews
-python-html5lib
-python-jedi
-python-lxml
 python-markdown
 python-matplotlib
 python-numpy
 python-pandas
 python-panel
-python-phonenumbers
 python-pip
 python-progress
 python-pygments
 python-pylint
 python-pynvim
-python-pysocks
 python-requests
-python-requests-futures
 python-scikit-learn
 python-scipy
 python-seaborn
 python-selenium
-python-soupsieve
 python-statsmodels
-python-stem
-python-telegram-bot
-python-torrequest
 python-virtualenv
 python-xlrd
 python2-pynvim
@@ -294,13 +233,7 @@ perl-log-log4perl
 
 # games
 0ad
-abuse
-astromenace
 bsd-games
-curseofwar
-frogatto
-gnujump
-mari0
 picomc
 teeworlds
 

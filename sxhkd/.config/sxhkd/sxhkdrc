@@ -21,11 +21,11 @@ ctrl + super + space
     slock
 
 {XF86MonBrightnessDown,XF86MonBrightnessUp}
-    xbacklight {-dec,-inc} 5; cstatus -r
+    xbacklight {-dec,-inc} 5; pkill -USR1 cstatus
 {XF86AudioLowerVolume,XF86AudioRaiseVolume}
-    pulsemixer --unmute --change-volume {-,+}5; cstatus -r
+    pulsemixer --unmute --change-volume {-,+}5; pkill -USR1 cstatus
 XF86AudioMute
-    pulsemixer --toggle-mute; cstatus -r
+    pulsemixer --toggle-mute; pkill -USR1 cstatus
 
 {XF86AudioPrev,XF86AudioNext,XF86AudioPlay}
     mpc {prev,next,toggle}
