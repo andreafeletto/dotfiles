@@ -7,16 +7,10 @@ super + e
     $TERMINAL
 super + a
     $TERMINAL -e fff
-super + Return
-    emacsclient -c
-super + b
-    blueman-manager
 super + o
     xdg-open "$(dbrowse)"
 super + p
     opass -p -y
-super + c
-    $TERMINAL -e nvim -c 'Codi python'
 ctrl + super + space
     slock
 
@@ -29,6 +23,9 @@ XF86AudioMute
 
 {XF86AudioPrev,XF86AudioNext,XF86AudioPlay}
     mpc {prev,next,toggle}
+
+Print
+    screenshot
 
 super + shift + Delete
     prompt "Shutdown?" "shutdown now"

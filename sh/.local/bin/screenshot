@@ -1,0 +1,6 @@
+#!/bin/sh
+
+path=$HOME/pictures/screenshots
+printf 'saving into: %s\n' "$path" 2>&1
+mkdir -pv "$path" 2>&1
+scrot --silent --overwrite "$path/$(date +%F-%H-%M-%S).png"

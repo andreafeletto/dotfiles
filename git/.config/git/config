@@ -1,6 +1,8 @@
 [user]
 	email = andrea@andreafeletto.com
 	name = Andrea Feletto
+[init]
+	defaultBranch = main
 [pull]
 	rebase = false
 [sendemail]

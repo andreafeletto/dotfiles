@@ -6,8 +6,6 @@ export TERMINAL='st'
 export READER='zathura'
 export WM='dwm'
 
-export _JAVA_AWT_WM_NONREPARENTING='1'
-
 ## __  ______   ____
 ## \ \/ /  _ \ / ___|
 ##  \  /| | | | |  _

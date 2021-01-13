@@ -1,9 +1,10 @@
 
-# AUR helpers
+# package managers
+npm
+python-pip
 yay
 
 # login
-kmscon-patched-git
 greetd
 greetd-tuigreet-bin
 
@@ -22,9 +23,20 @@ hdparm
 laptop-mode-tools
 nvme-cli
 
-# terminal
-alacritty
-tmux
+# 32bit
+lib32-alsa-plugins
+lib32-glibc
+lib32-gcc-libs
+lib32-sdl2
+lib32-sdl2_mixer
+lib32-libpulse
+lib32-libcurl-gnutls
+lib32-openssl-1.0
+
+# spellcheck
+nuspell
+hunspell-en_US
+hunspell-it
 
 # shell
 bash
@@ -57,9 +69,6 @@ xcircuit
 jupyter-gnuplot_kernel
 jupyter-octave_kernel
 jupyterlab
-maxima-jupyter-git
-evcxr_jupyter
-python-jupytext
 
 # GTK themes
 arc-solid-gtk-theme
@@ -100,43 +109,33 @@ pdfmixtool
 
 # docs
 man-pages
-ruby-bropages
-wikiman
-xorg-docs
-python-docs
-arch-wiki-docs
-linux-docs
 
 # dev
 deno
 ghc
 git
 nodejs
-npm
 perl
-python2
-python3
+python
 r
 ruby
 rust
 zig
 
 # archives
+p7zip
 tar
 unzip
 zip
 
 # utility
-bat
 bc
 dex
-fd
 fzf
 gource
+graphviz
 htop
 neofetch
-nodejs-fx
-ripgrep
 rmtrash
 stow
 tree
@@ -144,17 +143,7 @@ usbutils
 words
 xdg-user-dirs
 xdg-utils
-xpub
 xurls
-
-# linters
-bash-language-server
-bashate
-ctags
-languagetool
-shellcheck
-shfmt
-vint
 
 # vis
 vis
@@ -163,6 +152,8 @@ vis-fzf-open-git
 vis-go-git
 vis-open_rej-git
 vis-pairs-git
+vis-smart-backspace-git
+vis-spellcheck-git
 vis-surround-git
 vis-toggler-git
 
@@ -174,7 +165,6 @@ texlive-most
 
 # system
 cronie
-incron
 openssh
 pacman-contrib
 pacutils
@@ -200,32 +190,13 @@ scrot
 sxiv
 
 # python
-autopep8
-flake8
-python-arrow
-python-beautifulsoup4
-python-colorama
-python-dask
-python-holoviews
-python-markdown
 python-matplotlib
 python-numpy
 python-pandas
-python-panel
-python-pip
-python-progress
-python-pygments
-python-pylint
-python-pynvim
 python-requests
 python-scikit-learn
 python-scipy
 python-seaborn
-python-selenium
-python-statsmodels
-python-virtualenv
-python-xlrd
-python2-pynvim
 
 # perl
 perl-term-readline-gnu
@@ -236,4 +207,3 @@ perl-log-log4perl
 bsd-games
 picomc
 teeworlds
-
